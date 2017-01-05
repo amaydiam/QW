@@ -1,4 +1,4 @@
-package com.ad.sample.adapter;
+package com.qwash.washer.adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ad.sample.R;
+import com.qwash.washer.R;
 
 /**
  * Created by binderbyte on 24/12/16.

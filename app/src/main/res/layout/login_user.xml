@@ -35,7 +35,7 @@
             </LinearLayout>
 
 
-            <com.ad.sample.ui.widget.RobotoBoldTextView
+            <com.qwash.washer.ui.widget.RobotoBoldTextView
                 android:id="@+id/label_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:layout_marginRight="@dimen/activity_vertical_margin">
 
-                <com.ad.sample.ui.widget.RobotoRegularEditText
+                <com.qwash.washer.ui.widget.RobotoRegularEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:hint="@string/email" />
 
-                <com.ad.sample.ui.widget.RobotoRegularEditText
+                <com.qwash.washer.ui.widget.RobotoRegularEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             </LinearLayout>
 
 
-            <com.ad.sample.ui.widget.RobotoRegularButton
+            <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/btn_login"
                 style="@style/btn_blue"
                 android:layout_width="match_parent"

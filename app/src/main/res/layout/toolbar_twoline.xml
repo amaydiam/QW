@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <com.ad.sample.ui.widget.RobotoBoldTextView
+    <com.qwash.washer.ui.widget.RobotoBoldTextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:textColor="@android:color/white"
         tools:text="toolbar_title"/>
 
-    <com.ad.sample.ui.widget.RobotoRegularTextView
+    <com.qwash.washer.ui.widget.RobotoRegularTextView
         android:id="@+id/toolbar_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

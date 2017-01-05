@@ -1,4 +1,4 @@
-package com.ad.sample.utils;
+package com.qwash.washer.utils;
 
 public class TextUtils {
 

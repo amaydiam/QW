@@ -1,4 +1,4 @@
-package com.ad.sample.api.client;
+package com.qwash.washer.api.client;
 
 /**
  * Created by Amay on 12/29/2016.

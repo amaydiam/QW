@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ad.sample.R;
-import com.ad.sample.Sample;
-import com.ad.sample.ui.fragment.HistoryDetailFragment;
+import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.ui.fragment.HistoryDetailFragment;
 
 public class HistoryDetailActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.ad.sample.R;
-import com.ad.sample.ui.widget.RobotoRegularButton;
-import com.ad.sample.ui.widget.RobotoRegularEditText;
-import com.ad.sample.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.R;
+import com.qwash.washer.ui.widget.RobotoRegularButton;
+import com.qwash.washer.ui.widget.RobotoRegularEditText;
+import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoIcons;

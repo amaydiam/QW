@@ -1,4 +1,4 @@
-package com.ad.sample.ui.fragment;
+package com.qwash.washer.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.ad.sample.R;
-import com.ad.sample.ui.widget.RobotoBoldTextView;
-import com.ad.sample.ui.widget.RobotoRegularButton;
-import com.ad.sample.utils.Utils;
+import com.qwash.washer.R;
+import com.qwash.washer.ui.widget.RobotoBoldTextView;
+import com.qwash.washer.ui.widget.RobotoRegularButton;
+import com.qwash.washer.utils.Utils;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;

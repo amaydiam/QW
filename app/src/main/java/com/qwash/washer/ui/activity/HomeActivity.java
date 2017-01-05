@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -27,18 +27,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ad.sample.R;
-import com.ad.sample.Sample;
-import com.ad.sample.api.ApiUtils;
-import com.ad.sample.api.client.AddressMapsFromGoogleApi;
-import com.ad.sample.api.model.Address;
-import com.ad.sample.api.model.AddressFromMapsResponse;
-import com.ad.sample.model.History;
-import com.ad.sample.model.PrepareOrder;
-import com.ad.sample.model.Vehicle;
-import com.ad.sample.ui.fragment.PrepareOrderFragment;
-import com.ad.sample.ui.fragment.WasherOrderFragment;
-import com.ad.sample.ui.widget.RobotoRegularEditText;
+import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.api.ApiUtils;
+import com.qwash.washer.api.client.AddressMapsFromGoogleApi;
+import com.qwash.washer.api.model.Address;
+import com.qwash.washer.api.model.AddressFromMapsResponse;
+import com.qwash.washer.model.History;
+import com.qwash.washer.model.PrepareOrder;
+import com.qwash.washer.model.Vehicle;
+import com.qwash.washer.ui.fragment.PrepareOrderFragment;
+import com.qwash.washer.ui.fragment.WasherOrderFragment;
+import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;

@@ -1,11 +1,11 @@
-package com.ad.sample.api.model;
+package com.qwash.washer.api.model;
 
 /**
  * Created by Amay on 12/29/2016.
  */
 
 
-import com.ad.sample.model.History;
+import com.qwash.washer.model.History;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

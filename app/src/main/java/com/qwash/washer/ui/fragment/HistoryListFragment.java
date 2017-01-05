@@ -1,4 +1,4 @@
-package com.ad.sample.ui.fragment;
+package com.qwash.washer.ui.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,16 +26,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ad.sample.R;
-import com.ad.sample.Sample;
-import com.ad.sample.adapter.HistoryAdapter;
-import com.ad.sample.api.ApiUtils;
-import com.ad.sample.api.client.HistoryService;
-import com.ad.sample.api.model.HistoryListResponse;
-import com.ad.sample.model.History;
-import com.ad.sample.ui.activity.HistoryActivity;
-import com.ad.sample.ui.activity.HistoryDetailActivity;
-import com.ad.sample.utils.TextUtils;
+import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.adapter.HistoryAdapter;
+import com.qwash.washer.api.ApiUtils;
+import com.qwash.washer.api.client.HistoryService;
+import com.qwash.washer.api.model.HistoryListResponse;
+import com.qwash.washer.model.History;
+import com.qwash.washer.ui.activity.HistoryActivity;
+import com.qwash.washer.ui.activity.HistoryDetailActivity;
+import com.qwash.washer.utils.TextUtils;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.widget.IconButton;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ad.sample.ui.activity.HomeActivity">
+    tools:context="com.qwash.washer.ui.activity.HomeActivity">
     <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
     <LinearLayout
         android:layout_width="0px"
@@ -57,7 +57,7 @@
                 app:backgroundTint="@color/white"
                 app:elevation="1dp" />
 
-            <com.ad.sample.ui.widget.RobotoRegularTextView
+            <com.qwash.washer.ui.widget.RobotoRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -82,7 +82,7 @@
                 app:backgroundTint="@color/white"
                 app:elevation="1dp" />
 
-            <com.ad.sample.ui.widget.RobotoRegularTextView
+            <com.qwash.washer.ui.widget.RobotoRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -108,7 +108,7 @@
                 app:backgroundTint="@color/white"
                 app:elevation="1dp" />
 
-            <com.ad.sample.ui.widget.RobotoRegularTextView
+            <com.qwash.washer.ui.widget.RobotoRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -153,7 +153,7 @@
             app:titleTextColor="@android:color/white">
 
 
-            <com.ad.sample.ui.widget.RobotoRegularEditText
+            <com.qwash.washer.ui.widget.RobotoRegularEditText
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

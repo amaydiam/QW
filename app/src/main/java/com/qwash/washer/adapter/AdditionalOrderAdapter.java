@@ -1,4 +1,4 @@
-package com.ad.sample.adapter;
+package com.qwash.washer.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,9 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.ad.sample.R;
-import com.ad.sample.model.AdditionalOrder;
-import com.ad.sample.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.R;
+import com.qwash.washer.model.AdditionalOrder;
+import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.EntypoIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;

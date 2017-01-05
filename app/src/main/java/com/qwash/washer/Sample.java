@@ -1,4 +1,4 @@
-package com.ad.sample;
+package com.qwash.washer;
 
 /**
  * Created by Amay on 12/28/2016.

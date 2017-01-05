@@ -1,4 +1,4 @@
-package com.ad.sample.adapter;
+package com.qwash.washer.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.ad.sample.R;
-import com.ad.sample.model.Vehicle;
-import com.ad.sample.ui.widget.RobotoBoldTextView;
+import com.qwash.washer.R;
+import com.qwash.washer.model.Vehicle;
+import com.qwash.washer.ui.widget.RobotoBoldTextView;
 import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconButton;
 import com.joanzapata.iconify.widget.IconTextView;

@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,12 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ad.sample.R;
-import com.ad.sample.Sample;
-import com.ad.sample.adapter.VehicleAdapter;
-import com.ad.sample.model.PrepareOrder;
-import com.ad.sample.model.Vehicle;
-import com.ad.sample.ui.fragment.PrepareOrderFragment;
+import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.adapter.VehicleAdapter;
+import com.qwash.washer.model.PrepareOrder;
+import com.qwash.washer.model.Vehicle;
+import com.qwash.washer.ui.fragment.PrepareOrderFragment;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialIcons;

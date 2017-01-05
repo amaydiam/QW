@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ad.sample.R;
+import com.qwash.washer.R;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 

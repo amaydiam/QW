@@ -1,4 +1,4 @@
-package com.ad.sample;
+package com.qwash.washer;
 
 import org.junit.Test;
 

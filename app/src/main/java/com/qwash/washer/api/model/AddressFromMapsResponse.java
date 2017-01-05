@@ -1,4 +1,4 @@
-package com.ad.sample.api.model;
+package com.qwash.washer.api.model;
 
 /**
  * Created by Amay on 12/29/2016.

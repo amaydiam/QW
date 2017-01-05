@@ -1,4 +1,4 @@
-package com.ad.sample.ui.activity;
+package com.qwash.washer.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,10 +6,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ad.sample.R;
-import com.ad.sample.Sample;
-import com.ad.sample.ui.fragment.HistoryDetailFragment;
-import com.ad.sample.ui.fragment.HistoryListFragment;
+import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.ui.fragment.HistoryDetailFragment;
+import com.qwash.washer.ui.fragment.HistoryListFragment;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;

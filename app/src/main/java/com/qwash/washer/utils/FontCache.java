@@ -1,4 +1,4 @@
-package com.ad.sample.utils;
+package com.qwash.washer.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;

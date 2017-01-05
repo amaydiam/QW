@@ -1,11 +1,11 @@
-package com.ad.sample.ui.widget;
+package com.qwash.washer.ui.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.ad.sample.utils.FontCache;
+import com.qwash.washer.utils.FontCache;
 
 public class RobotoBoldTextView extends TextView {
 

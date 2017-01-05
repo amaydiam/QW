@@ -57,7 +57,7 @@
 
             </LinearLayout>
 
-            <com.ad.sample.ui.widget.RobotoRegularButton
+            <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/btn_report_an_issue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

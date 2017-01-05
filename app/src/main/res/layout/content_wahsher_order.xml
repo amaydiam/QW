@@ -27,7 +27,7 @@
                 app:av_border_width="4dp"
                 app:av_text_size_percentage="35" />
 
-            <com.ad.sample.ui.widget.RobotoBoldTextView
+            <com.qwash.washer.ui.widget.RobotoBoldTextView
                 android:id="@+id/whaser_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                     android:layout_marginTop="@dimen/activity_half_vertical_margin"
                     android:text="{entypo-clock} 10:20:45" />
 
-                <com.ad.sample.ui.widget.RobotoRegularTextView
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -86,7 +86,7 @@
                     android:text="@string/harga_total"
                     android:textColor="@color/grey" />
 
-                <com.ad.sample.ui.widget.RobotoBoldTextView
+                <com.qwash.washer.ui.widget.RobotoBoldTextView
                     android:id="@+id/bill_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

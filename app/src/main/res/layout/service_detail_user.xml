@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ad.sample.ui.activity.ServiceDetailUserActivity">
+    tools:context="com.qwash.washer.ui.activity.ServiceDetailUserActivity">
 
     <include layout="@layout/toolbar" />
 

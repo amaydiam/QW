@@ -1,10 +1,10 @@
-package com.ad.sample.api.client;
+package com.qwash.washer.api.client;
 
 /**
  * Created by Amay on 12/29/2016.
  */
 
-import com.ad.sample.api.model.AddressFromMapsResponse;
+import com.qwash.washer.api.model.AddressFromMapsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

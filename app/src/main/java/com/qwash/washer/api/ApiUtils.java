@@ -1,8 +1,8 @@
-package com.ad.sample.api;
+package com.qwash.washer.api;
 
-import com.ad.sample.api.client.HistoryService;
-import com.ad.sample.api.client.RetrofitClient;
-import com.ad.sample.api.client.AddressMapsFromGoogleApi;
+import com.qwash.washer.api.client.HistoryService;
+import com.qwash.washer.api.client.RetrofitClient;
+import com.qwash.washer.api.client.AddressMapsFromGoogleApi;
 
 /**
  * Created by Amay on 12/29/2016.

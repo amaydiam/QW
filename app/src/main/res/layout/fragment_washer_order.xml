@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="@dimen/activity_vertical_margin"
-    tools:context="com.ad.sample.ui.fragment.WasherOrderFragment">
+    tools:context="com.qwash.washer.ui.fragment.WasherOrderFragment">
 <include layout="@layout/content_wahsher_order" />
     <!--TextView layout Main Menu TextView-->
     <LinearLayout
@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
 
-        <com.ad.sample.ui.widget.RobotoRegularButton
+        <com.qwash.washer.ui.widget.RobotoRegularButton
             android:id="@+id/btn_contact"
             style="@style/btn_blue"
             android:layout_width="0dp"
@@ -26,7 +26,7 @@
             android:gravity="center"
             android:text="@string/button_contact" />
 
-        <com.ad.sample.ui.widget.RobotoRegularButton
+        <com.qwash.washer.ui.widget.RobotoRegularButton
             android:id="@+id/btn_cancel"
             style="@style/btn_blue"
             android:layout_width="0dp"

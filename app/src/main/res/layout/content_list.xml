@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.ad.sample.ui.widget.RobotoRegularEditText
+            <com.qwash.washer.ui.widget.RobotoRegularEditText
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

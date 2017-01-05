@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ad.sample.ui.activity.MyBalanceActivity">
+    tools:context="com.qwash.washer.ui.activity.MyBalanceActivity">
 
     <include layout="@layout/toolbar" />
 
@@ -35,7 +35,7 @@
                     android:textColor="@color/blue_1E87DA"
                     android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-                <com.ad.sample.ui.widget.RobotoBoldTextView
+                <com.qwash.washer.ui.widget.RobotoBoldTextView
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:id="@+id/amount_of_balance"
@@ -47,7 +47,7 @@
                     android:gravity="center"/>
             </LinearLayout>
 
-            <com.ad.sample.ui.widget.RobotoRegularButton
+            <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:layout_margin="@dimen/activity_vertical_margin"
                 android:id="@+id/btn_top_up_balance"
                 android:layout_width="match_parent"

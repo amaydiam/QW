@@ -1,4 +1,4 @@
-package com.ad.sample.model;
+package com.qwash.washer.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
