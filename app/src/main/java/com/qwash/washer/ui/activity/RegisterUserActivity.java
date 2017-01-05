@@ -1,5 +1,6 @@
 package com.qwash.washer.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,23 +44,23 @@ public class RegisterUserActivity extends AppCompatActivity {
     FloatingActionButton btnGooglePlus;
 
     @OnClick(R.id.btn_login)
-    void ActionLogin(){
+    void ActionLogin() {
         finish();
     }
 
     @OnClick(R.id.btn_register)
-    void SubmitRegister(){
-        //Login
-        //  startActivity(new Intent(this,LoginActivity.class));
+    void SubmitRegister() {
+
+        startActivity(new Intent(this, LockWasherActivity.class));
     }
 
     @OnClick(R.id.btn_facebook)
-    void LoginViaFacebook(){
+    void LoginViaFacebook() {
         Toast.makeText(this, "Login Via Facebook", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btn_google_plus)
-    void LoginViaGooglePlus(){
+    void LoginViaGooglePlus() {
         Toast.makeText(this, "Login Via Google plus", Toast.LENGTH_SHORT).show();
     }
 
@@ -75,7 +76,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         setContentView(R.layout.register_user);
         ButterKnife.bind(this);
         //set underline
-        btnLogin.setPaintFlags(btnLogin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        btnLogin.setPaintFlags(btnLogin.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         //set icon
         btnFacebook.setImageDrawable(
                 new IconDrawable(this, FontAwesomeIcons.fa_facebook)

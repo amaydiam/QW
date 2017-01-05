@@ -26,6 +26,10 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ui.activity.LockWasherActivity"
+            android:label="@string/title_activity_lock_washer"
+            android:theme="@style/AppTheme.HomeActivity" />
+        <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.HomeActivity" />

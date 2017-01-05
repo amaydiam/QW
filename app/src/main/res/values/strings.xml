@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sample</string>
+    <string name="app_name">Q-Wash Washer</string>
     <string name="create_new_accout">Create New Account</string>
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
@@ -105,4 +105,7 @@
     <string name="brand_ford">Ford</string>
     <string name="brand_holden">Holden</string>
     <string name="action_clear">Clear</string>
+    <string name="sign_in_washer">Please signin with an app-spesific password</string>
+    <string name="action_logout">Logout</string>
+    <string name="title_activity_lock_washer">Lock Washer</string>
 </resources>
