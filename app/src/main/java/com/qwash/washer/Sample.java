@@ -13,6 +13,7 @@ public class Sample {
     public static final String IS_FINISH_LOADING_AWAL_DATA = "is_loading";
     public static final String IS_LOADING_MORE_DATA = "is_locked";
     public static final String KEYWORD = "keyword";
+    public static final String TAG_FRAGMENT = "fargment";
     public static String PAGE = "page";
     public static String DATA="data";
 

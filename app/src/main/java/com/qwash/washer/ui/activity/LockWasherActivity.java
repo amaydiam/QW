@@ -79,7 +79,7 @@ public class LockWasherActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(
                 new IconDrawable(this, MaterialIcons.md_arrow_back)
-                        .colorRes(R.color.black_424242)
+                        .colorRes(R.color.white)
                         .actionBarSize());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class LockWasherActivity extends AppCompatActivity implements
                 finish();
             }
         });
-
+        toolbar.setTitle("");
 
         new TedPermission(this)
                 .setPermissionListener(permissionMapsListener)
@@ -241,7 +241,7 @@ public class LockWasherActivity extends AppCompatActivity implements
         MenuItem acLogout = menu.findItem(R.id.action_logout);
         acLogout.setIcon(
                 new IconDrawable(this, MaterialCommunityIcons.mdi_logout)
-                        .colorRes(R.color.black_424242)
+                        .colorRes(R.color.white)
                         .actionBarSize());
         return true;
     }

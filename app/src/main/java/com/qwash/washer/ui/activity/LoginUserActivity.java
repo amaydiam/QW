@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
@@ -60,8 +61,7 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_login)
-    void LoginEmail() {
-        // Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
+    void Login() {
         startActivity(new Intent(this, HomeActivity.class));
     }
 
