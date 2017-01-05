@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view_notification">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:id="@+id/space_gambar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/image_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_toRightOf="@id/space_gambar"
+        android:id="@+id/space_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Promo Awal Tahun"
+            android:ems="10"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/deskripsi_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 januari 2016"
+            android:ems="10"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>
+    </android.support.v7.widget.CardView>
