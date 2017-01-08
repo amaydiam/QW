@@ -15,12 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.fragment.ProfilFragment;
+import com.qwash.washer.ui.fragment.TopUpFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
+import com.qwash.washer.ui.fragment.WashHistoryFragment;
 import com.qwash.washer.utils.Menus;
 
 import butterknife.BindView;
@@ -131,7 +132,7 @@ public class HomeActivity extends AppCompatActivity
                 fragment = new WalletFragment();
                 break;
             case Menus.nav_top_up:
-                fragment = new WalletFragment();
+                fragment = new TopUpFragment();
                 break;
             case Menus.nav_wash_history:
                 fragment = new WashHistoryFragment();

@@ -1,4 +1,4 @@
-package com.qwash.washer.ui.activity;
+package com.qwash.washer.ui.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

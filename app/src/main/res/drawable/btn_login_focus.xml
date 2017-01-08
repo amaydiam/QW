@@ -10,8 +10,7 @@
         android:top="10dp"
         android:bottom="10dp"
         />
-    <solid
-        android:color="#d1ecfa"/>
+    <solid android:color="#6bb1d7" />
     <stroke
         android:color="@color/mdtp_date_picker_view_animator"
         android:width="2dp" />
