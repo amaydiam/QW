@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity
                 fragment = new WalletFragment();
                 break;
             case Menus.nav_wash_history:
-                fragment = new WalletFragment();
+                fragment = new WashHistoryFragment();
                 break;
             case Menus.nav_feedback_customer:
                 fragment = new WalletFragment();

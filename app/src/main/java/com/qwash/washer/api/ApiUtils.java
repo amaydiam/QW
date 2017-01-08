@@ -12,6 +12,7 @@ public class ApiUtils {
 
     public static final String BASE_URL = "http://maps.googleapis.com/maps/api/";
     public static final String BASE_URL_QLAP = "https://api.myjson.com/bins/";
+    public static final String BASE_URL_INPROGRESS = "https://api.myjson.com/bins/";
 
     public static AddressMapsFromGoogleApi getAddressMapsFromGoogleApi() {
         return RetrofitClient.getClient(BASE_URL).create(AddressMapsFromGoogleApi.class);
@@ -21,9 +22,5 @@ public class ApiUtils {
         return RetrofitClient.getClient(BASE_URL_QLAP).create(HistoryService.class);
 
     }
-
-
-
-
 
 }

@@ -4,14 +4,12 @@ package com.qwash.washer.api.client;
  * Created by Amay on 12/29/2016.
  */
 
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-
 
     public static Retrofit getClient(String baseUrl) {
 
