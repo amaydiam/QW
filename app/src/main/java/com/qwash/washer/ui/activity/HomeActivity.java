@@ -16,14 +16,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
+import com.joanzapata.iconify.fonts.MaterialCommunityModule;
+import com.joanzapata.iconify.fonts.MaterialIcons;
+import com.joanzapata.iconify.fonts.MaterialModule;
+import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.fragment.ProfilFragment;
-import com.qwash.washer.ui.fragment.TopUpFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
-import com.qwash.washer.ui.fragment.WashHistoryFragment;
+import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Menus;
 
+import agency.tango.android.avatarview.loader.PicassoLoader;
+import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,6 +52,8 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
 
     private Fragment fragment;
+    private AvatarView washer_photo;
+    private RobotoRegularTextView washer_name;
 
     @OnClick(R.id.fab)
     void clickFab(View view) {
@@ -51,6 +63,12 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Iconify
+                .with(new FontAwesomeModule())
+                .with(new EntypoModule())
+                .with(new MaterialModule())
+                .with(new MaterialCommunityModule())
+                .with(new SimpleLineIconsModule());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
@@ -64,7 +82,8 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
 
         navView.setNavigationItemSelectedListener(this);
-
+        SetMenuDrawer();
+        SetDataUser();
         setSelectedDrawerItem(Menus.nav_profil);
     }
 
@@ -132,10 +151,10 @@ public class HomeActivity extends AppCompatActivity
                 fragment = new WalletFragment();
                 break;
             case Menus.nav_top_up:
-                fragment = new TopUpFragment();
+                fragment = new WalletFragment();
                 break;
             case Menus.nav_wash_history:
-                fragment = new WashHistoryFragment();
+                fragment = new WalletFragment();
                 break;
             case Menus.nav_feedback_customer:
                 fragment = new WalletFragment();
@@ -154,6 +173,39 @@ public class HomeActivity extends AppCompatActivity
         transaction.commitAllowingStateLoss();
     }
 
+    private void SetMenuDrawer() {
+
+        // ============ header menu drawer ==============
+        View header = navView.getHeaderView(0);
+        washer_photo = (AvatarView) header.findViewById(R.id.washer_photo);
+        washer_name = (RobotoRegularTextView) header.findViewById(R.id.washer_name);
+
+        // ============ list menu drawer ==============
+        Menu menu = navView.getMenu();
+        MenuItem nav_profil = menu.findItem(R.id.nav_profil);
+        nav_profil.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_calendar).actionBarSize());
+        MenuItem nav_wallet = menu.findItem(R.id.nav_wallet);
+        nav_wallet.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_qrcode_scan).actionBarSize());
+        MenuItem nav_top_up = menu.findItem(R.id.nav_top_up);
+        nav_top_up.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_comment_question_outline).actionBarSize());
+        MenuItem nav_wash_history = menu.findItem(R.id.nav_wash_history);
+        nav_wash_history.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_map_marker).actionBarSize());
+        MenuItem nav_feedback_customer = menu.findItem(R.id.nav_feedback_customer);
+        nav_feedback_customer.setIcon(new IconDrawable(this, MaterialIcons.md_people).actionBarSize());
+        MenuItem nav_pusat_bantuan = menu.findItem(R.id.nav_pusat_bantuan);
+        nav_pusat_bantuan.setIcon(new IconDrawable(this, MaterialIcons.md_accessibility).actionBarSize());
+               
+    }
+
+    public void SetDataUser() {
+
+      //  washer_name.setText(Prefs.getNamaLengkap(this));
+        PicassoLoader imageLoader = new PicassoLoader();
+      //  imageLoader.loadImage(washer_photo, url, Prefs.getNamaLengkap(this));
+        imageLoader.loadImage(washer_photo, "", "Fachri");
+
+    }
+
     @Override
     public void onProfilFragmentInteraction() {
 
@@ -162,5 +214,17 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void OnWalletInteraction(Uri uri) {
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Iconify
+                .with(new FontAwesomeModule())
+                .with(new EntypoModule())
+                .with(new MaterialModule())
+                .with(new MaterialCommunityModule())
+                .with(new SimpleLineIconsModule());
+        SetMenuDrawer();
+        SetDataUser();
     }
 }
