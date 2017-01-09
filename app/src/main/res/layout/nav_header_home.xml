@@ -22,10 +22,10 @@
 
         <agency.tango.android.avatarview.views.AvatarView
             android:id="@+id/washer_photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:av_border_color="@android:color/white"
-            app:av_border_width="4dp"
+            app:av_border_width="2dp"
             app:av_text_size_percentage="35"  />
 
         <com.qwash.washer.ui.widget.RobotoRegularTextView

@@ -9,9 +9,6 @@
             android:id="@+id/nav_wallet"
             android:title="Wallet" />
         <item
-            android:id="@+id/nav_top_up"
-            android:title="Top Up" />
-        <item
             android:id="@+id/nav_wash_history"
             android:title="Wash History" />
         <item
@@ -20,6 +17,9 @@
         <item
             android:id="@+id/nav_pusat_bantuan"
             android:title="Pusat Bantuan" />
+        <item
+            android:id="@+id/nav_info"
+            android:title="Info" />
 
     </group>
 </menu>

@@ -23,12 +23,20 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="btn_welcome" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/border_white_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="btn_blue" parent="Base.Widget.AppCompat.Button">
         <item name="android:background">@color/blue_2196F3</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-
+    <style name="btn_orange" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@color/orange</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style name="FullScreen" parent="android:Theme.Translucent.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>

@@ -18,7 +18,9 @@ import android.view.View;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoIcons;
 import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
@@ -28,7 +30,9 @@ import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.fragment.ProfilFragment;
+import com.qwash.washer.ui.fragment.TopUpFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
+import com.qwash.washer.ui.fragment.WashHistoryFragment;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Menus;
 
@@ -123,13 +127,13 @@ public class HomeActivity extends AppCompatActivity
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_wallet) {
             setSelectedDrawerItem(id);
-        } else if (id == Menus.nav_top_up) {
-            setSelectedDrawerItem(id);
         } else if (id == Menus.nav_wash_history) {
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_feedback_customer) {
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_pusat_bantuan) {
+            setSelectedDrawerItem(id);
+        }else if (id == Menus.nav_info) {
             setSelectedDrawerItem(id);
         }
 
@@ -139,34 +143,41 @@ public class HomeActivity extends AppCompatActivity
 
 
     public void setSelectedDrawerItem(int id) {
-        MenuItem item = navView.getMenu().findItem(id);
-        item.setChecked(true);
-        toolbar.setSubtitle(item.getTitle());
-        Bundle args = new Bundle();
         switch (id) {
             case Menus.nav_profil:
                 fragment = new ProfilFragment();
+                setFragment(id,fragment);
                 break;
             case Menus.nav_wallet:
                 fragment = new WalletFragment();
-                break;
-            case Menus.nav_top_up:
-                fragment = new WalletFragment();
+                setFragment(id,fragment);
                 break;
             case Menus.nav_wash_history:
-                fragment = new WalletFragment();
+                fragment = new WashHistoryFragment();
+                setFragment(id,fragment);
                 break;
             case Menus.nav_feedback_customer:
-                fragment = new WalletFragment();
+
                 break;
             case Menus.nav_pusat_bantuan:
-                fragment = new WalletFragment();
+
+                break;
+            case Menus.nav_info:
+
                 break;
             default:
                 fragment = new ProfilFragment();
+                setFragment(id,fragment);
                 break;
         }
 
+    }
+
+    private void setFragment(int id, Fragment fragment) {
+        Bundle args = new Bundle();
+        MenuItem item = navView.getMenu().findItem(id);
+        item.setChecked(true);
+        toolbar.setTitle(item.getTitle());
         fragment.setArguments(args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment, Sample.TAG_FRAGMENT);
@@ -183,17 +194,17 @@ public class HomeActivity extends AppCompatActivity
         // ============ list menu drawer ==============
         Menu menu = navView.getMenu();
         MenuItem nav_profil = menu.findItem(R.id.nav_profil);
-        nav_profil.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_calendar).actionBarSize());
+        nav_profil.setIcon(new IconDrawable(this, EntypoIcons.entypo_user).actionBarSize());
         MenuItem nav_wallet = menu.findItem(R.id.nav_wallet);
-        nav_wallet.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_qrcode_scan).actionBarSize());
-        MenuItem nav_top_up = menu.findItem(R.id.nav_top_up);
-        nav_top_up.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_comment_question_outline).actionBarSize());
+        nav_wallet.setIcon(new IconDrawable(this, EntypoIcons.entypo_wallet).actionBarSize());
         MenuItem nav_wash_history = menu.findItem(R.id.nav_wash_history);
-        nav_wash_history.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_map_marker).actionBarSize());
+        nav_wash_history.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_history).actionBarSize());
         MenuItem nav_feedback_customer = menu.findItem(R.id.nav_feedback_customer);
-        nav_feedback_customer.setIcon(new IconDrawable(this, MaterialIcons.md_people).actionBarSize());
+        nav_feedback_customer.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_comment_alert).actionBarSize());
         MenuItem nav_pusat_bantuan = menu.findItem(R.id.nav_pusat_bantuan);
-        nav_pusat_bantuan.setIcon(new IconDrawable(this, MaterialIcons.md_accessibility).actionBarSize());
+        nav_pusat_bantuan.setIcon(new IconDrawable(this, FontAwesomeIcons.fa_question_circle).actionBarSize());
+        MenuItem nav_info = menu.findItem(R.id.nav_info);
+        nav_info.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_alert_circle).actionBarSize());
                
     }
 
@@ -202,7 +213,7 @@ public class HomeActivity extends AppCompatActivity
       //  washer_name.setText(Prefs.getNamaLengkap(this));
         PicassoLoader imageLoader = new PicassoLoader();
       //  imageLoader.loadImage(washer_photo, url, Prefs.getNamaLengkap(this));
-        imageLoader.loadImage(washer_photo, "", "Fachri");
+        imageLoader.loadImage(washer_photo, "ht", "Fachri");
 
     }
 

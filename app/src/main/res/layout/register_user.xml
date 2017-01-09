@@ -11,271 +11,236 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:background="#dedede"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:background="@color/white"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp">
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_weight="7"
-                    android:layout_width="0dp"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_halft_vertical_margin"
+                    android:layout_toLeftOf="@+id/right"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:orientation="vertical"
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/first_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/first_name"
+                        android:padding="10dp" android:maxLines="1" />
 
-                        <EditText
-                            android:background="@null"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:lines="1"
-                            android:id="@+id/firsh_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Firsh Name"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ccc" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#ccc"/>
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/last_name"
+                        android:padding="10dp"  android:maxLines="1"/>
+                </LinearLayout>
 
-                        <EditText
-                            android:background="@null"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:lines="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Last Name"/>
-                    </LinearLayout>
-                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_weight="3"
-                    android:layout_width="0dp"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
+                    <agency.tango.android.avatarview.views.AvatarView
+                        android:id="@+id/washer_photo"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_user"
+                        app:av_border_color="@android:color/white"
+                        app:av_border_width="2dp"
+                        app:av_text_size_percentage="35" />
+                </LinearLayout>
+            </RelativeLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp">
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:background="#ccc"/>
-                    </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_halft_vertical_margin"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/email"
+                        android:padding="10dp"  android:maxLines="1"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ccc" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
                         android:gravity="center">
 
-                        <TextView
+                        <ImageView
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/pick_code_country"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+"
-                            android:textSize="55sp"
-                            android:textColor="#bfbfbf"/>
+                            android:layout_marginRight="10dp" />
+
+                        <TextView
+                            android:id="@+id/code_country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:lines="1"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:text="+62"
+                            android:textSize="18sp" />
+                        <com.qwash.washer.ui.widget.RobotoRegularEditText
+                            android:id="@+id/no_telp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/no_telp"
+                            android:padding="10dp" android:maxLines="1" />
+
                     </LinearLayout>
-                </RelativeLayout>
-            </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ccc" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/password"
+                        android:padding="10dp"
+                        android:inputType="textPassword"
+                        android:maxLines="1"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ccc" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/city"
+                        android:padding="10dp" android:maxLines="1" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+            <com.qwash.washer.ui.widget.RobotoRegularButton
+                android:id="@+id/btn_continue"
+                style="@style/btn_blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="@string/button_continue" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
-
-                    <EditText
-                        android:background="@null"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:lines="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Email"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#ccc"/>
-
-                    <LinearLayout
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/gbr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/bubble_mask"/>
-                        <TextView
-                            android:background="@null"
-                            android:layout_marginRight="15dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:lines="1"
-                            android:layout_toRightOf="@id/gbr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:text="+62"/>
-
-                        <EditText
-                            android:background="@null"
-                            android:layout_marginRight="15dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:lines="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="87778899430"/>
-
-                    </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#ccc"/>
-                    <EditText
-                        android:background="@null"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:lines="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Password"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#ccc"/>
-
-                    <EditText
-                        android:background="@null"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:lines="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Kota"/>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/blue_1E87DA"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:text="CONTINUE"/>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
-                    android:layout_weight="4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_weight="4">
+
                     <View
-                        android:id="@+id/view1"
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:background="#000"/>
+                        android:background="#000" />
                 </LinearLayout>
 
 
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="OR"
                     android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_weight="4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_weight="4">
+
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:background="#000"/>
+                        android:background="#000" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Sign up with washer account"
-                android:textColor="@color/blue_1E87DA"
                 android:textAlignment="center"
+                android:textColor="@color/blue_1E87DA"
                 android:textSize="20sp" />
 
             <TextView
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="By proceeding, I agree that Q-Lap or it's representatived may contact me by email, phone, or SMS at the email address or number I provide, including for marketing purpose. I have read and understand the relevant Washer privacy statement."/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:text="By proceeding, I agree that Q-Lap or it's representatived may contact me by email, phone, or SMS at the email address or number I provide, including for marketing purpose. I have read and understand the relevant Washer privacy statement." />
 
         </LinearLayout>
-    </RelativeLayout>
 
-</android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

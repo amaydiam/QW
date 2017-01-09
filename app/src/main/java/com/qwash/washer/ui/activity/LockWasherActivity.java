@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +32,7 @@ import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
@@ -54,6 +56,8 @@ public class LockWasherActivity extends AppCompatActivity implements
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     private double current_latitude, current_longitude;
     private View mapView;
@@ -88,6 +92,12 @@ public class LockWasherActivity extends AppCompatActivity implements
             }
         });
         toolbar.setTitle("");
+        getActionBar().setTitle("");
+
+        fab.setImageDrawable(
+                new IconDrawable(this, MaterialCommunityIcons.mdi_car)
+                        .colorRes(R.color.blue_1E87DA)
+                        .actionBarSize());
 
         new TedPermission(this)
                 .setPermissionListener(permissionMapsListener)

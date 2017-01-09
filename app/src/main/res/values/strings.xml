@@ -1,14 +1,5 @@
 <resources>
     <string name="app_name">Q-Wash Washer</string>
-    <string name="create_new_accout">Create New Account</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_nama">Nama</string>
-    <string name="button_sign_up">Sign Up</string>
-    <string name="or_sign_white">or sign in with:</string>
-    <string name="term_login">By Signin your agree with our term and conditions</string>
-    <string name="login">Login</string>
-    <string name="title_activity_home">Map</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="dont_have_an_account">Don\'t Have An Account?</string>
@@ -17,13 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="title_activity_add_vehicle_type">Add Vehicle Type</string>
     <string name="button_login">Login</string>
 
     <string name="message_denied">Permission \"%1$s\" has been denied.</string>
-    <string name="title_activity_my_balance">My Balnce</string>
-    <string name="title_activity_history">history</string>
-    <string name="title_activity_detail_history">Detail History</string>
     =======
     <string name="sign_in_washer">Please signin with an app-spesific password</string>
     <string name="action_logout">Logout</string>
@@ -35,6 +22,11 @@
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sign_in">Sign In</string>
+    <string name="button_top_up">Top Up</string>
+    <string name="office_address">Ruko Parakan Kavling 8E, Jl. Parakan, Pd. Benda, Pamulang, Kota Tangerang Selatan, Banten, 15417</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="no_telp">87778899430</string>
+    <string name="city">City</string>
+    <string name="button_continue">CONTINUE</string>
 </resources>

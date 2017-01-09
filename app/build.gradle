@@ -30,18 +30,19 @@ dependencies {
     })
 
     // Retrofit
+    
+
+
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
-
-
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:percent:25.1.0'
-    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    compile  'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-entypo:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-material:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-simplelineicons:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-material-community:2.2.2'
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'agency.tango.android:avatar-view:0.0.2'
     compile 'agency.tango.android:avatar-view-picasso:0.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
