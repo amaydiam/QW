@@ -92,7 +92,7 @@ public class LockWasherActivity extends AppCompatActivity implements
             }
         });
         toolbar.setTitle("");
-        getActionBar().setTitle("");
+        getSupportActionBar().setTitle("");
 
         fab.setImageDrawable(
                 new IconDrawable(this, MaterialCommunityIcons.mdi_car)
