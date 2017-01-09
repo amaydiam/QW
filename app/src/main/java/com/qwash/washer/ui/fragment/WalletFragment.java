@@ -1,6 +1,7 @@
 package com.qwash.washer.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qwash.washer.R;
+import com.qwash.washer.ui.activity.TopUpActivity;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WalletFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -44,7 +49,9 @@ public class WalletFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_wallet, container, false);
+        View view = inflater.inflate(R.layout.fragment_wallet, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -69,6 +76,13 @@ public class WalletFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @OnClick(R.id.click_top_up)
+    public void onClick() {
+
+        startActivity(new Intent(getContext(), TopUpActivity.class));
+
     }
 
     public interface OnWalletInteractionListener {

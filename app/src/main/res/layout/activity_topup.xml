@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,7 +25,6 @@
             android:text="Choose the amount of balance"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,13 +52,10 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox20"
+                            android:text="IDR 20.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 20.000" />
 
                     </LinearLayout>
 
@@ -65,13 +69,10 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox100"
+                            android:text="IDR 100.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 100.000" />
 
                     </LinearLayout>
 
@@ -85,13 +86,10 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox500"
+                            android:text="IDR 500.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 500.000" />
 
                     </LinearLayout>
 
@@ -113,13 +111,10 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox50"
+                            android:text="IDR 50.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 50.000" />
 
                     </LinearLayout>
 
@@ -132,13 +127,11 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox250"
+                            android:text="IDR 250.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 250.000" />
 
                     </LinearLayout>
 
@@ -150,13 +143,11 @@
                         android:padding="10dp">
 
                         <RadioButton
+                            android:id="@+id/checkbox750"
+                            android:text="IDR 750.000"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IDR 750.000" />
 
                     </LinearLayout>
 
@@ -174,13 +165,10 @@
                 android:padding="10dp">
 
                 <RadioButton
+                    android:id="@+id/checkbox1jt"
+                    android:text="IDR 1.000.000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 1.000.000" />
 
             </LinearLayout>
         </RelativeLayout>
@@ -197,10 +185,11 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/totalharga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="IDR 20.000"
+                android:text="IDR 0"
                 android:textColor="#f5c93a"
                 android:textSize="18sp" />
 
@@ -214,19 +203,14 @@
 
             <CheckBox
                 android:id="@+id/checkbox"
+                android:text="I agree to the terms and conditions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@id/checkbox"
-                android:text="I agree to the terms and conditions" />
 
         </RelativeLayout>
 
         <Button
+            android:id="@+id/topup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_btn_orange"
@@ -238,3 +222,4 @@
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

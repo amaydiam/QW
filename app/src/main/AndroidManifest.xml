@@ -37,6 +37,10 @@
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"
             android:theme="@style/AppTheme.HomeActivity" />
+        <activity
+            android:name=".ui.activity.TopUpActivity"
+            android:label="@string/title_activity_lock_washer"
+            android:theme="@style/AppTheme.HomeActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

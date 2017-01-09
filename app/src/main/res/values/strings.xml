@@ -29,4 +29,5 @@
     <string name="no_telp">87778899430</string>
     <string name="city">City</string>
     <string name="button_continue">CONTINUE</string>
+    <string name="title_activity_topup">Top Up</string>
 </resources>

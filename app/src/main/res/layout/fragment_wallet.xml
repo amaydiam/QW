@@ -49,6 +49,7 @@
     </LinearLayout>
 
     <com.qwash.washer.ui.widget.RobotoRegularButton
+        android:id="@+id/click_top_up"
         style="@style/btn_orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
