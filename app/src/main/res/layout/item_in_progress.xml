@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border"
+    android:id="@+id/klik_in_progress"
     android:padding="10dp"
     android:layout_marginTop="16dp"
     android:layout_marginRight="16dp"
