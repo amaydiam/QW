@@ -35,18 +35,18 @@
 
                     <ImageView
                         android:id="@+id/gbr1"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_date_range_black_24px" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_toRightOf="@id/gbr1"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:text="Today"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -55,18 +55,18 @@
 
                     <ImageView
                         android:id="@+id/gbr2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_access_time_black_24px" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_toRightOf="@id/gbr2"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:text="18:20 WIB"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -81,8 +81,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Harga Total :"
-                    android:textSize="15sp" />
+                    android:text="Harga Total:"
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:textSize="16sp"
                     android:text="ADDITIONAL SELECT" />
 
                 <View
@@ -132,8 +133,8 @@
 
                 <ImageView
                     android:id="@+id/gbr3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
@@ -142,6 +143,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/gbr3"
+                    android:textSize="16sp"
                     android:text="Perfumed" />
             </RelativeLayout>
 
@@ -156,8 +158,8 @@
 
                 <ImageView
                     android:id="@+id/gbr4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
@@ -166,6 +168,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_centerInParent="true"
                     android:layout_toRightOf="@id/gbr4"
+                    android:textSize="16sp"
                     android:text="Interior Vacuum" />
             </RelativeLayout>
 
@@ -188,16 +191,17 @@
 
                 <ImageView
                     android:id="@+id/gbr5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_location_on_black_24px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/gbr5"
+                    android:textSize="16sp"
                     android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402" />
             </RelativeLayout>
 
@@ -211,15 +215,15 @@
 
                 <ImageView
                     android:id="@+id/gbr6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/ic_launcher" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/gbr6"
                     android:orientation="vertical">
 
@@ -228,6 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:textSize="16sp"
                         android:text="Daitsu Alya" />
 
                     <TextView
@@ -235,6 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ddd"
                         android:layout_centerInParent="true"
+                        android:textSize="16sp"
                         android:text="X 1.5 AT" />
                 </LinearLayout>
             </RelativeLayout>

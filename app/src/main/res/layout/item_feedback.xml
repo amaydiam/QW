@@ -16,9 +16,10 @@
 
         <ImageView
             android:id="@+id/gbr"
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_date_range_black_24px" />
 
         <TextView
             android:id="@+id/date_feedback"
