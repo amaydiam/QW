@@ -28,6 +28,7 @@ import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
+import com.qwash.washer.ui.fragment.FeedbackFragment;
 import com.qwash.washer.ui.fragment.ProfilFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
 import com.qwash.washer.ui.fragment.WashHistoryFragment;
@@ -42,7 +43,7 @@ import butterknife.OnClick;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProfilFragment.OnProfilFragmentInteractionListener,WalletFragment.OnWalletInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfilFragment.OnProfilFragmentInteractionListener, WalletFragment.OnWalletInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -131,7 +132,7 @@ public class HomeActivity extends AppCompatActivity
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_pusat_bantuan) {
             setSelectedDrawerItem(id);
-        }else if (id == Menus.nav_info) {
+        } else if (id == Menus.nav_info) {
             setSelectedDrawerItem(id);
         }
 
@@ -144,18 +145,19 @@ public class HomeActivity extends AppCompatActivity
         switch (id) {
             case Menus.nav_profil:
                 fragment = new ProfilFragment();
-                setFragment(id,fragment);
+                setFragment(id, fragment);
                 break;
             case Menus.nav_wallet:
                 fragment = new WalletFragment();
-                setFragment(id,fragment);
+                setFragment(id, fragment);
                 break;
             case Menus.nav_wash_history:
                 fragment = new WashHistoryFragment();
-                setFragment(id,fragment);
+                setFragment(id, fragment);
                 break;
             case Menus.nav_feedback_customer:
-
+                fragment = new FeedbackFragment();
+                setFragment(id, fragment);
                 break;
             case Menus.nav_pusat_bantuan:
 
@@ -165,7 +167,7 @@ public class HomeActivity extends AppCompatActivity
                 break;
             default:
                 fragment = new ProfilFragment();
-                setFragment(id,fragment);
+                setFragment(id, fragment);
                 break;
         }
 
@@ -203,14 +205,14 @@ public class HomeActivity extends AppCompatActivity
         nav_pusat_bantuan.setIcon(new IconDrawable(this, FontAwesomeIcons.fa_question_circle).actionBarSize());
         MenuItem nav_info = menu.findItem(R.id.nav_info);
         nav_info.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_alert_circle).actionBarSize());
-               
+
     }
 
     public void SetDataUser() {
 
-      //  washer_name.setText(Prefs.getNamaLengkap(this));
+        //  washer_name.setText(Prefs.getNamaLengkap(this));
         PicassoLoader imageLoader = new PicassoLoader();
-      //  imageLoader.loadImage(washer_photo, url, Prefs.getNamaLengkap(this));
+        //  imageLoader.loadImage(washer_photo, url, Prefs.getNamaLengkap(this));
         imageLoader.loadImage(washer_photo, "ht", "Fachri");
 
     }
@@ -224,6 +226,7 @@ public class HomeActivity extends AppCompatActivity
     public void OnWalletInteraction(Uri uri) {
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();

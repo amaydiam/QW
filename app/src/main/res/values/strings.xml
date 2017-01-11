@@ -30,4 +30,11 @@
     <string name="city">City</string>
     <string name="button_continue">CONTINUE</string>
     <string name="title_activity_topup">Top Up</string>
+    <string name="title_activity_detail_history">Detail History</string>
+    <string name="val_email_length">Email must be at least 5 chars and 100 chars length</string>
+    <string name="val_password_length">Password must be at least 4 chars and 10 chars length</string>
+    <string name="val_first_length">Isi nama depan anda</string>
+    <string name="val_last_length">Isi nama belakang anda</string>
+    <string name="val_telp_length">Isi nomor telpon anda</string>
+    <string name="val_city_length">Isi kota anda</string>
 </resources>

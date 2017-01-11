@@ -101,7 +101,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/email"
-                        android:padding="10dp"  android:maxLines="1"/>
+                        android:padding="10dp"
+                        android:maxLines="1" />
 
                     <View
                         android:layout_width="match_parent"
@@ -117,8 +118,9 @@
                         <ImageView
                             android:layout_marginLeft="10dp"
                             android:id="@+id/pick_code_country"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/flag_id"
                             android:layout_marginRight="10dp" />
 
                         <TextView
@@ -136,8 +138,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:maxEms="13"
+                            android:phoneNumber="true"
                             android:hint="@string/no_telp"
-                            android:padding="10dp" android:maxLines="1" />
+                            android:padding="10dp"
+                            android:maxLines="1" />
 
                     </LinearLayout>
 
@@ -167,7 +172,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/city"
-                        android:padding="10dp" android:maxLines="1" />
+                        android:padding="10dp"
+                        android:maxLines="1" />
                 </LinearLayout>
 
 

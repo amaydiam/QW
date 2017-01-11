@@ -1,14 +1,18 @@
 package com.qwash.washer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qwash.washer.R;
 import com.qwash.washer.api.model.InProgressResponse;
+import com.qwash.washer.ui.activity.DetailHistoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,20 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.My
         holder.textView1.setText(date[position]);
         holder.textView2.setText(time[position]);
         holder.textView3.setText(merk[position]);
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetailHistoryActivity.class);
+                intent.putExtra("date", "");
+                intent.putExtra("time", "");
+                intent.putExtra("totalharga", "");
+                intent.putExtra("addselect1", "");
+                intent.putExtra("addselect2", "");
+                intent.putExtra("lokasi", "");
+                intent.putExtra("merk", "");
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -50,6 +68,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.My
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView1, textView2, textView3;
+        private LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -57,6 +76,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.My
             textView1 = (TextView) itemView.findViewById(R.id.date_in_progress);
             textView2 = (TextView) itemView.findViewById(R.id.time_in_progress);
             textView3 = (TextView) itemView.findViewById(R.id.merk_in_progress);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.klik_in_progress);
 
         }
     }
