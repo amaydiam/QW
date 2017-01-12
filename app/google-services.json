@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "937408409681",
+    "firebase_url": "https://qwfirebaseproject.firebaseio.com",
+    "project_id": "qwfirebaseproject",
+    "storage_bucket": "qwfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937408409681:android:269156c93dd5b50d",
+        "android_client_info": {
+          "package_name": "com.qwash.washer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937408409681-895l26k1dg5qk3g59ldae8d8juehb9bb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qwash.washer",
+            "certificate_hash": "13ABEDF18C72DF5306E5BA16FE8B3CFF5CC115F5"
+          }
+        },
+        {
+          "client_id": "937408409681-96v1hg66jmd7mq8jgv6qpsgimt5njgrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD79H3fEV3M30Lr1ZkssHEQYf6dwr-eLZo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937408409681-96v1hg66jmd7mq8jgv6qpsgimt5njgrt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
