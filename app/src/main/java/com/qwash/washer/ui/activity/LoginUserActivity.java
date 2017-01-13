@@ -1,6 +1,7 @@
 package com.qwash.washer.ui.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -26,14 +26,23 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.qwash.washer.R;
-import com.qwash.washer.ui.widget.RobotoRegularButton;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class LoginUserActivity extends AppCompatActivity {
 
@@ -52,6 +61,10 @@ public class LoginUserActivity extends AppCompatActivity {
     RobotoRegularEditText password;
 
     private Validator validator;
+    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+    private OkHttpClient mClient = new OkHttpClient();
+    private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Iconify
@@ -118,10 +131,10 @@ public class LoginUserActivity extends AppCompatActivity {
         // Get token
         String token = FirebaseInstanceId.getInstance().getToken();
 
-        // Log and toast
-        String msg = "Output " + token;
-        Log.d("Token", msg);
-        Toast.makeText(this, "" + msg, Toast.LENGTH_SHORT).show();
+        //send token
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put("cSUsJMWnwiU:APA91bFzl7JpahvwDxb1JT0wO4Ht-T1pMzQ7LTY50Ao77keyCZVQLmV7tbKGhiZW6Zcmpwxz_Yf8cbId-MhL1174Q0ZmfHcJBFQke8JR7TCcRvePRr4-Wmh9bDQ8Rv8YCq1-5FIXkgyy");
+        sendNotification(jsonArray, "Hello", "How r u", "google.com", "My Name is Vishal");
     }
 
     @OnClick(R.id.btn_forgot_password)
@@ -132,6 +145,61 @@ public class LoginUserActivity extends AppCompatActivity {
     @OnClick(R.id.register)
     void Register() {
         startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+    }
+
+    public void sendNotification(final JSONArray recipients, final String title, final String body, final String icon, final String message) {
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONObject notification = new JSONObject();
+                    notification.put("body", body);
+                    notification.put("title", title);
+                    notification.put("icon", icon);
+
+                    JSONObject data = new JSONObject();
+                    data.put("message", message);
+                    root.put("notification", notification);
+                    root.put("data", data);
+                    root.put("registration_ids", recipients);
+
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                    //Toast.makeText(LoginUserActivity.this, "Message Success: " + success + "Message Failed: " + failure, Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(LoginUserActivity.this, "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
+                }
+            }
+        }.execute();
+    }
+
+    String postToFCM(String bodyString) throws IOException {
+        RequestBody body = RequestBody.create(JSON, bodyString);
+        String keyfirebase = "AIzaSyCSF410-oAGTH4A2-PzQM1Otf4acV06H7o";
+        Request request = new Request.Builder()
+                .url(FCM_MESSAGE_URL)
+                .post(body)
+                .addHeader("Authorization", "key=" + keyfirebase)
+                .build();
+        Response response = mClient.newCall(request).execute();
+        return response.body().string();
     }
 
 
