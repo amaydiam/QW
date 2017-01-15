@@ -1,59 +1,45 @@
 package com.qwash.washer.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
-public class PrepareOrder implements Parcelable {
+public class PrepareOrder implements Serializable {
+    
+    // customer order
+    public String userId;
+    public String username;
+    public String email;
+    public String name;
+    public String phone;
+    public String authLevel;
+    public String firebase_id;
 
-    // Attributes
-    public String id_muzaki;
-    public String nama_muzaki;
-    public String alamat_muzaki;
-    public String no_identitas_muzaki;
-    public String no_telp_muzaki;
-    public String status_muzaki;
+    // address order
+    public String usersDetailsId;
+    public String  userIdFk;
+    public String  nameAddress;
+    public String  address;
+    public String  latlong;
+    public String  type;
 
-    // Constructor
-    public PrepareOrder(String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki,
-                        String status_muzaki) {
-        this.id_muzaki = id_muzaki;
-        this.nama_muzaki = nama_muzaki;
-        this.alamat_muzaki = alamat_muzaki;
-        this.no_identitas_muzaki = no_identitas_muzaki;
-        this.no_telp_muzaki = no_telp_muzaki;
-        this.status_muzaki = status_muzaki;
-    }
-    public PrepareOrder(Parcel in) {
-        this.id_muzaki = in.readString();
-        this.nama_muzaki = in.readString();
-        this.alamat_muzaki = in.readString();
-        this.no_identitas_muzaki = in.readString();
-        this.no_telp_muzaki = in.readString();
-        this.status_muzaki = in.readString();
-    }
+    //vehicle order
+    public String vCustomersId;
+    public String vName;
+    public String vBrand;
+    public String models;
+    public String vTransmision;
+    public String years;
+    public String vId;
+    public String vBrandId;
+    public String vModelId;
+    public String vTransId;
+    public String vYearsId;
 
-    // Parcelable Creator
-    public static final Creator CREATOR = new Creator() {
-        public PrepareOrder createFromParcel(Parcel in) {
-            return new PrepareOrder(in);
-        }
-        public PrepareOrder[] newArray(int size) {
-            return new PrepareOrder[size];
-        }
-    };
+    //order detail
+    public int price;
+    public int perfumed;
+    public int interior_vaccum;
+    public int estimated_price;
+    public String datetime;
 
-    // Parcelling methods
-    @Override
-    public void writeToParcel(Parcel out, int i) {
-        out.writeString(id_muzaki);
-        out.writeString(nama_muzaki);
-        out.writeString(alamat_muzaki);
-        out.writeString(no_identitas_muzaki);
-        out.writeString(no_telp_muzaki);
-        out.writeString(status_muzaki);
-    }
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+
 }

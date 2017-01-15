@@ -64,7 +64,7 @@ public class Utils {
         } catch (Exception e) {
 
         }
-        return "Rp. "+ss.replace(",", ".");
+        return "IDR. "+ss.replace(",", ".");
     }
 
     public static String Rupiah(int s) {
@@ -74,6 +74,6 @@ public class Utils {
         } catch (Exception e) {
 
         }
-        return  "Rp. "+ss.replace(",", ".");
+        return  "IDR. "+ss.replace(",", ".");
     }
 }
