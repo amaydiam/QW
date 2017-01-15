@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qwash.washer">
 
+    <!--set alarm -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Permission to start Alarm on device reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -74,6 +79,22 @@
         </service>
         <!-- [END firebase_iid_service] -->
 
+
+
+        <!-- Avilable for job
+        -->
+        <receiver android:name=".service.availableforjob.DeviceBootAvailableForJobReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".service.availableforjob.AlarmAvailableForJobReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:name=".service.availableforjob.LocationAvailableForJobService"/>
     </application>
 
 </manifest>

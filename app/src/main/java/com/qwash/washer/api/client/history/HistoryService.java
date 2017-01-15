@@ -1,4 +1,4 @@
-package com.qwash.washer.api.client;
+package com.qwash.washer.api.client.history;
 
 /**
  * Created by Amay on 12/29/2016.

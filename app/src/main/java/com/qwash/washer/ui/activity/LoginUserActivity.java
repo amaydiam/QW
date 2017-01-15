@@ -27,6 +27,7 @@ import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.qwash.washer.R;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
+import com.qwash.washer.utils.Prefs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,7 +98,9 @@ public class LoginUserActivity extends AppCompatActivity {
         validator.setValidationListener(new Validator.ValidationListener() {
             @Override
             public void onValidationSucceeded() {
+
                 loginSucces();
+
             }
 
             @Override
@@ -108,7 +111,22 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
     private void loginSucces() {
-        startActivity(new Intent(this, HomeActivity.class));
+
+
+        Prefs.putToken(LoginUserActivity.this, "xxx");
+        Prefs.putFirebaseId(LoginUserActivity.this, "xx");
+
+        Prefs.putUserId(LoginUserActivity.this, "1");
+        Prefs.putUsername(LoginUserActivity.this, "xx");
+        Prefs.putEmail(LoginUserActivity.this, "xx");
+        Prefs.putName(LoginUserActivity.this, "xx");
+        Prefs.putPhone(LoginUserActivity.this, "xx");
+        Prefs.putAuthLevel(LoginUserActivity.this, "5");
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void loginFailed(List<ValidationError> errors) {
@@ -127,14 +145,15 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     void Login() {
-        validator.validate();
+      //  validator.validate();
         // Get token
         String token = FirebaseInstanceId.getInstance().getToken();
 
-        //send token
+        Log.v("token",token);
+     /*   //send token
         JSONArray jsonArray = new JSONArray();
         jsonArray.put("cSUsJMWnwiU:APA91bFzl7JpahvwDxb1JT0wO4Ht-T1pMzQ7LTY50Ao77keyCZVQLmV7tbKGhiZW6Zcmpwxz_Yf8cbId-MhL1174Q0ZmfHcJBFQke8JR7TCcRvePRr4-Wmh9bDQ8Rv8YCq1-5FIXkgyy");
-        sendNotification(jsonArray, "Hello", "How r u", "google.com", "My Name is Vishal");
+        sendNotification(jsonArray, "Hello", "How r u", "google.com", "My Name is Vishal");*/
     }
 
     @OnClick(R.id.btn_forgot_password)
@@ -192,7 +211,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
     String postToFCM(String bodyString) throws IOException {
         RequestBody body = RequestBody.create(JSON, bodyString);
-        String keyfirebase = "AIzaSyCSF410-oAGTH4A2-PzQM1Otf4acV06H7o";
+        String keyfirebase = "AAAA6dPgYVk:APA91bHI2HxHsoiiqS6_8pdO84jNMU-Rq_Rhg9nWAmwETLsiyn5Do8zB_MW-__aGu1keJOIS3_moL-csuAsvUYeOBcdBCZp93GJGk1JKm3VMfxQ_0AWlxrpGjqNJNojtbmjM_3UItK90";
         Request request = new Request.Builder()
                 .url(FCM_MESSAGE_URL)
                 .post(body)
