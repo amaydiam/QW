@@ -37,4 +37,6 @@
     <string name="val_last_length">Isi nama belakang anda</string>
     <string name="val_telp_length">Isi nomor telpon anda</string>
     <string name="val_city_length">Isi kota anda</string>
+    <string name="title_detail_in_progress">Detail Order</string>
+    <string name="title_in_progress">In Progress</string>
 </resources>

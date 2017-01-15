@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.qwash.washer.R;
 import com.qwash.washer.api.model.InProgressResponse;
 import com.qwash.washer.ui.activity.DetailHistoryActivity;
+import com.qwash.washer.ui.activity.DetailInProgressActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class InProgressAdapter extends RecyclerView.Adapter<InProgressAdapter.My
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), DetailHistoryActivity.class);
+                Intent intent = new Intent(v.getContext(), DetailInProgressActivity.class);
                 intent.putExtra("date", "");
                 intent.putExtra("time", "");
                 intent.putExtra("totalharga", "");
