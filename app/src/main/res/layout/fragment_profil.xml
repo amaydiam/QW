@@ -29,6 +29,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
             <com.qwash.washer.ui.widget.RobotoLightTextView
+                android:id="@+id/change_saldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_halft_vertical_margin"

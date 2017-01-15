@@ -147,6 +147,7 @@ public class LoginUserActivity extends AppCompatActivity {
     void Login() {
       //  validator.validate();
         // Get token
+        startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
         String token = FirebaseInstanceId.getInstance().getToken();
 
         Log.v("token",token);

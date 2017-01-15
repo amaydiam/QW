@@ -17,6 +17,8 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.qwash.washer.R;
 import com.qwash.washer.service.availableforjob.AlarmAvailableForJobReceiver;
+import com.qwash.washer.ui.activity.TopUpActivity;
+import com.qwash.washer.ui.widget.RobotoLightTextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -34,6 +36,8 @@ public class ProfilFragment extends Fragment {
     Switch availableForJob;
     @BindView(R.id.available_for_vaccum)
     Switch availableForVaccum;
+    @BindView(R.id.change_saldo)
+    RobotoLightTextView changeSaldo;
     private PendingIntent pendingIntent;
     private Intent alarmIntent;
 
@@ -49,6 +53,11 @@ public class ProfilFragment extends Fragment {
             cancel();
             availableForJob.setChecked(false);
         }
+    }
+
+    @OnClick(R.id.change_saldo)
+    public void changeSaldo() {
+        startActivity(new Intent(getContext(), TopUpActivity.class));
     }
 
     PermissionListener permissionMapsListener = new PermissionListener() {
@@ -89,7 +98,7 @@ public class ProfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         alarmIntent = new Intent(getActivity(), AlarmAvailableForJobReceiver.class);
+        alarmIntent = new Intent(getActivity(), AlarmAvailableForJobReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (getArguments() != null) {
@@ -151,6 +160,6 @@ public class ProfilFragment extends Fragment {
     }
 
     public boolean isRunning() {
-        return(PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
+        return (PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_NO_CREATE) != null);
     }
 }

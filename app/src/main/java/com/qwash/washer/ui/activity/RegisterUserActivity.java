@@ -106,10 +106,6 @@ public class RegisterUserActivity extends AppCompatActivity {
                 finish();
             }
         });
-        pickCodeCountry.setImageDrawable(
-                new IconDrawable(this, FontAwesomeIcons.fa_caret_down)
-                        .colorRes(R.color.black_424242)
-                        .actionBarSize());
         getSupportActionBar().setTitle("Create Account");
 
     }
