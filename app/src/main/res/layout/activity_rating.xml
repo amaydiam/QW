@@ -59,7 +59,7 @@
                     android:id="@+id/rating_logo"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/logowasher" />
 
                 <TextView
                     android:id="@+id/rating_name"
@@ -168,7 +168,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_white_blue"
+                    android:background="@drawable/border_blue"
                     android:text="SUBMIT"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="16dp"

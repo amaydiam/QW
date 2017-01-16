@@ -2,13 +2,14 @@ package com.qwash.washer.ui.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.qwash.washer.utils.FontCache;
 
 
-public class RobotoRegularEditText extends EditText {
+public class RobotoRegularEditText extends AppCompatEditText {
 
     public RobotoRegularEditText(Context context) {
         super(context);

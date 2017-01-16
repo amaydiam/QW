@@ -22,11 +22,11 @@
             <com.qwash.washer.ui.widget.RobotoRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
                 android:text="20x"
                 android:textColor="@color/orange_FFEB3B"
-                android:textSize="30sp"
-                android:layout_marginTop="@dimen/activity_vertical_margin"/>
+                android:textSize="30sp" />
 
             <com.qwash.washer.ui.widget.RobotoLightTextView
                 android:id="@+id/change_saldo"
@@ -42,11 +42,11 @@
             <com.qwash.washer.ui.widget.RobotoLightTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:gravity="center"
                 android:text="YOUR TOTAL BALANCE"
                 android:textColor="@color/white_DFF0FC"
-                android:textSize="14sp"
-                android:layout_marginBottom="@dimen/activity_vertical_margin" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <View
@@ -62,18 +62,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/center"
             android:layout_alignBottom="@+id/right"
             android:layout_alignTop="@+id/right"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@+id/center"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/activity_vertical_margin">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <com.joanzapata.iconify.widget.IconTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,10 +86,10 @@
                     android:textSize="30sp" />
 
                 <com.qwash.washer.ui.widget.RobotoLightTextView
-                    android:layout_marginLeft="@dimen/activity_halft_vertical_margin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_halft_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_halft_vertical_margin"
                     android:layout_marginTop="@dimen/activity_halft_vertical_margin"
                     android:gravity="center"
                     android:text="4.5"
@@ -105,20 +106,23 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
-<LinearLayout
-    android:id="@+id/layout_available_for_job"
-    android:clickable="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <Switch
-        android:clickable="false"
-        android:id="@+id/available_for_job"
+
+    <LinearLayout
+        android:id="@+id/layout_available_for_job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:text="Available for Job"
-        android:textColor="@color/black_777777"/>
-</LinearLayout>
+        android:clickable="true">
+
+        <Switch
+            android:id="@+id/available_for_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:clickable="false"
+            android:text="Available for Job"
+            android:textColor="@color/black_777777" />
+    </LinearLayout>
+
     <Switch
         android:id="@+id/available_for_vaccum"
         android:layout_width="match_parent"

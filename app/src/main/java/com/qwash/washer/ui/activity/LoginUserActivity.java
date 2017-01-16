@@ -59,7 +59,7 @@ public class LoginUserActivity extends AppCompatActivity {
     @NotEmpty
     @Length(min = 4, max = 10, trim = true, messageResId = R.string.val_password_length)
     @BindView(R.id.password)
-    RobotoRegularEditText password;
+    com.txusballesteros.PasswordEditText password;
 
     private Validator validator;
     public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
@@ -145,12 +145,12 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     void Login() {
-      //  validator.validate();
+        //  validator.validate();
         // Get token
         startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
         String token = FirebaseInstanceId.getInstance().getToken();
 
-        Log.v("token",token);
+        Log.v("token", token);
      /*   //send token
         JSONArray jsonArray = new JSONArray();
         jsonArray.put("cSUsJMWnwiU:APA91bFzl7JpahvwDxb1JT0wO4Ht-T1pMzQ7LTY50Ao77keyCZVQLmV7tbKGhiZW6Zcmpwxz_Yf8cbId-MhL1174Q0ZmfHcJBFQke8JR7TCcRvePRr4-Wmh9bDQ8Rv8YCq1-5FIXkgyy");

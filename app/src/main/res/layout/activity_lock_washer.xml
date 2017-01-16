@@ -6,148 +6,147 @@
     android:layout_height="match_parent"
     tools:context="com.qwash.washer.ui.activity.LockWasherActivity">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true" />
+   <fragment
+       android:id="@+id/map"
+       android:name="com.google.android.gms.maps.SupportMapFragment"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:fitsSystemWindows="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_transparant_25"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/marginTopClearFitsSystemWindows">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/black_transparant_25"
+       android:clickable="true"
+       android:orientation="vertical"
+       android:paddingTop="@dimen/marginTopClearFitsSystemWindows">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:elevation="0dp">
+      <android.support.design.widget.AppBarLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@android:color/transparent"
+          android:theme="@style/AppTheme.AppBarOverlay"
+          app:elevation="0dp">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+         <android.support.v7.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="@android:color/transparent"
+             app:elevation="0dp"
+             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+      </android.support.design.widget.AppBarLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+         <android.support.design.widget.CoordinatorLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                app:elevation="0dp"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </android.support.design.widget.AppBarLayout>
+               <LinearLayout
+                   android:id="@+id/viewA"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="0.1"
+                   android:orientation="horizontal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@color/white"
+                   android:orientation="vertical">
 
-            <android.support.design.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/blue_1E87DA">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="@dimen/activity_vertical_margin"
+                         android:layout_marginLeft="@dimen/activity_vertical_margin"
+                         android:layout_marginRight="120dp"
+                         android:layout_marginTop="@dimen/activity_vertical_margin"
+                         android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/viewA"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.1"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/blue_1E87DA">
+                            android:text="Ruko Parakan Tangerang Selatan"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                                android:layout_marginRight="120dp"
-                                android:layout_marginTop="@dimen/activity_vertical_margin"
-                                android:orientation="vertical">
-
-                                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Ruko Parakan Tangerang Selatan"
-                                    android:textColor="@color/white"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"/>
-
-                                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/activity_halft_vertical_margin"
-                                    android:text="Mon - Sat 09.00 -10.00pm"
-                                    android:textColor="@color/white_DFF0FC"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_margin="@dimen/activity_vertical_margin">
+                            android:layout_marginTop="@dimen/activity_halft_vertical_margin"
+                            android:text="Mon - Sat 09.00 -10.00pm"
+                            android:textColor="@color/white_DFF0FC"
+                            android:textSize="16sp" />
+                     </LinearLayout>
+                  </LinearLayout>
 
-                            <com.joanzapata.iconify.widget.IconTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="{mdi-map-marker}"
-                                android:textSize="16sp"
-                                android:textColor="@color/black_777777"/>
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_margin="@dimen/activity_vertical_margin">
 
-
-                            <com.qwash.washer.ui.widget.RobotoRegularTextView
-                                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/office_address"
-                                android:textSize="16sp"
-                                android:textColor="@color/black_777777" />
-
-                        </LinearLayout>
-                    </LinearLayout>
+                     <com.joanzapata.iconify.widget.IconTextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="{mdi-map-marker}"
+                         android:textSize="16sp"
+                         android:textColor="@color/black_777777"/>
 
 
-                </LinearLayout>
+                     <com.qwash.washer.ui.widget.RobotoRegularTextView
+                         android:layout_marginLeft="@dimen/activity_vertical_margin"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/office_address"
+                         android:textSize="16sp"
+                         android:textColor="@color/black_777777" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:clickable="true"
-                    app:backgroundTint="@color/white"
-                    app:fabSize="normal"
-                    app:layout_anchor="@id/viewA"
-                    app:layout_anchorGravity="bottom|right|end" />
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:paddingTop="50dp"
-                    app:layout_anchor="@id/fab"
-                    app:layout_anchorGravity="bottom|center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:text="1 mil" />
-            </android.support.design.widget.CoordinatorLayout>
+                  </LinearLayout>
+               </LinearLayout>
 
-        </LinearLayout>
-    </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:clickable="true"
+                app:backgroundTint="@color/white"
+                app:fabSize="normal"
+                app:layout_anchor="@id/viewA"
+                app:layout_anchorGravity="bottom|right|end" />
+            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                android:paddingTop="50dp"
+                app:layout_anchor="@id/fab"
+                app:layout_anchorGravity="bottom|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="1 mil" />
+         </android.support.design.widget.CoordinatorLayout>
+
+      </LinearLayout>
+   </LinearLayout>
 
 </RelativeLayout>

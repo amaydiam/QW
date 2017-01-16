@@ -50,7 +50,8 @@
 
     <com.qwash.washer.ui.widget.RobotoRegularButton
         android:id="@+id/click_top_up"
-        style="@style/btn_orange"
+        android:background="@drawable/rounded_orange"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_vertical_margin"

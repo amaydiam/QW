@@ -11,7 +11,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#dedede"
+        android:background="#FFF9F9F9"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -31,7 +31,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_halft_vertical_margin"
+                    android:layout_centerInParent="true"
                     android:layout_toLeftOf="@+id/right"
                     android:background="@color/white"
                     android:orientation="vertical">
@@ -91,7 +91,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_halft_vertical_margin"
                     android:background="@color/white"
                     android:orientation="vertical">
 
@@ -180,7 +179,7 @@
             </RelativeLayout>
             <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/btn_continue"
-                android:background="@drawable/border_white_blue"
+                android:background="@drawable/border_blue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -202,7 +201,7 @@
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:background="#000" />
+                        android:background="@color/black_424242" />
                 </LinearLayout>
 
 
@@ -224,7 +223,7 @@
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:background="#000" />
+                        android:background="@color/black_424242" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -37,7 +37,7 @@
         <activity
             android:name=".ui.activity.LockWasherActivity"
             android:label="@string/title_activity_lock_washer"
-            android:theme="@style/AppTheme.HomeActivity" />
+            android:theme="@style/LocationTheme" />
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"
