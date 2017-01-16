@@ -177,6 +177,7 @@
 
 
             </RelativeLayout>
+
             <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/btn_continue"
                 android:background="@drawable/border_blue"
