@@ -1,6 +1,5 @@
 package com.qwash.washer.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,16 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -32,24 +26,15 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.qwash.washer.R;
-import com.qwash.washer.Sample;
-import com.qwash.washer.api.ApiUtils;
-import com.qwash.washer.api.client.auth.LoginService;
-import com.qwash.washer.api.model.login.DataLogin;
-import com.qwash.washer.api.model.login.Login;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.Prefs;
-import com.qwash.washer.utils.ProgressDialogBuilder;
-import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,8 +44,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class LoginUserActivity extends AppCompatActivity {
 
@@ -76,11 +59,12 @@ public class LoginUserActivity extends AppCompatActivity {
     @NotEmpty
     @Length(min = 4, max = 10, trim = true, messageResId = R.string.val_password_length)
     @BindView(R.id.password)
-    ShowHidePasswordEditText password;
+    com.txusballesteros.PasswordEditText password;
 
     private Validator validator;
-    private ProgressDialogBuilder dialogProgress;
-    private String TAG="LoginUserActivity";
+    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+    private OkHttpClient mClient = new OkHttpClient();
+    private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,8 +77,7 @@ public class LoginUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_user);
         ButterKnife.bind(this);
-
-        dialogProgress = new ProgressDialogBuilder(this);
+        setValidator();
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(
                 new IconDrawable(this, MaterialIcons.md_arrow_back)
@@ -107,18 +90,6 @@ public class LoginUserActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setTitle("");
-        setValidator();
-        password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    hideKeyboard();
-                    validator.validate();
-                    return true;
-                }
-                return false;
-            }
-        });
 
     }
 
@@ -128,8 +99,7 @@ public class LoginUserActivity extends AppCompatActivity {
             @Override
             public void onValidationSucceeded() {
 
-
-                remoteLogin();
+                loginSucces();
 
             }
 
@@ -138,6 +108,25 @@ public class LoginUserActivity extends AppCompatActivity {
                 loginFailed(errors);
             }
         });
+    }
+
+    private void loginSucces() {
+
+
+        Prefs.putToken(LoginUserActivity.this, "xxx");
+        Prefs.putFirebaseId(LoginUserActivity.this, "xx");
+
+        Prefs.putUserId(LoginUserActivity.this, "1");
+        Prefs.putUsername(LoginUserActivity.this, "xx");
+        Prefs.putEmail(LoginUserActivity.this, "xx");
+        Prefs.putName(LoginUserActivity.this, "xx");
+        Prefs.putPhone(LoginUserActivity.this, "xx");
+        Prefs.putAuthLevel(LoginUserActivity.this, "5");
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void loginFailed(List<ValidationError> errors) {
@@ -156,7 +145,16 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     void Login() {
-     validator.validate();
+        //  validator.validate();
+        // Get token
+        startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        Log.v("token", token);
+     /*   //send token
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put("cSUsJMWnwiU:APA91bFzl7JpahvwDxb1JT0wO4Ht-T1pMzQ7LTY50Ao77keyCZVQLmV7tbKGhiZW6Zcmpwxz_Yf8cbId-MhL1174Q0ZmfHcJBFQke8JR7TCcRvePRr4-Wmh9bDQ8Rv8YCq1-5FIXkgyy");
+        sendNotification(jsonArray, "Hello", "How r u", "google.com", "My Name is Vishal");*/
     }
 
     @OnClick(R.id.btn_forgot_password)
@@ -169,94 +167,60 @@ public class LoginUserActivity extends AppCompatActivity {
         startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
     }
 
+    public void sendNotification(final JSONArray recipients, final String title, final String body, final String icon, final String message) {
 
-    private void remoteLogin() {
-        Log.d(TAG, "remote login...");
-        dialogProgress.show("LoginService ...", "Please wait...");
-
-        final String firebase_id = FirebaseInstanceId.getInstance().getToken();
-        Map<String, String> params = new HashMap<>();
-        params.put(Sample.EMAIL, email.getText().toString());
-        params.put(Sample.PASSWORD, password.getText().toString());
-        params.put(Sample.FIREBASE_ID, firebase_id);
-        params.put(Sample.AUTH_LEVEL, "5");
-
-        for (Map.Entry entry : params.entrySet()) {
-            System.out.println(entry.getKey() + ", " + entry.getValue());
-        }
-
-        LoginService mService = ApiUtils.LoginService(this);
-        mService.getLoginLink(params).enqueue(new Callback<Login>() {
+        new AsyncTask<String, String, String>() {
             @Override
-            public void onResponse(Call<Login> call, retrofit2.Response<Login> response) {
-                Log.w("response", new Gson().toJson(response));
-                dialogProgress.hide();
-                if (response.isSuccessful()) {
-                    if (response.body().getStatus()) {
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONObject notification = new JSONObject();
+                    notification.put("body", body);
+                    notification.put("title", title);
+                    notification.put("icon", icon);
 
-                        DataLogin dataLogin = response.body().getDataLogin();
+                    JSONObject data = new JSONObject();
+                    data.put("message", message);
+                    root.put("notification", notification);
+                    root.put("data", data);
+                    root.put("registration_ids", recipients);
 
-                        Prefs.putToken(LoginUserActivity.this, response.body().getToken());
-                        Prefs.putFirebaseId(LoginUserActivity.this, firebase_id);
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return null;
+            }
 
-                        Prefs.putUserId(LoginUserActivity.this, dataLogin.getUserId());
-                        Prefs.putUsername(LoginUserActivity.this, dataLogin.getUsername());
-                        Prefs.putEmail(LoginUserActivity.this, dataLogin.getEmail());
-                        Prefs.putName(LoginUserActivity.this, dataLogin.getName());
-                        Prefs.putPhone(LoginUserActivity.this, dataLogin.getPhone());
-                        Prefs.putAuthLevel(LoginUserActivity.this, String.valueOf(dataLogin.getAuthLevel()));
-
-                        toHomeActivity();
-
-                    }
-                    Log.d(TAG, "posts loaded from API");
-                } else {
-                    int statusCode = response.code();
-                    Log.d(TAG, "error loading from API, status: " + statusCode);
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
-                        String message = jsonObject.getString(Sample.MESSAGE);
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        password.setText("");
-                    } catch (JSONException | IOException e) {
-                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
-                    }
+            @Override
+            protected void onPostExecute(String result) {
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                    //Toast.makeText(LoginUserActivity.this, "Message Success: " + success + "Message Failed: " + failure, Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(LoginUserActivity.this, "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
                 }
             }
-
-            @Override
-            public void onFailure(Call<Login> call, Throwable t) {
-                String message = t.getMessage();
-                Log.d(TAG, message);
-                dialogProgress.hide();
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
+        }.execute();
     }
 
-    private void toHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+    String postToFCM(String bodyString) throws IOException {
+        RequestBody body = RequestBody.create(JSON, bodyString);
+        String keyfirebase = "AAAA6dPgYVk:APA91bHI2HxHsoiiqS6_8pdO84jNMU-Rq_Rhg9nWAmwETLsiyn5Do8zB_MW-__aGu1keJOIS3_moL-csuAsvUYeOBcdBCZp93GJGk1JKm3VMfxQ_0AWlxrpGjqNJNojtbmjM_3UItK90";
+        Request request = new Request.Builder()
+                .url(FCM_MESSAGE_URL)
+                .post(body)
+                .addHeader("Authorization", "key=" + keyfirebase)
+                .build();
+        Response response = mClient.newCall(request).execute();
+        return response.body().string();
     }
 
-    void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (Prefs.isLogedIn(this)) {
-            toHomeActivity();
-        }
-    }
 
 }

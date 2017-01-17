@@ -1,9 +1,5 @@
 package com.qwash.washer.ui.activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,14 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoIcons;
@@ -40,7 +34,6 @@ import com.qwash.washer.ui.fragment.WalletFragment;
 import com.qwash.washer.ui.fragment.WashHistoryFragment;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Menus;
-import com.qwash.washer.utils.Prefs;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -117,34 +110,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-
-                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Are you sure, you wanted to logout?");
-                alertDialogBuilder.setPositiveButton("yes",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                // Logout email
-                                Prefs.Reset(HomeActivity.this);
-                                // Google sign out
-                                FirebaseAuth.getInstance().signOut();
-
-                                Intent intent = new Intent(HomeActivity.this, LoginUserActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-
-                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

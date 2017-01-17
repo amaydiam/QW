@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.qwash.washer.R;
-import com.qwash.washer.Sample;
 import com.qwash.washer.utils.Prefs;
 
 import butterknife.ButterKnife;
@@ -38,17 +38,8 @@ public class WelcomeLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (Prefs.isLogedIn(this)) {
-
-            if(Prefs.getOrdered(this)!=null && Prefs.getProgresWorking(this) == 2){
-                ProgressOrderedrActiivity();
-            }
-            else
-                toHomeActivity();
+            toHomeActivity();
         }
-        else  if (Prefs.getLockMapRegister(this)) {
-            LockMapRegisterActiivity();
-        }
-
     }
 
     private void toHomeActivity() {
@@ -57,24 +48,5 @@ public class WelcomeLogin extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
-    private void LockMapRegisterActiivity() {
-        Intent intent = new Intent(this, LockWasherActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    private void ProgressOrderedrActiivity() {
-        Bundle args= new Bundle();
-        args.putString(Sample.ORDER, Prefs.getOrdered(this));
-        Intent intent = new Intent(this, ProgressOrderActivity.class);
-        intent.putExtras(args);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
 
 }
