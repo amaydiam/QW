@@ -1,7 +1,6 @@
 package com.qwash.washer.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qwash.washer.R;
-import com.qwash.washer.ui.activity.RatingActivity;
 
 /**
  * Created by binderbyte on 10/01/17.
@@ -41,8 +39,8 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyRecy
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), RatingActivity.class);
-                v.getContext().startActivity(intent);
+              //  Intent intent = new Intent(v.getContext(), RatingActivity.class);
+             //   v.getContext().startActivity(intent);
             }
         });
     }

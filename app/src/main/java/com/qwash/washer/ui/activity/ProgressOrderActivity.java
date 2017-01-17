@@ -1,47 +1,52 @@
 package com.qwash.washer.ui.activity;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
-import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.model.PrepareOrder;
 import com.qwash.washer.ui.widget.RobotoBoldTextView;
+import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.Utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 
 public class ProgressOrderActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.title_toolbar)
-    TextView toolbarTitle;
-    MediaPlayer mp = null;
     @BindView(R.id.vehicle_image)
     ImageView vehicleImage;
     @BindView(R.id.vehicle_description)
@@ -66,18 +71,58 @@ public class ProgressOrderActivity extends AppCompatActivity {
     TextView address;
     @BindView(R.id.seconds_vehicle_description)
     TextView secondsVehicleDescription;
+    @BindView(R.id.btn_deacline)
+    Button btnDeacline;
+    @BindView(R.id.btn_accept)
+    Button btnAccept;
+
     private PrepareOrder prepareOrder;
+    private Context context;
+    private String order_data;
+
+
+    private OkHttpClient mClient = new OkHttpClient();
+    private MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @OnClick(R.id.btn_deacline)
-    void Deacline() {
-        finish();
+    void ActionDeacline() {
+        Deacline();
     }
 
     @OnClick(R.id.btn_accept)
-    void Accept() {
-        finish();
+    void ActionAccept() {
+        stopPlaying();
+        ChangeWorkingStatus();
     }
 
+    private void ChangeWorkingStatus() {
+        if (Prefs.getProgresWorking(context) == 1) {
+            Accept();
+        } else if (Prefs.getProgresWorking(context) == 2) {
+            //sedang mencuci
+            Start();
+        } else if (Prefs.getProgresWorking(context) == 3) {
+            //finish pekerjaan mencuci
+            Finish();
+        }
+    }
+
+
+    private void CheckWorkingStatus() {
+        if (Prefs.getProgresWorking(context) == 1) {
+            btnDeacline.setVisibility(View.VISIBLE);
+            btnAccept.setText("Accept");
+        } else if (Prefs.getProgresWorking(context) == 2) {
+            btnDeacline.setVisibility(View.VISIBLE);
+            btnAccept.setText("Start");
+        } else if (Prefs.getProgresWorking(context) == 3) {
+            btnDeacline.setVisibility(View.GONE);
+            btnAccept.setText("SELESAI");
+        }
+    }
+
+
+    MediaPlayer mp = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,29 +134,19 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 .with(new MaterialCommunityModule())
                 .with(new SimpleLineIconsModule());
         setContentView(R.layout.activity_progress_order);
-
+        ButterKnife.bind(this);
+        context = getApplicationContext();
         Bundle bundle = getIntent().getExtras();
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(
-                new IconDrawable(this, MaterialIcons.md_arrow_back)
-                        .colorRes(R.color.black_424242)
-                        .actionBarSize());
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        getSupportActionBar().setTitle("Detail Order");
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.cancel(0);
         PlaySound();
 
         if (bundle != null) {
-            String order = bundle.getString(Sample.ORDER);
+            order_data = bundle.getString(Sample.ORDER);
+            Log.v("order_data", order_data);
             try {
 
-                JSONObject json = new JSONObject(order);
+                JSONObject json = new JSONObject(order_data);
                 JSONObject jsonCustomer = (JSONObject) json.get(Sample.CUSTOMER);
                 JSONObject jsonAddress = (JSONObject) json.get(Sample.ADDRESS);
                 JSONObject jsonVehicle = (JSONObject) json.get(Sample.VEHICLE);
@@ -240,6 +275,8 @@ public class ProgressOrderActivity extends AppCompatActivity {
             address.setText(prepareOrder.address);
 
             secondsVehicleDescription.setText(prepareOrder.vBrand + "\n" + prepareOrder.models + " " + prepareOrder.vTransmision + " " + prepareOrder.years);
+
+            CheckWorkingStatus();
         }
 
     }
@@ -279,4 +316,300 @@ public class ProgressOrderActivity extends AppCompatActivity {
         stopPlaying();
         finish();
     }
+
+    private void Deacline() {
+        Prefs.putProgresWorking(context, Sample.CODE_NO_ORDER);
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.put(prepareOrder.firebase_id);
+
+                    JSONObject data = new JSONObject();
+                    data.put(Sample.ACTION, Sample.CODE_DEACLINE);
+                    data.put(Sample.MESSAGE, "deacline");
+
+                    JSONObject washer = new JSONObject();
+                    washer.put(Sample.ORDER_USERID, prepareOrder.userId);
+                    washer.put(Sample.WASHER_FIREBASE_ID, Prefs.getFirebaseId(ProgressOrderActivity.this));
+
+                    data.put(Sample.WASHER, washer);
+
+                    root.put(Sample.DATA, data);
+                    root.put(Sample.REGISTRATION_IDS, jsonArray);
+
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(context, "You has decline a order", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, "You has decline a order", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+            }
+        }.execute();
+    }
+
+
+    private void Start() {
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.put(prepareOrder.firebase_id);
+
+                    JSONObject data = new JSONObject();
+                    data.put(Sample.ACTION, Sample.CODE_START);
+                    data.put(Sample.MESSAGE, "start");
+
+                    JSONObject washer = new JSONObject();
+                    washer.put(Sample.ORDER_USERID, prepareOrder.userId);
+                    washer.put(Sample.WASHER_FIREBASE_ID, Prefs.getFirebaseId(ProgressOrderActivity.this));
+
+                    data.put(Sample.WASHER, washer);
+
+                    root.put(Sample.DATA, data);
+                    root.put(Sample.REGISTRATION_IDS, jsonArray);
+
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(context, "There has a mistakes. please contact Admin", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+
+
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                    if (success != 0) {
+                        //start pekerjaan
+                        Prefs.putProgresWorking(context, Sample.CODE_START);
+                        Prefs.putOrderedData(context, order_data);
+                        CheckWorkingStatus();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(ProgressOrderActivity.this, "Cannot start", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(ProgressOrderActivity.this, "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+            }
+        }.execute();
+    }
+
+
+    private void Accept() {
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.put(prepareOrder.firebase_id);
+
+                    JSONObject data = new JSONObject();
+                    data.put(Sample.ACTION, Sample.CODE_ACCEPT);
+                    data.put(Sample.MESSAGE, "accept");
+
+                    JSONObject washer = new JSONObject();
+                    washer.put(Sample.ORDER_USERID, prepareOrder.userId);
+                    washer.put(Sample.WASHER_FIREBASE_ID, Prefs.getFirebaseId(ProgressOrderActivity.this));
+                    washer.put(Sample.WASHER_USER_ID, Prefs.getUserId(ProgressOrderActivity.this));
+                    washer.put(Sample.WASHER_EMAIL, Prefs.getEmail(ProgressOrderActivity.this));
+                    washer.put(Sample.WASHER_NAME, Prefs.getName(ProgressOrderActivity.this));
+                    washer.put(Sample.WASHER_PHONE, Prefs.getPhone(ProgressOrderActivity.this));
+                    washer.put(Sample.WASHER_RATING, Prefs.getRating(ProgressOrderActivity.this));
+
+                    data.put(Sample.WASHER, washer);
+
+                    root.put(Sample.DATA, data);
+                    root.put(Sample.REGISTRATION_IDS, jsonArray);
+
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(context, "There has a mistakes. please contact Admin", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                    if (success != 0) {
+                        //terima orderan
+                        Prefs.putProgresWorking(context, Sample.CODE_ACCEPT);
+                        Prefs.putOrderedData(context, order_data);
+                        CheckWorkingStatus();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(ProgressOrderActivity.this, "Cannot Aceppted", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(ProgressOrderActivity.this, "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+            }
+        }.execute();
+    }
+
+
+    private void Finish() {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    JSONObject root = new JSONObject();
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.put(prepareOrder.firebase_id);
+
+                    JSONObject data = new JSONObject();
+                    data.put(Sample.ACTION, Sample.CODE_FINISH_WORKING);
+                    data.put(Sample.MESSAGE, "finish");
+
+                    JSONObject washer = new JSONObject();
+                    washer.put(Sample.ORDER_USERID, prepareOrder.userId);
+                    washer.put(Sample.WASHER_FIREBASE_ID, Prefs.getFirebaseId(ProgressOrderActivity.this));
+
+                    data.put(Sample.WASHER, washer);
+
+                    root.put(Sample.DATA, data);
+                    root.put(Sample.REGISTRATION_IDS, jsonArray);
+
+                    String result = postToFCM(root.toString());
+                    Log.d("RESULT", "Result: " + result);
+                    return result;
+                } catch (Exception ex) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(context, "There has a mistakes. please contact Admin", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    int success, failure;
+                    success = resultJson.getInt("success");
+                    failure = resultJson.getInt("failure");
+                    if (success != 0) {
+                        //finish pekerjaan
+                        Prefs.putProgresWorking(context, Sample.CODE_NO_ORDER);
+                        Prefs.putOrderedData(context, null);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(context, "You finaly has wash..", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(ProgressOrderActivity.this, "Cannot Finish", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(ProgressOrderActivity.this, "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+        }.execute();
+    }
+
+    String postToFCM(String bodyString) throws IOException {
+        RequestBody body = RequestBody.create(JSON, bodyString);
+        Request request = new Request.Builder()
+                .url(Sample.FCM_MESSAGE_URL)
+                .post(body)
+                .addHeader("Authorization", "key=" + Sample.SERVER_KEY_FIREBASE)
+                .build();
+        okhttp3.Response response = mClient.newCall(request).execute();
+        return response.body().string();
+    }
+
+
 }

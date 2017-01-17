@@ -53,9 +53,6 @@
             android:name=".ui.activity.ProgressOrderActivity"
             android:theme="@style/ProgressOrderActivity" />
         <activity
-            android:name=".ui.activity.RatingActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.activity.DetailHistoryActivity"
             android:label="@string/title_activity_lock_washer"
             android:theme="@style/AppTheme.NoActionBar" />

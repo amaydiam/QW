@@ -37,7 +37,7 @@ tools:context=".ui.activity.LoginUserActivity">
                     <ImageView
                         android:layout_width="110dp"
                         android:layout_height="110dp"
-                        android:src="@drawable/logowasher" />
+                        android:src="@drawable/logo" />
 
                 </LinearLayout>
 
@@ -70,6 +70,7 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/email"
+                            android:inputType="textEmailAddress"
                             android:padding="10dp" android:maxLines="1" />
 
                         <View
@@ -77,7 +78,7 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:layout_height="1dp"
                             android:background="#ccc" />
 
-                        <com.txusballesteros.PasswordEditText
+                        <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                             android:id="@+id/password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -90,7 +91,7 @@ tools:context=".ui.activity.LoginUserActivity">
                             app:showDrawable="@drawable/ic_password_visible_24dp"
                             app:hideDrawable="@drawable/ic_password_hidden_24dp"
                             app:drawableTintCompat="?attr/colorAccent" />
-
+/>
                     </LinearLayout>
 
                 </RelativeLayout>
