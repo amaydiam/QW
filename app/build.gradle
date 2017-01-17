@@ -66,8 +66,6 @@ dependencies {
     compile 'com.txusballesteros:PasswordEditText:1.0.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.github.scottyab:showhidepasswordedittext:0.8'
-    compile 'org.greenrobot:eventbus:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

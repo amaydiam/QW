@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -45,12 +44,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 int action = json.getInt(Sample.ACTION);
                 if(action==1){
                     String order = json.getString(Sample.ORDER);
-                    Log.v("order",order);
-                    sendNotification(order);
+                   sendNotification(order);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.v("err",e.getMessage());
             }
 
         }
@@ -63,6 +60,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String order) {
 
+        int requestID = (int) System.currentTimeMillis();
         Bundle args= new Bundle();
         args.putString(Sample.ORDER, order);
         Intent intent = new Intent(this, ProgressOrderActivity.class);
@@ -70,9 +68,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(args);
-        startActivity(intent);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,intent, PendingIntent.FLAG_UPDATE_CURRENT
+        this.startActivity(intent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID,intent, PendingIntent.FLAG_UPDATE_CURRENT
                 | PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri =  Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fishtank_bubbles);

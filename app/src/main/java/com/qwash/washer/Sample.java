@@ -14,15 +14,8 @@ public class Sample {
     public static final String IS_LOADING_MORE_DATA = "is_locked";
     public static final String KEYWORD = "keyword";
     public static final String TAG_FRAGMENT = "fargment";
-    public static final String CITY = "city";
-    public static final String LOCK_AFTER_REGISTER = "lock_after_register";
-    public static final String PROGRESS_WORKING = "lock_get_order";;
     public static String PAGE = "page";
     public static String DATA="data";
-
-
-    public static final String SERVER_KEY_FIREBASE = "AAAA6dPgYVk:APA91bHI2HxHsoiiqS6_8pdO84jNMU-Rq_Rhg9nWAmwETLsiyn5Do8zB_MW-__aGu1keJOIS3_moL-csuAsvUYeOBcdBCZp93GJGk1JKm3VMfxQ_0AWlxrpGjqNJNojtbmjM_3UItK90";
-    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
 
     public static String isSuccess="isSuccess";
     public static String message="message";
@@ -90,26 +83,5 @@ public class Sample {
     public static final String ORDER_INTERIOR_VACCUM="interior_vaccum";
     public static final String ORDER_ESTIMATED_PRICE="estimated_price";
     public static final String ORDER_DATETIME="datetime";
-
-    //Washer Accept
-    public static final String WASHER_PHONE = "phone";
-    public static final String WASHER_NAME = "name";
-    public static final String WASHER_EMAIL = "email";
-    public static final String WASHER_USER_ID = "userId";
-    public static final String WASHER_FIREBASE_ID = "firebase_id";
-
-    public static final String WASHER = "washer";
-    public static final String REGISTRATION_IDS = "registration_ids";
-    public static final String WASHER_RATING="rating";
-    public static String RATING="rating";
-
-    //
-
-    public static final int CODE_NO_ORDER= 1;
-    public static final int CODE_DEACLINE= 2;
-    public static final int CODE_ACCEPT = 3;
-    public static final int CODE_START = 4;
-    public static final int CODE_FINISH_WORKING = 5;
-
 
 }
