@@ -16,4 +16,8 @@
     <color name="white_DFF0FC">#DFF0FC</color>
     <color name="black_777777">#777777</color>
     <color name="color_red">#f44336</color>
+    <color name="blue_light">#33B5E5</color>
+    <color name="green_light">#99CC00</color>[
+    <color name="orange_light">#FFBB33</color>
+    <color name="red_light">#FF4444</color>
 </resources>

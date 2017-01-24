@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/klik_feedback"
+    android:id="@+id/root_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/border_orange"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="2dp"
-    android:padding="10dp">
+    android:layout_margin="@dimen/activity_half_vertical_margin">
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/gbr"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="left|center">
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/icon_datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="{mdi-clock}"
             android:layout_marginRight="5dp"
-            android:src="@drawable/ic_date_range_black_24px" />
-
-        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/blue_2196F3"/>
+        <com.qwash.washer.ui.widget.RobotoRegularTextView
             android:id="@+id/date_feedback"
-            android:layout_toRightOf="@id/gbr"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today, 26 January 2017" />
-    </RelativeLayout>
+            android:text="Today, 26 January 2017"
+            android:textColor="@color/black_424242"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-    <TextView
+    <com.qwash.washer.ui.widget.RobotoLightTextView
         android:id="@+id/deskripsi_feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:lines="2"
+        android:textSize="14sp"
         android:text="Lorem ipsum doler asmet, Lorem ipsum doler asmet sinuka diasdn asdn sdjasd nasndansdn sanan nnaf asn fnaafa " />
-</LinearLayout>
+
+
+        <com.joanzapata.iconify.widget.IconButton
+            android:id="@+id/btn_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:text="{mdi-menu-down}"
+            android:textColor="@color/blue_2196F3"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+    </LinearLayout>
+    </LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- Error Icon -->
+    <ImageView android:src="@drawable/server_unreachable"
+        android:layout_width="@dimen/error_icon_width"
+        android:layout_height="@dimen/error_icon_height"
+        tools:ignore="ContentDescription"/>
+
+    <!-- Unable to connect -->
+    <com.qwash.washer.ui.widget.RobotoLightTextView
+        android:id="@+id/text_error"
+        android:text="@string/server_unreachable"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <!-- Try again -->
+    <com.qwash.washer.ui.widget.RobotoBoldTextView
+        android:id="@+id/try_again"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/activity_half_vertical_margin"
+        android:text="@string/try_again"
+        android:textSize="18sp"
+        android:textColor="@color/blue_1E87DA"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"/>
+
+</LinearLayout>

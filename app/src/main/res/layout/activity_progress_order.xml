@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#eee">
 
     <LinearLayout
@@ -9,7 +10,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_selected_vehicle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_2196F3"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <include layout="@layout/layout_selected_vehicle" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +64,7 @@
                         android:src="@drawable/ic_access_time_black_24px" />
 
                     <TextView
-                        android:id="@+id/date_time"
+                        android:id="@+id/des_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -94,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="#fff">
+            android:background="#fff" >
 
 
             <LinearLayout
@@ -178,7 +188,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="#fff"
             android:orientation="vertical">
 
@@ -186,62 +196,161 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
 
                 <ImageView
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:id="@+id/gbr5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_location_on_black_24px" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_location_on_black_24px"
+                    android:adjustViewBounds="true"/>
 
                 <TextView
+                    android:layout_toLeftOf="@+id/batas"
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/gbr5"
                     android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402"
                     android:textSize="16sp" />
+
+                <View
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_toLeftOf="@+id/layout_navigation"
+                    android:id="@+id/batas" android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black_777777"
+                    android:layout_alignTop="@+id/address"
+                    android:layout_alignBottom="@+id/address"/>
+                <LinearLayout
+                    android:id="@+id/layout_navigation"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                <ImageView
+                    android:id="@+id/btn_navigation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/places_ic_clear"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NAVIGATION"/>
+                </LinearLayout>
             </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="#fff"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                <ImageView
-                    android:id="@+id/gbr6"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                <agency.tango.android.avatarview.views.AvatarView
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:id="@+id/customer_photo"
+                    android:src="@drawable/ic_location_on_black_24px"
+                    android:adjustViewBounds="true"
+                    android:layout_width="@dimen/image_customer_size"
+                    android:layout_height="@dimen/image_customer_size"
+                    app:av_border_color="@android:color/white"
+                    app:av_border_width="4dp"
+                    app:av_text_size_percentage="35"
+                    android:layout_centerVertical="true"/>
 
                 <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/customer_photo"
+                    android:layout_toLeftOf="@+id/layout_sms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/gbr6"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/seconds_vehicle_description"
+                        android:id="@+id/customer_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="left"
-                        android:text="Daitsu Alya"
+                        android:text="customer_name"
                         android:textSize="16sp" />
 
+
+                    <TextView
+                        android:id="@+id/customer_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="customer_phone"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/layout_sms"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_toLeftOf="@+id/layout_call">
+                    <ImageView
+                        android:id="@+id/btn_sms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/places_ic_clear"
+                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SMS"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/layout_call"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/btn_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/places_ic_clear"
+                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALL"/>
                 </LinearLayout>
             </RelativeLayout>
-        </LinearLayout>
 
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

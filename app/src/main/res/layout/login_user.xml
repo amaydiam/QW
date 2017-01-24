@@ -12,7 +12,6 @@ tools:context=".ui.activity.LoginUserActivity">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:background="#f9f9f9"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -37,7 +36,7 @@ tools:context=".ui.activity.LoginUserActivity">
                     <ImageView
                         android:layout_width="110dp"
                         android:layout_height="110dp"
-                        android:src="@drawable/logowasher" />
+                        android:src="@drawable/logo" />
 
                 </LinearLayout>
 
@@ -60,6 +59,7 @@ tools:context=".ui.activity.LoginUserActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_halft_vertical_margin"
                         android:layout_toLeftOf="@+id/right"
                         android:background="@color/white"
                         android:orientation="vertical">
@@ -70,6 +70,7 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/email"
+                            android:inputType="textEmailAddress"
                             android:padding="10dp" android:maxLines="1" />
 
                         <View
@@ -77,31 +78,27 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:layout_height="1dp"
                             android:background="#ccc" />
 
-                        <com.txusballesteros.PasswordEditText
+                        <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                             android:id="@+id/password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:maxLines="1"
                             android:background="@null"
+                            android:hint="@string/password"
                             android:padding="10dp"
-                            android:maxLength="10"
-                            app:showDrawable="@drawable/ic_password_visible_24dp"
-                            app:hideDrawable="@drawable/ic_password_hidden_24dp"
-                            app:drawableTintCompat="?attr/colorAccent" />
-
+                            android:inputType="textPassword"
+                            android:imeOptions="actionGo"
+                            android:maxLines="1"
+                            android:maxLength="10"/>
                     </LinearLayout>
 
                 </RelativeLayout>
 
                 <com.qwash.washer.ui.widget.RobotoRegularButton
                     android:id="@+id/btn_login"
-                    android:background="@drawable/border_blue"
+                    style="@style/btn_blue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="@color/white"
                     android:text="@string/button_login" />
                 <TextView
                     android:id="@+id/btn_forgot_password"

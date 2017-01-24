@@ -16,6 +16,14 @@ import retrofit2.http.POST;
 
 public interface AvailableForJobService {
     @FormUrlEncoded
-    @POST("login/authenticate")
-    Call<AvailableForJob> getAvailableForJobLink(@FieldMap Map<String, String> params);
+    @POST("findmatch/washerOn")
+    Call<AvailableForJob> getWasherOnLink(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("findmatch/washerOnUpdate")
+    Call<AvailableForJob> getWasherOnUpdateLink(@FieldMap Map<String, String> params);
+
+    @FormUrlEncoded
+    @POST("findmatch/washerOff")
+    Call<AvailableForJob> getWasherOffLink(@FieldMap Map<String, String> params);
 }

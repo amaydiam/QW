@@ -1,5 +1,9 @@
 package com.qwash.washer.ui.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,12 +14,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoIcons;
@@ -28,12 +35,20 @@ import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
+import com.qwash.washer.service.MessageFireBase;
 import com.qwash.washer.ui.fragment.FeedbackFragment;
 import com.qwash.washer.ui.fragment.ProfilFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
 import com.qwash.washer.ui.fragment.WashHistoryFragment;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Menus;
+import com.qwash.washer.utils.Prefs;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -75,6 +90,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        Bundle bundle = getIntent().getExtras();
         setSupportActionBar(toolbar);
 
         fab.setVisibility(View.GONE);
@@ -87,6 +103,13 @@ public class HomeActivity extends AppCompatActivity
         navView.setNavigationItemSelectedListener(this);
         SetMenuDrawer();
         SetDataUser();
+        if (bundle != null) {
+            if (bundle.getInt(Sample.ACTION) == Sample.ACTION_OPEN_FEED_ORDER) {
+                setSelectedDrawerItem(Menus.nav_feedback_customer);
+                return;
+            }
+        }
+
         setSelectedDrawerItem(Menus.nav_profil);
     }
 
@@ -109,8 +132,35 @@ public class HomeActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_logout) {
+
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("Are you sure, you wanted to logout?");
+            alertDialogBuilder.setPositiveButton("yes",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            // Logout email
+                            Prefs.Reset(HomeActivity.this);
+                            // Google sign out
+                            FirebaseAuth.getInstance().signOut();
+
+                            Intent intent = new Intent(HomeActivity.this, LoginUserActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -227,6 +277,20 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        if (!Prefs.isLogedIn(this)) {
+            //   toHomeActivity();
+        } else if (Prefs.getOrdered(this) != null && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER) {
+            //  ProgressOrderedrActiivity();
+        } else {
+
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -238,5 +302,37 @@ public class HomeActivity extends AppCompatActivity
                 .with(new SimpleLineIconsModule());
         SetMenuDrawer();
         SetDataUser();
+        if (getIntent().getAction() != null) {
+            String action = getIntent().getAction();
+            if (action.equalsIgnoreCase(Sample.ACTION_FROM_NOTIFICATION)) {
+                setSelectedDrawerItem(Menus.nav_profil);
+                ProfilFragment fragment = (ProfilFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                if (fragment != null) {
+                    fragment.mIsServiceStarted = true;
+                    fragment.setCheckedButtonStatus();
+                }
+            }
+        }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageFireBase(MessageFireBase MessageFireBase) {
+        try {
+            JSONObject json = new JSONObject(MessageFireBase.getData());
+            int action = json.getInt(Sample.ACTION);
+            if (action ==  Sample.ACTION_OPEN_FEED_ORDER) {
+                setSelectedDrawerItem(Menus.nav_feedback_customer);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
 }

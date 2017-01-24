@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.qwash.washer.Sample;
+import com.qwash.washer.service.availableforjob.LocationUpdateService;
+import com.qwash.washer.ui.activity.LoginUserActivity;
+import com.qwash.washer.ui.activity.ProgressOrderActivity;
 
 
 public final class Prefs {
 
     public static SharedPreferences get(final Context context) {
-        return context.getSharedPreferences("com.qwash.user",
+        return context.getSharedPreferences("com.qwash.washer",
                 Context.MODE_PRIVATE);
     }
 
@@ -31,7 +34,6 @@ public final class Prefs {
     }
 
 
-
     //Data User
     public static void putFirebaseId(final Context context, String token) {
         Prefs.putPref(context, Sample.FIREBASE_ID, token);
@@ -49,7 +51,7 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.TOKEN, "");
     }
 
-        public static void putUserId(final Context context, String id_user) {
+    public static void putUserId(final Context context, String id_user) {
         Prefs.putPref(context, Sample.USER_ID, id_user);
     }
 
@@ -98,10 +100,47 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.PHONE, "");
     }
 
+    public static void putPhoto(final Context context, String photo) {
+        Prefs.putPref(context, Sample.PHOTO, photo);
+    }
+
+    public static String getPhoto(final Context context) {
+        return Prefs.getPref(context, Sample.PHOTO, "");
+    }
+
+
+    public static void putRating(final Context context, String phone) {
+        Prefs.putPref(context, Sample.RATING, phone);
+    }
+
+    public static String getRating(final Context context) {
+        return Prefs.getPref(context, Sample.RATING, "0");
+    }
+
+
     //end data user
 
 
-    public static void putLatitude(final Context context, float latitude) {
+
+    public static void putAvailableForJob(final Context context, boolean enabled) {
+        Prefs.putPref(context, Sample.AVAILABLE_FOR_JOB, (enabled ? "true" : "false"));
+    }
+
+
+    public static boolean getAvailableForJob(final Context context) {
+        String e = Prefs.getPref(context, Sample.AVAILABLE_FOR_JOB, "false");
+        return e.equals("true");
+    }
+
+    public static void putAvailableForVaccum(final Context context, int isAvailableForVaccum) {
+        Prefs.putPref(context, Sample.VACCUM, String.valueOf(isAvailableForVaccum));
+    }
+
+    public static int getAvailableForVaccum(Context context) {
+        return Integer.parseInt(Prefs.getPref(context, Sample.VACCUM, "0"));
+    }
+
+    public static void putLatitude(final Context context, double latitude) {
         Prefs.putPref(context, Sample.LATITUDE, String.valueOf(latitude));
     }
 
@@ -109,7 +148,7 @@ public final class Prefs {
         return Float.parseFloat(Prefs.getPref(context, Sample.LATITUDE, "0f"));
     }
 
-    public static void putLongitude(final Context context, float Longitude) {
+    public static void putLongitude(final Context context, double Longitude) {
         Prefs.putPref(context, Sample.LONGITUDE, String.valueOf(Longitude));
     }
 
@@ -128,17 +167,47 @@ public final class Prefs {
     }
 
 
-    public static void Reset(Context context) {
-        putToken(context,"");
-        putUserId(context,"");
-        putName(context,"");
-        putAuthLevel(context,"");
-        putEmail(context,"");
-        putUsername(context,"");
-        putPhone(context,"");
-        putLatitude(context,0);
-        putLongitude(context,0);
+    public static void putLockMapRegister(final Context context, boolean enabled) {
+        Prefs.putPref(context, Sample.LOCK_AFTER_REGISTER, (enabled ? "true" : "false"));
     }
+
+
+    public static boolean getLockMapRegister(final Context context) {
+        String e = Prefs.getPref(context, Sample.LOCK_AFTER_REGISTER, "false");
+        return e.equals("true");
+    }
+
+
+    public static void putProgresWorking(final Context context, int latitude) {
+        Prefs.putPref(context, Sample.PROGRESS_WORKING, String.valueOf(latitude));
+    }
+
+    public static int getProgresWorking(Context context) {
+        return Integer.parseInt(Prefs.getPref(context, Sample.PROGRESS_WORKING, String.valueOf(Sample.CODE_NO_ORDER)));
+    }
+
+
+    public static void putOrderedData(final Context context, String phone) {
+        Prefs.putPref(context, Sample.ORDER, phone);
+    }
+
+    public static String getOrdered(final Context context) {
+        return Prefs.getPref(context, Sample.ORDER, null);
+    }
+
+
+    public static void Reset(Context context) {
+        putToken(context, "");
+        putUserId(context, "");
+        putName(context, "");
+        putAuthLevel(context, "");
+        putEmail(context, "");
+        putUsername(context, "");
+        putPhone(context, "");
+        putLatitude(context, 0);
+        putLongitude(context, 0);
+    }
+
 
 
 }

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -17,7 +18,9 @@ import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.activity.HomeActivity;
 import com.qwash.washer.ui.activity.ProgressOrderActivity;
+import com.qwash.washer.utils.Prefs;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,12 +45,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData());
                 int action = json.getInt(Sample.ACTION);
-                if(action==1){
+                if (action == Sample.ACTION_ORDER) {
                     String order = json.getString(Sample.ORDER);
-                   sendNotification(order);
+                    sendNotification(order);
+                }
+               else if (action == Sample.ACTION_CANCEL_ORDER) {
+                    Log.v("masuk", "cancel_order");
+                    Prefs.putProgresWorking(this, Sample.CODE_NO_ORDER);
+                    EventBus.getDefault().post(new MessageFireBase(remoteMessage.getData()));
+                } else if (action == Sample.ACTION_OPEN_FEED_ORDER) {
+                    Log.v("masuk", "open_feedback");
+                    Bundle args = new Bundle();
+                    args.putInt(Sample.ACTION, Sample.ACTION_OPEN_FEED_ORDER);
+                    Intent intent = new Intent(this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtras(args);
+                    this.startActivity(intent);
+                    Prefs.putProgresWorking(this, Sample.CODE_NO_ORDER);
+                    EventBus.getDefault().post(new MessageFireBase(remoteMessage.getData()));
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.v("err", e.getMessage());
             }
 
         }
@@ -60,19 +82,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String order) {
 
-        int requestID = (int) System.currentTimeMillis();
-        Bundle args= new Bundle();
+        Bundle args = new Bundle();
         args.putString(Sample.ORDER, order);
         Intent intent = new Intent(this, ProgressOrderActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(args);
-        this.startActivity(intent);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, requestID,intent, PendingIntent.FLAG_UPDATE_CURRENT
+        startActivity(intent);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
                 | PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri =  Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fishtank_bubbles);
+        Uri defaultSoundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fishtank_bubbles);
         NotificationCompat.Builder notificationBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getResources().getString(R.string.app_name))
