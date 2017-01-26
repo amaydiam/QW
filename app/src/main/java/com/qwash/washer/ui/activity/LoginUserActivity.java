@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -73,7 +71,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
     private Validator validator;
     private ProgressDialogBuilder dialogProgress;
-    private String TAG="LoginUserActivity";
+    private String TAG = "LoginUserActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,7 +147,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     void Login() {
-     validator.validate();
+        validator.validate();
     }
 
     @OnClick(R.id.btn_forgot_password)
@@ -164,26 +162,19 @@ public class LoginUserActivity extends AppCompatActivity {
 
 
     private void remoteLogin() {
-        Log.d(TAG, "remote login...");
         dialogProgress.show("LoginService ...", "Please wait...");
 
         final String firebase_id = FirebaseInstanceId.getInstance().getToken();
-        Log.v("firebase_id",firebase_id);
         Map<String, String> params = new HashMap<>();
         params.put(Sample.EMAIL, email.getText().toString());
         params.put(Sample.PASSWORD, password.getText().toString());
         params.put(Sample.FIREBASE_ID, firebase_id);
         params.put(Sample.AUTH_LEVEL, "5");
 
-        for (Map.Entry entry : params.entrySet()) {
-            System.out.println(entry.getKey() + ", " + entry.getValue());
-        }
-
         LoginService mService = ApiUtils.LoginService(this);
         mService.getLoginLink(params).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, retrofit2.Response<Login> response) {
-                Log.w("response", new Gson().toJson(response));
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
@@ -204,10 +195,8 @@ public class LoginUserActivity extends AppCompatActivity {
                         toHomeActivity();
 
                     }
-                    Log.d(TAG, "posts loaded from API");
                 } else {
                     int statusCode = response.code();
-                    Log.d(TAG, "error loading from API, status: " + statusCode);
                     try {
                         JSONObject jsonObject = new JSONObject(response.errorBody().string());
                         String message = jsonObject.getString(Sample.MESSAGE);
@@ -223,7 +212,6 @@ public class LoginUserActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
                 String message = t.getMessage();
-                Log.d(TAG, message);
                 dialogProgress.hide();
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }

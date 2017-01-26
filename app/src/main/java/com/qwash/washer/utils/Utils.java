@@ -4,20 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.qwash.washer.R;
 
 import java.math.BigInteger;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,7 +59,7 @@ public class Utils {
         } catch (Exception e) {
 
         }
-        return "IDR. "+ss.replace(",", ".");
+        return "IDR. " + ss.replace(",", ".");
     }
 
     public static String Rupiah(int s) {
@@ -78,7 +69,7 @@ public class Utils {
         } catch (Exception e) {
 
         }
-        return  "IDR. "+ss.replace(",", ".");
+        return "IDR. " + ss.replace(",", ".");
     }
 
     public static int getNumberOfColumns(Activity activity, boolean isTablet) {

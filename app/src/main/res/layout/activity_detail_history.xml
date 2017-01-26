@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#eee">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee">
 
-        <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_2196F3"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/mobil" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/blue_2196F3"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
+                android:layout_gravity="center"
+                android:text="Honda"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-                <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/mobil" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Jazz 1.5 AT 2016"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Honda"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Jazz 1.5 AT 2016"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <RelativeLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -65,8 +65,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_toRightOf="@id/gbr1"
                         android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/gbr1"
                         android:text="Today"
                         android:textSize="16sp" />
                 </RelativeLayout>
@@ -85,8 +85,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_toRightOf="@id/gbr2"
                         android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/gbr2"
                         android:text="18:20 WIB"
                         android:textSize="16sp" />
                 </RelativeLayout>
@@ -133,8 +133,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:textSize="16sp"
-                    android:text="ADDITIONAL SELECT" />
+                    android:text="ADDITIONAL SELECT"
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -165,8 +165,8 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/gbr3"
-                    android:textSize="16sp"
-                    android:text="Perfumed" />
+                    android:text="Perfumed"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -187,11 +187,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/gbr4"
-                    android:textSize="16sp"
-                    android:text="Interior Vacuum" />
+                    android:text="Interior Vacuum"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
         </RelativeLayout>
@@ -223,8 +223,8 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/gbr5"
-                    android:textSize="16sp"
-                    android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402" />
+                    android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402"
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -254,16 +254,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="16sp"
-                        android:text="Daitsu Alya" />
+                        android:text="Daitsu Alya"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ddd"
                         android:layout_centerInParent="true"
-                        android:textSize="16sp"
-                        android:text="X 1.5 AT" />
+                        android:text="X 1.5 AT"
+                        android:textSize="16sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
@@ -272,13 +272,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="#fff"
             android:background="@drawable/btn_custom_orange"
-            android:text="REPORT AN ISSUE" />
+            android:text="REPORT AN ISSUE"
+            android:textColor="#fff" />
 
 
     </LinearLayout>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".ui.activity.LoginUserActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginUserActivity">
 
-<include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -17,14 +17,14 @@ tools:context=".ui.activity.LoginUserActivity">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center" >
+            android:gravity="center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/activity_vertical_margin">
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,8 +46,7 @@ tools:context=".ui.activity.LoginUserActivity">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="@string/sign_in_washer"
-                    android:textColor="@color/black_424242"
-                     />
+                    android:textColor="@color/black_424242" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -71,7 +70,8 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:background="@null"
                             android:hint="@string/email"
                             android:inputType="textEmailAddress"
-                            android:padding="10dp" android:maxLines="1" />
+                            android:maxLines="1"
+                            android:padding="10dp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -84,11 +84,11 @@ tools:context=".ui.activity.LoginUserActivity">
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/password"
-                            android:padding="10dp"
-                            android:inputType="textPassword"
                             android:imeOptions="actionGo"
+                            android:inputType="textPassword"
+                            android:maxLength="10"
                             android:maxLines="1"
-                            android:maxLength="10"/>
+                            android:padding="10dp" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -100,23 +100,24 @@ tools:context=".ui.activity.LoginUserActivity">
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/button_login" />
+
                 <TextView
                     android:id="@+id/btn_forgot_password"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:text="@string/forgot_password"
                     android:textColor="@color/blue_2196F3" />
 
                 <TextView
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:gravity="center"
                     android:text="@string/dont_have_an_account"
                     android:textColor="@color/black_424242" />
 

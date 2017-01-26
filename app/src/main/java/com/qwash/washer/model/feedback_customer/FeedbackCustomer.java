@@ -1,4 +1,4 @@
-package com.qwash.washer.model;
+package com.qwash.washer.model.feedback_customer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,10 +6,19 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class FeedbackCustomer implements Parcelable {
 
+    public static final Creator<FeedbackCustomer> CREATOR = new Creator<FeedbackCustomer>() {
+        @Override
+        public FeedbackCustomer createFromParcel(Parcel in) {
+            return new FeedbackCustomer(in);
+        }
+
+        @Override
+        public FeedbackCustomer[] newArray(int size) {
+            return new FeedbackCustomer[size];
+        }
+    };
     @SerializedName("id")
     @Expose
     private String id;
@@ -26,7 +35,6 @@ public class FeedbackCustomer implements Parcelable {
     @Expose
     private String ordersRef;
 
-
     public FeedbackCustomer(String id, String rate, String createAt, String comments, String ordersRef) {
         this.id = id;
         this.rate = rate;
@@ -42,18 +50,6 @@ public class FeedbackCustomer implements Parcelable {
         comments = in.readString();
         ordersRef = in.readString();
     }
-
-    public static final Creator<FeedbackCustomer> CREATOR = new Creator<FeedbackCustomer>() {
-        @Override
-        public FeedbackCustomer createFromParcel(Parcel in) {
-            return new FeedbackCustomer(in);
-        }
-
-        @Override
-        public FeedbackCustomer[] newArray(int size) {
-            return new FeedbackCustomer[size];
-        }
-    };
 
     public String getId() {
         return id;

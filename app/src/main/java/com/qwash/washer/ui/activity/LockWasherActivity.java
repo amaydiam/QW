@@ -32,13 +32,11 @@ import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.joanzapata.iconify.fonts.MaterialModule;
-import com.joanzapata.iconify.fonts.SimpleLineIconsIcons;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 
@@ -54,18 +52,38 @@ public class LockWasherActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-
-    private double current_latitude, current_longitude;
-    private View mapView;
-    private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+    private double current_latitude, current_longitude;
+    private View mapView;
+    PermissionListener permissionMapsListener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapView = mapFragment.getView();
+            mapFragment.getMapAsync(LockWasherActivity.this);
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+            String message = String.format(Locale.getDefault(), getString(R.string.message_denied), "ACCESS_FINE_LOCATION");
+            Toast.makeText(LockWasherActivity.this, message, Toast.LENGTH_SHORT).show();
+        }
+
+
+    };
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +124,6 @@ public class LockWasherActivity extends AppCompatActivity implements
                 .check();
 
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -195,9 +212,6 @@ public class LockWasherActivity extends AppCompatActivity implements
 
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -243,7 +257,6 @@ public class LockWasherActivity extends AppCompatActivity implements
                 .with(new SimpleLineIconsModule());
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -278,27 +291,6 @@ public class LockWasherActivity extends AppCompatActivity implements
             mGoogleApiClient.connect();
         }
     }
-
-    PermissionListener permissionMapsListener = new PermissionListener() {
-        @Override
-        public void onPermissionGranted() {
-
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
-            mapView = mapFragment.getView();
-            mapFragment.getMapAsync(LockWasherActivity.this);
-        }
-
-        @Override
-        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-
-            String message = String.format(Locale.getDefault(), getString(R.string.message_denied), "ACCESS_FINE_LOCATION");
-            Toast.makeText(LockWasherActivity.this, message, Toast.LENGTH_SHORT).show();
-        }
-
-
-    };
 
 
 }

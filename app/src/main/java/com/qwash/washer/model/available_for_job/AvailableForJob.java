@@ -1,4 +1,4 @@
-package com.qwash.washer.model.availableforjob; /**
+package com.qwash.washer.model.available_for_job; /**
  * Created by Amay on 12/29/2016.
  */
 
@@ -16,6 +16,7 @@ public class AvailableForJob {
     public Boolean getStatus() {
         return status;
     }
+
     public void setStatus(Boolean status) {
         this.status = status;
     }

@@ -1,225 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include layout="@layout/toolbar" />
 
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose the amount of balance"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
-                android:id="@+id/utama"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose the amount of balance"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:orientation="vertical">
+                    android:id="@+id/utama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:layout_weight="5"
+                        android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/checkbox20"
-                            android:text="IDR 20.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/checkbox20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 20.000" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/checkbox100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 100.000" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/checkbox500"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 500.000" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:layout_weight="5"
+                        android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/checkbox100"
-                            android:text="IDR 100.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
 
-                    </LinearLayout>
+                            <RadioButton
+                                android:id="@+id/checkbox50"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 50.000" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
+                        </LinearLayout>
 
-                        <RadioButton
-                            android:id="@+id/checkbox500"
-                            android:text="IDR 500.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/checkbox250"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 250.000" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#eee"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/checkbox750"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IDR 750.000" />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:orientation="vertical">
+                    android:layout_below="@id/utama"
+                    android:layout_marginBottom="10dp"
+                    android:background="#eee"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <RadioButton
+                        android:id="@+id/checkbox1jt"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <RadioButton
-                            android:id="@+id/checkbox50"
-                            android:text="IDR 50.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <RadioButton
-                            android:id="@+id/checkbox250"
-                            android:text="IDR 250.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#eee"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <RadioButton
-                            android:id="@+id/checkbox750"
-                            android:text="IDR 750.000"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-
-                    </LinearLayout>
+                        android:text="IDR 1.000.000" />
 
                 </LinearLayout>
+            </RelativeLayout>
 
-            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Pay"
+                    android:textColor="#f5c93a"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/totalharga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="IDR 0"
+                    android:textColor="#f5c93a"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I agree to the terms and conditions" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/topup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/utama"
-                android:layout_marginBottom="10dp"
-                android:background="#eee"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <RadioButton
-                    android:id="@+id/checkbox1jt"
-                    android:text="IDR 1.000.000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Pay"
-                android:textColor="#f5c93a"
+                android:background="@drawable/selector_btn_orange"
+                android:clickable="true"
+                android:text="Top Up"
+                android:textAllCaps="false"
+                android:textColor="#fff"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/totalharga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="IDR 0"
-                android:textColor="#f5c93a"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
-
-            <CheckBox
-                android:id="@+id/checkbox"
-                android:text="I agree to the terms and conditions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/topup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_btn_orange"
-            android:text="Top Up"
-            android:clickable="true"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

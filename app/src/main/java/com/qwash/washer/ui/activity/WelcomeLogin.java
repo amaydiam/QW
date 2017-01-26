@@ -74,6 +74,4 @@ public class WelcomeLogin extends AppCompatActivity {
     }
 
 
-
-
 }

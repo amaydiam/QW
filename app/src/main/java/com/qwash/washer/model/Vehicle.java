@@ -5,6 +5,16 @@ import android.os.Parcelable;
 
 public class Vehicle implements Parcelable {
 
+    // Parcelable Creator
+    public static final Creator CREATOR = new Creator() {
+        public Vehicle createFromParcel(Parcel in) {
+            return new Vehicle(in);
+        }
+
+        public Vehicle[] newArray(int size) {
+            return new Vehicle[size];
+        }
+    };
     // Attributes
     public String id_vehicle;
     public int type;
@@ -31,17 +41,6 @@ public class Vehicle implements Parcelable {
         this.transmission = in.readString();
         this.year = in.readString();
     }
-
-    // Parcelable Creator
-    public static final Creator CREATOR = new Creator() {
-        public Vehicle createFromParcel(Parcel in) {
-            return new Vehicle(in);
-        }
-
-        public Vehicle[] newArray(int size) {
-            return new Vehicle[size];
-        }
-    };
 
     // Parcelling methods
     @Override

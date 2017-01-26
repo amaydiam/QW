@@ -3,14 +3,10 @@ package com.qwash.washer.service;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -24,9 +20,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataInputStream;
-import java.io.InputStream;
-
 /**
  * Created by binderbyte on 11/01/17.
  */
@@ -38,23 +31,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData().get("message"));
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData());
                 int action = json.getInt(Sample.ACTION);
                 if (action == Sample.ACTION_ORDER) {
                     String order = json.getString(Sample.ORDER);
                     sendNotification(order);
-                }
-               else if (action == Sample.ACTION_CANCEL_ORDER) {
-                    Log.v("masuk", "cancel_order");
+                } else if (action == Sample.ACTION_CANCEL_ORDER) {
                     Prefs.putProgresWorking(this, Sample.CODE_NO_ORDER);
                     EventBus.getDefault().post(new MessageFireBase(remoteMessage.getData()));
                 } else if (action == Sample.ACTION_OPEN_FEED_ORDER) {
-                    Log.v("masuk", "open_feedback");
                     Bundle args = new Bundle();
                     args.putInt(Sample.ACTION, Sample.ACTION_OPEN_FEED_ORDER);
                     Intent intent = new Intent(this, HomeActivity.class);
@@ -69,14 +57,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.v("err", e.getMessage());
             }
 
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
     }
 

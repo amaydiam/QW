@@ -86,7 +86,7 @@
                                     android:text="Ruko Parakan Tangerang Selatan"
                                     android:textColor="@color/white"
                                     android:textSize="18sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold" />
 
                                 <com.qwash.washer.ui.widget.RobotoRegularTextView
                                     android:layout_width="wrap_content"
@@ -101,24 +101,24 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_margin="@dimen/activity_vertical_margin">
+                            android:layout_margin="@dimen/activity_vertical_margin"
+                            android:orientation="horizontal">
 
                             <com.joanzapata.iconify.widget.IconTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="{mdi-map-marker}"
-                                android:textSize="16sp"
-                                android:textColor="@color/black_777777"/>
+                                android:textColor="@color/black_777777"
+                                android:textSize="16sp" />
 
 
                             <com.qwash.washer.ui.widget.RobotoRegularTextView
-                                android:layout_marginLeft="@dimen/activity_vertical_margin"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/activity_vertical_margin"
                                 android:text="@string/office_address"
-                                android:textSize="16sp"
-                                android:textColor="@color/black_777777" />
+                                android:textColor="@color/black_777777"
+                                android:textSize="16sp" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -136,15 +136,16 @@
                     app:fabSize="normal"
                     app:layout_anchor="@id/viewA"
                     app:layout_anchorGravity="bottom|right|end" />
+
                 <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:paddingTop="50dp"
-                    app:layout_anchor="@id/fab"
-                    app:layout_anchorGravity="bottom|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:paddingTop="50dp"
+                    android:text="1 mil"
                     android:textColor="@color/white"
-                    android:text="1 mil" />
+                    android:textSize="16sp"
+                    app:layout_anchor="@id/fab"
+                    app:layout_anchorGravity="bottom|center" />
             </android.support.design.widget.CoordinatorLayout>
 
         </LinearLayout>

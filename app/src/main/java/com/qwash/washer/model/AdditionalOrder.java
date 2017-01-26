@@ -8,6 +8,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class AdditionalOrder implements Parcelable {
 
+    // Parcelable Creator
+    public static final Creator CREATOR = new Creator() {
+        public AdditionalOrder createFromParcel(Parcel in) {
+            return new AdditionalOrder(in);
+        }
+
+        public AdditionalOrder[] newArray(int size) {
+            return new AdditionalOrder[size];
+        }
+    };
     // Attributes
     @SerializedName("img_additional_order")
     @Expose
@@ -42,17 +52,6 @@ public class AdditionalOrder implements Parcelable {
     public void setAdditional_order(String additional_order) {
         this.additional_order = additional_order;
     }
-
-    // Parcelable Creator
-    public static final Creator CREATOR = new Creator() {
-        public AdditionalOrder createFromParcel(Parcel in) {
-            return new AdditionalOrder(in);
-        }
-
-        public AdditionalOrder[] newArray(int size) {
-            return new AdditionalOrder[size];
-        }
-    };
 
     // Parcelling methods
     @Override

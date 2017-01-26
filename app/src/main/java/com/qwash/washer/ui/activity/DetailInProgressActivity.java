@@ -3,7 +3,9 @@ package com.qwash.washer.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
 import com.qwash.washer.R;
+
 /**
  * Created by binderbyte on 14/01/17.
  */

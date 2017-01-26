@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -43,7 +41,6 @@ import com.qwash.washer.ui.widget.RobotoBoldTextView;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.ProgressDialogBuilder;
 import com.qwash.washer.utils.Utils;
-import com.sdsmdg.tastytoast.TastyToast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -115,21 +112,17 @@ public class ProgressOrderActivity extends AppCompatActivity {
     LinearLayout layoutSms;
     @BindView(R.id.layout_call)
     LinearLayout layoutCall;
-
+    MediaPlayer mp = null;
     private PrepareOrder prepareOrder;
     private Context context;
     private String order_data;
-
     private String TAG = "ProgressOrderActivity";
-
-
     private ProgressDialogBuilder dialogProgress;
 
     @OnClick(R.id.btn_deacline)
     void ActionDeacline() {
         Deacline();
     }
-
 
     @OnClick({R.id.btn_accept, R.id.layout_navigation, R.id.layout_call, R.id.layout_sms})
     void Action(View view) {
@@ -150,7 +143,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 break;
             case R.id.layout_navigation:
                 String[] LatLong = prepareOrder.latlong.split(",");
-                String uri = "http://maps.google.com/maps?f=d&hl=en&saddr=" + Prefs.getLatitude(this) + "," + Prefs.getLongitude(this)+ "&daddr=" +
+                String uri = "http://maps.google.com/maps?f=d&hl=en&saddr=" + Prefs.getLatitude(this) + "," + Prefs.getLongitude(this) + "&daddr=" +
                         LatLong[0] + "," + LatLong[1];
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(Intent.createChooser(intent, "Select an application"));
@@ -168,7 +161,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
         }
 
     }
-
 
     private void CheckWorkingStatus() {
         if (Prefs.getProgresWorking(context) == Sample.CODE_NO_ORDER) {
@@ -197,9 +189,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
             btnAccept.setText("SELESAI");
         }
     }
-
-
-    MediaPlayer mp = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -236,7 +225,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
 
         if (bundle != null) {
             order_data = bundle.getString(Sample.ORDER);
-            Log.v("order_data", order_data);
             try {
 
                 JSONObject json = new JSONObject(order_data);
@@ -258,8 +246,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 String photo = jsonCustomer.getString(Sample.ORDER_PHOTO);
                 String authLevel = jsonCustomer.getString(Sample.ORDER_AUTHLEVEL);
                 String firebase_id = jsonCustomer.getString(Sample.ORDER_FIREBASE_ID);
-                Log.v("userId_customer", userId);
-                Log.v("firebase_id_customer", firebase_id);
 
                 // address order
                 String usersDetailsId = jsonAddress.getString(Sample.ORDER_USERSDETAILSID);
@@ -274,7 +260,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 String vName = jsonVehicle.getString(Sample.ORDER_VNAME);
                 String vBrand = jsonVehicle.getString(Sample.ORDER_VBRAND);
                 String models = jsonVehicle.getString(Sample.ORDER_MODELS);
-                String vTransmision = jsonVehicle.getString(Sample.ORDER_VTRANSMISION);
+                String vTransmission = jsonVehicle.getString(Sample.ORDER_VTRANSMISSION);
                 String years = jsonVehicle.getString(Sample.ORDER_YEARS);
                 String vId = jsonVehicle.getString(Sample.ORDER_VID);
                 String vBrandId = jsonVehicle.getString(Sample.ORDER_VBRANDID);
@@ -316,7 +302,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 prepareOrder.vName = vName;
                 prepareOrder.vBrand = vBrand;
                 prepareOrder.models = models;
-                prepareOrder.vTransmision = vTransmision;
+                prepareOrder.vTransmission = vTransmission;
                 prepareOrder.years = years;
                 prepareOrder.vId = vId;
                 prepareOrder.vBrandId = vBrandId;
@@ -353,7 +339,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                     .placeholder(prepareOrder.vId.equalsIgnoreCase("1") ? R.drawable.mobil : R.drawable.motor)
                     .crossFade()
                     .into(vehicleImage);
-            vehicleDescription.setText(prepareOrder.vBrand + "\n" + prepareOrder.models + " " + prepareOrder.vTransmision + " " + prepareOrder.years);
+            vehicleDescription.setText(prepareOrder.vBrand + "\n" + prepareOrder.models + " " + prepareOrder.vTransmission + " " + prepareOrder.years);
             vehicleDescription.setTextColor(ContextCompat.getColor(this, R.color.white));
 
             desDate.setText(prepareOrder.pick_date);
@@ -443,7 +429,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                     root.put(Sample.REGISTRATION_IDS, jsonArray);
 
                     String result = PushNotification.postToFCM(root.toString());
-                    Log.d("RESULT", "Result: " + result);
+
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -480,21 +466,15 @@ public class ProgressOrderActivity extends AppCompatActivity {
     // ======== AcceptOrder Order
     private void AcceptOrder() {
         {
-            Log.d(TAG, "AcceptOrder Orde Activity");
             dialogProgress.show("AcceptOrder Wash ...", "Please wait...");
             Map<String, String> params = new HashMap<>();
             params.put(Sample.ORDERS_REF, prepareOrder.orders_ref);
             params.put(Sample.WASHER_ID, Prefs.getUserId(context));
 
-            for (Map.Entry entry : params.entrySet()) {
-                System.out.println(entry.getKey() + ", " + entry.getValue());
-            }
-
             OrderService mService = ApiUtils.OrderService(this);
             mService.getPickOrderLink(params).enqueue(new Callback<PickOrder>() {
                 @Override
                 public void onResponse(Call<PickOrder> call, Response<PickOrder> response) {
-                    Log.w("response", new Gson().toJson(response));
                     dialogProgress.hide();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus()) {
@@ -504,10 +484,8 @@ public class ProgressOrderActivity extends AppCompatActivity {
                             CheckWorkingStatus();
                             PushNotifAcceptOrder();
                         }
-                        Log.d(TAG, "posts loaded from API");
                     } else {
                         int statusCode = response.code();
-                        Log.d(TAG, "error loading from API, status: " + statusCode);
                         try {
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             String message = jsonObject.getString(Sample.MESSAGE);
@@ -525,7 +503,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<PickOrder> call, Throwable t) {
                     String message = t.getMessage();
-                    Log.d(TAG, message);
                     dialogProgress.hide();
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -563,7 +540,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                     root.put(Sample.REGISTRATION_IDS, jsonArray);
 
                     String result = PushNotification.postToFCM(root.toString());
-                    Log.d("RESULT", "Result: " + result);
+
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -590,20 +567,14 @@ public class ProgressOrderActivity extends AppCompatActivity {
     // ======== StartWash Order
     private void StartWash() {
         {
-            Log.d(TAG, "StartWash Orde Activity");
             dialogProgress.show("Start Wash ...", "Please wait...");
             Map<String, String> params = new HashMap<>();
             params.put(Sample.ORDERS_REF, prepareOrder.orders_ref);
-
-            for (Map.Entry entry : params.entrySet()) {
-                System.out.println(entry.getKey() + ", " + entry.getValue());
-            }
 
             OrderService mService = ApiUtils.OrderService(this);
             mService.getOrderStartWashLink(params).enqueue(new Callback<OrderStartWash>() {
                 @Override
                 public void onResponse(Call<OrderStartWash> call, Response<OrderStartWash> response) {
-                    Log.w("response", new Gson().toJson(response));
                     dialogProgress.hide();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus()) {
@@ -613,10 +584,8 @@ public class ProgressOrderActivity extends AppCompatActivity {
                             CheckWorkingStatus();
                             PushStartWash();
                         }
-                        Log.d(TAG, "posts loaded from API");
                     } else {
                         int statusCode = response.code();
-                        Log.d(TAG, "error loading from API, status: " + statusCode);
                         try {
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             String message = jsonObject.getString(Sample.MESSAGE);
@@ -634,7 +603,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<OrderStartWash> call, Throwable t) {
                     String message = t.getMessage();
-                    Log.d(TAG, message);
                     dialogProgress.hide();
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -665,7 +633,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                     root.put(Sample.REGISTRATION_IDS, jsonArray);
 
                     String result = PushNotification.postToFCM(root.toString());
-                    Log.d("RESULT", "Result: " + result);
+
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -695,22 +663,16 @@ public class ProgressOrderActivity extends AppCompatActivity {
     // ======== FinishWash Order
     private void FinishWash() {
         {
-            Log.d(TAG, "FinishWash Order Activity");
             dialogProgress.show("Finish Wash ...", "Please wait...");
             Map<String, String> params = new HashMap<>();
             params.put(Sample.ORDERS_REF, prepareOrder.orders_ref);
             params.put(Sample.WASHER_ID, Prefs.getUserId(context));
             params.put(Sample.SALDO, String.valueOf(prepareOrder.estimated_price));
 
-            for (Map.Entry entry : params.entrySet()) {
-                System.out.println(entry.getKey() + ", " + entry.getValue());
-            }
-
             OrderService mService = ApiUtils.OrderService(this);
             mService.getOrderFinishLink(params).enqueue(new Callback<OrderFinish>() {
                 @Override
                 public void onResponse(Call<OrderFinish> call, Response<OrderFinish> response) {
-                    Log.w("response", new Gson().toJson(response));
                     dialogProgress.hide();
                     if (response.isSuccessful()) {
                         if (response.body().getStatus()) {
@@ -720,10 +682,8 @@ public class ProgressOrderActivity extends AppCompatActivity {
                             CheckWorkingStatus();
                             PushNotifFinishWash();
                         }
-                        Log.d(TAG, "posts loaded from API");
                     } else {
                         int statusCode = response.code();
-                        Log.d(TAG, "error loading from API, status: " + statusCode);
                         try {
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             String message = jsonObject.getString(Sample.MESSAGE);
@@ -738,7 +698,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<OrderFinish> call, Throwable t) {
                     String message = t.getMessage();
-                    Log.d(TAG, message);
                     dialogProgress.hide();
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -769,7 +728,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
                     root.put(Sample.REGISTRATION_IDS, jsonArray);
 
                     String result = PushNotification.postToFCM(root.toString());
-                    Log.d("RESULT", "Result: " + result);
+
                     return result;
                 } catch (Exception ex) {
                     runOnUiThread(new Runnable() {
@@ -817,7 +776,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
             JSONObject json = new JSONObject(MessageFireBase.getData());
             int action = json.getInt(Sample.ACTION);
             if (action == Sample.ACTION_CANCEL_ORDER) {
-                Prefs.putProgresWorking(this,Sample.CODE_NO_ORDER);
+                Prefs.putProgresWorking(this, Sample.CODE_NO_ORDER);
                 Toast.makeText(context, "You has decline a order", Toast.LENGTH_SHORT).show();
                 finish();
             }

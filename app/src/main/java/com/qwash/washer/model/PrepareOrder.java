@@ -12,24 +12,24 @@ public class PrepareOrder implements Serializable {
     public String email;
     public String name;
     public String phone;
-    public  String photo;
+    public String photo;
     public String authLevel;
     public String firebase_id;
 
     // address order
     public String usersDetailsId;
-    public String  userIdFk;
-    public String  nameAddress;
-    public String  address;
-    public String  latlong;
-    public String  type;
+    public String userIdFk;
+    public String nameAddress;
+    public String address;
+    public String latlong;
+    public String type;
 
     //vehicle order
     public String vCustomersId;
     public String vName;
     public String vBrand;
     public String models;
-    public String vTransmision;
+    public String vTransmission;
     public String years;
     public String vId;
     public String vBrandId;

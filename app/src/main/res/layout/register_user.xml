@@ -42,7 +42,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/first_name"
-                        android:padding="10dp" android:maxLines="1" />
+                        android:maxLines="1"
+                        android:padding="10dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -55,7 +56,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/last_name"
-                        android:padding="10dp"  android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:padding="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,8 +102,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/email"
-                        android:padding="10dp"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:padding="10dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -115,15 +117,14 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_marginLeft="10dp"
                             android:id="@+id/pick_code_country"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/flag_id"
-                            android:layout_marginRight="10dp" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/flag_id" />
 
                         <TextView
-                            android:id="@+id/code_country"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -132,16 +133,17 @@
                             android:paddingTop="10dp"
                             android:text="+62"
                             android:textSize="18sp" />
+
                         <com.qwash.washer.ui.widget.RobotoRegularEditText
                             android:id="@+id/no_telp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:maxEms="13"
-                            android:phoneNumber="true"
                             android:hint="@string/no_telp"
+                            android:maxEms="13"
+                            android:maxLines="1"
                             android:padding="10dp"
-                            android:maxLines="1" />
+                            android:phoneNumber="true" />
 
                     </LinearLayout>
 
@@ -156,9 +158,9 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/password"
-                        android:padding="10dp"
                         android:inputType="textPassword"
-                        android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:padding="10dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -171,8 +173,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/city"
-                        android:padding="10dp"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:padding="10dp" />
                 </LinearLayout>
 
 
@@ -180,12 +182,12 @@
 
             <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/btn_continue"
-                android:background="@drawable/border_blue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_margin="@dimen/activity_vertical_margin"
-                android:text="@string/button_continue" />
+                android:background="@drawable/border_blue"
+                android:text="@string/button_continue"
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"

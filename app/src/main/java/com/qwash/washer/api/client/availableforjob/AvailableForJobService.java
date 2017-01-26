@@ -5,7 +5,7 @@ package com.qwash.washer.api.client.availableforjob;
  */
 
 
-import com.qwash.washer.model.availableforjob.AvailableForJob;
+import com.qwash.washer.model.available_for_job.AvailableForJob;
 
 import java.util.Map;
 

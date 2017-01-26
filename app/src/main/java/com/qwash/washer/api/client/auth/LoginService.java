@@ -5,7 +5,6 @@ package com.qwash.washer.api.client.auth;
  */
 
 
-
 import com.qwash.washer.api.model.login.Login;
 
 import java.util.Map;

@@ -8,19 +8,16 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.gson.Gson;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
-import com.qwash.washer.api.model.order.OrderStartWash;
-import com.qwash.washer.model.availableforjob.AvailableForJob;
+import com.qwash.washer.model.available_for_job.AvailableForJob;
 import com.qwash.washer.utils.Prefs;
 
 import org.json.JSONException;
@@ -41,17 +38,16 @@ import retrofit2.Response;
  */
 public class LocationUpdateService extends Service implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-    protected static final String TAG = "LocationUpdateService";
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 3 * 10000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    protected static final String TAG = "LocationUpdateService";
     public static Boolean mRequestingLocationUpdates;
+    public static boolean isEnded = false;
     protected String mLastUpdateTime;
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
-
     protected Location mCurrentLocation;
-    public static boolean isEnded = false;
     private int count = 1;
 
     @Override
@@ -101,7 +97,6 @@ public class LocationUpdateService extends Service implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + connectionResult.getErrorCode());
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -120,7 +115,6 @@ public class LocationUpdateService extends Service implements
 
     private void SendToServer() {
         {
-            Log.d(TAG, "Update To Server");
             Map<String, String> params = new HashMap<>();
             params.put(Sample.USER_ID, Prefs.getUserId(this));
             params.put(Sample.LAT, String.valueOf(mCurrentLocation.getLatitude()));
@@ -128,23 +122,16 @@ public class LocationUpdateService extends Service implements
             params.put(Sample.VACCUM, String.valueOf(Prefs.getAvailableForVaccum(this)));
 
 
-            for (Map.Entry entry : params.entrySet()) {
-                System.out.println(entry.getKey() + ", " + entry.getValue());
-            }
-
             AvailableForJobService mService = ApiUtils.AvailableForJobService(this);
             (count == 1 ? mService.getWasherOnLink(params) : mService.getWasherOnUpdateLink(params)).enqueue(new Callback<AvailableForJob>() {
                 @Override
                 public void onResponse(Call<AvailableForJob> call, Response<AvailableForJob> response) {
-                    Log.w("response", new Gson().toJson(response));
                     if (response.isSuccessful()) {
                         if (response.body().getStatus()) {
                             count = count + 1;
                         }
-                        Log.d(TAG, "posts loaded from API");
                     } else {
                         int statusCode = response.code();
-                        Log.d(TAG, "error loading from API, status: " + statusCode);
                         try {
                             JSONObject jsonObject = new JSONObject(response.errorBody().string());
                             String message = jsonObject.getString(Sample.MESSAGE);
@@ -157,7 +144,6 @@ public class LocationUpdateService extends Service implements
                 @Override
                 public void onFailure(Call<AvailableForJob> call, Throwable t) {
                     String message = t.getMessage();
-                    Log.d(TAG, message);
                 }
             });
         }
@@ -193,7 +179,6 @@ public class LocationUpdateService extends Service implements
             }
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
-            Log.i(TAG, " startLocationUpdates===");
             isEnded = true;
         }
     }
@@ -204,7 +189,6 @@ public class LocationUpdateService extends Service implements
     protected void stopLocationUpdates() {
         if (mRequestingLocationUpdates) {
             mRequestingLocationUpdates = false;
-            Log.d(TAG, "stopLocationUpdates();==");
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }

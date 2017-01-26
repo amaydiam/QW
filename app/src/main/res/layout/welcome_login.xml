@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/blue_2196F3"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
-    android:orientation="vertical"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue_2196F3"
+    android:fillViewport="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/logowasher"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
-
-        <com.qwash.washer.ui.widget.RobotoRegularButton
-            android:id="@+id/sign_in_washer"
-            android:background="@drawable/border_white"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/button_login"
-            android:textColor="@color/white"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
-            />
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/create_account"
-            android:layout_below="@id/sign_in_washer"
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/logowasher" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create Account\nI'm new washers"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="17sp"/>
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
-    </RelativeLayout>
+            <com.qwash.washer.ui.widget.RobotoRegularButton
+                android:id="@+id/sign_in_washer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/border_white"
+                android:text="@string/button_login"
+                android:textColor="@color/white" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/create_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sign_in_washer"
+                android:gravity="center"
+                android:text="Create Account\nI'm new washers"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
 

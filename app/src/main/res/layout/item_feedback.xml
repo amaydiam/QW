@@ -3,46 +3,82 @@
     android:id="@+id/root_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_half_vertical_margin"
     android:background="@drawable/border_orange"
-    android:layout_margin="@dimen/activity_half_vertical_margin">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left|center">
-        <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/icon_datetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{mdi-clock}"
-            android:layout_marginRight="5dp"
-            android:textSize="12sp"
-            android:textColor="@color/blue_2196F3"/>
-        <com.qwash.washer.ui.widget.RobotoRegularTextView
-            android:id="@+id/date_feedback"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Today, 26 January 2017"
-            android:textColor="@color/black_424242"
-            android:textSize="12sp"/>
-    </LinearLayout>
 
-    <com.qwash.washer.ui.widget.RobotoLightTextView
-        android:id="@+id/deskripsi_feedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:lines="2"
-        android:textSize="14sp"
-        android:text="Lorem ipsum doler asmet, Lorem ipsum doler asmet sinuka diasdn asdn sdjasd nasndansdn sanan nnaf asn fnaafa " />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/linearLayout2"
+                android:gravity="left|center"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="{mdi-clock}"
+                    android:textColor="@color/blue_2196F3"
+                    android:textSize="12sp" />
+
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:id="@+id/date_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Today, 26 January 2017"
+                    android:textColor="@color/black_424242"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="left|center"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="{mdi-star}"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp" />
+
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="3.4"
+                    android:textColor="@color/black_777777"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.qwash.washer.ui.widget.RobotoLightTextView
+            android:id="@+id/deskripsi_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:lines="2"
+            android:text="Lorem ipsum doler asmet, Lorem ipsum doler asmet sinuka diasdn asdn sdjasd nasndansdn sanan nnaf asn fnaafa "
+            android:textSize="14sp" />
 
 
         <com.joanzapata.iconify.widget.IconButton
@@ -55,6 +91,6 @@
             android:textColor="@color/blue_2196F3"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>

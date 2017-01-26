@@ -1,9 +1,9 @@
 package com.qwash.washer.ui.fragment;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -37,8 +37,8 @@ public class WashHistoryFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_wash_history, container, false);
 
-        pager= (ViewPager) view.findViewById(R.id.view_pager);
-        tabLayout= (TabLayout) view.findViewById(R.id.tab_layout);
+        pager = (ViewPager) view.findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 
         FragmentManager manager = getActivity().getSupportFragmentManager();
         PagerAdapter adapter = new PagerAdapter(manager);

@@ -1,74 +1,62 @@
 package com.qwash.washer.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.AudioManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.joanzapata.iconify.widget.IconButton;
 import com.qwash.washer.R;
-import com.qwash.washer.model.feedback_customer.FeedbackCustomer;
-import com.qwash.washer.ui.widget.RobotoLightTextView;
-import com.qwash.washer.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.Sample;
+import com.qwash.washer.model.wash_history.WashHistory;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustomerAdapter.ViewHolder> implements View.OnTouchListener, View.OnClickListener {
+public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.ViewHolder> implements View.OnTouchListener, View.OnClickListener {
 
-    public final ArrayList<FeedbackCustomer> data;
+    public final ArrayList<WashHistory> data;
     private final GestureDetector gestureDetector;
+    private final int type_wash_history;
+
     private boolean isTablet = false;
     private Activity activity;
     private SparseBooleanArray mSelectedItemsIds;
     private int selected = -1;
 
-    private OnFeedbackCustomerItemClickListener OnFeedbackCustomerItemClickListener;
+    private OnWashHistoryItemClickListener OnWashHistoryItemClickListener;
 
 
-    public FeedbackCustomerAdapter(Activity activity, ArrayList<FeedbackCustomer> feedbackCustomerList) {
+    public WashHistoryAdapter(Activity activity, int type_wash_history, ArrayList<WashHistory> feedbackCustomerList) {
         this.activity = activity;
+        this.type_wash_history = type_wash_history;
         this.data = feedbackCustomerList;
         mSelectedItemsIds = new SparseBooleanArray();
         gestureDetector = new GestureDetector(activity, new SingleTapConfirm());
 
     }
 
-    public void setOnFeedbackCustomerItemClickListener(OnFeedbackCustomerItemClickListener onFeedbackCustomerItemClickListener) {
-        this.OnFeedbackCustomerItemClickListener = onFeedbackCustomerItemClickListener;
+    public void setOnWashHistoryItemClickListener(OnWashHistoryItemClickListener onWashHistoryItemClickListener) {
+        this.OnWashHistoryItemClickListener = onWashHistoryItemClickListener;
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-        final int viewId = v.getId();
-        if (viewId == R.id.btn_action) {
-            if (gestureDetector.onTouchEvent(event)) {
-                if (OnFeedbackCustomerItemClickListener != null) {
-                    AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.playSoundEffect(SoundEffectConstants.CLICK);
-                    OnFeedbackCustomerItemClickListener.onActionClick(v, (Integer) v.getTag());
-                }
-            }
-        }
 
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        if (OnFeedbackCustomerItemClickListener != null) {
-            OnFeedbackCustomerItemClickListener.onRootClick(v, (Integer) v.getTag());
+        if (OnWashHistoryItemClickListener != null) {
+            OnWashHistoryItemClickListener.onRootClick(v, (Integer) v.getTag());
         }
     }
 
@@ -94,21 +82,23 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
     public ViewHolder onCreateViewHolder(ViewGroup parent,
                                          int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_feedback, parent, false);
+                .inflate(R.layout.item_history_wash, parent, false);
         ViewHolder holder = new ViewHolder(v);
         holder.rootParent.setOnClickListener(this);
-        holder.btnAction.setOnTouchListener(this);
         return holder;
     }
 
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        FeedbackCustomer FeedbackCustomer = data.get(position);
+        WashHistory WashHistory = data.get(position);
 
-        holder.dateFeedback.setText(FeedbackCustomer.getCreateAt());
-        holder.rating.setText(FeedbackCustomer.getRate());
-        holder.deskripsiFeedback.setText(FeedbackCustomer.getComments());
+        holder.dateInProgress.setText(WashHistory.getPickDate());
+        holder.timeInProgress.setText(WashHistory.getPickTime());
+        holder.merkInProgress.setText(WashHistory.getVBrand());
+        if (type_wash_history == Sample.WASH_HISTORY_COMPLETE)
+            holder.status.setVisibility(View.VISIBLE);
+        else
+            holder.status.setVisibility(View.GONE);
 
-        holder.btnAction.setTag(position);
         holder.rootParent.setTag(position);
 
     }
@@ -151,8 +141,7 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
         return mSelectedItemsIds;
     }
 
-    public interface OnFeedbackCustomerItemClickListener {
-        void onActionClick(View v, int position);
+    public interface OnWashHistoryItemClickListener {
 
         void onRootClick(View v, int position);
 
@@ -160,16 +149,16 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.date_feedback)
-        RobotoRegularTextView dateFeedback;
-        @BindView(R.id.deskripsi_feedback)
-        RobotoLightTextView deskripsiFeedback;
-        @BindView(R.id.rating)
-        RobotoRegularTextView rating;
-        @BindView(R.id.btn_action)
-        IconButton btnAction;
+        @BindView(R.id.date_in_progress)
+        TextView dateInProgress;
+        @BindView(R.id.time_in_progress)
+        TextView timeInProgress;
+        @BindView(R.id.merk_in_progress)
+        TextView merkInProgress;
+        @BindView(R.id.status)
+        TextView status;
         @BindView(R.id.root_parent)
-        LinearLayout rootParent;
+        RelativeLayout rootParent;
 
         public ViewHolder(View vi) {
             super(vi);

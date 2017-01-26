@@ -7,9 +7,9 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,9 +51,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/rating_logo"
@@ -62,7 +62,6 @@
                     android:src="@drawable/logowasher" />
 
                 <TextView
-                    android:id="@+id/rating_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -85,7 +84,6 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/total_cost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="IDR 25.000"
@@ -94,11 +92,10 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
                     android:layout_below="@id/rating_logo"
+                    android:layout_marginTop="10dp"
                     android:background="#ccc" />
 
             </RelativeLayout>
@@ -110,7 +107,6 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/view2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -142,7 +138,6 @@
 
 
                 <RatingBar
-                    android:id="@+id/rating_wash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -151,28 +146,28 @@
                     android:rating="3" />
 
                 <EditText
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:minLines="1"
-                    android:gravity="top|left"
-                    android:maxLines="5"
-                    android:hint="Leave a comment"
-                    android:background="@drawable/rounded_edittext"
+                    android:layout_width="fill_parent"
                     android:layout_height="100dp"
-                    android:padding="10dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_width="fill_parent"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="top|left"
+                    android:hint="Leave a comment"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:maxLines="5"
+                    android:minLines="1"
+                    android:padding="10dp"
                     android:scrollbars="vertical" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_blue"
-                    android:text="SUBMIT"
-                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_blue"
+                    android:text="SUBMIT"
                     android:textColor="@color/white" />
 
             </LinearLayout>

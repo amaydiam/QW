@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.qwash.washer.Sample;
-import com.qwash.washer.service.availableforjob.LocationUpdateService;
-import com.qwash.washer.ui.activity.LoginUserActivity;
-import com.qwash.washer.ui.activity.ProgressOrderActivity;
 
 
 public final class Prefs {
@@ -121,7 +118,6 @@ public final class Prefs {
     //end data user
 
 
-
     public static void putAvailableForJob(final Context context, boolean enabled) {
         Prefs.putPref(context, Sample.AVAILABLE_FOR_JOB, (enabled ? "true" : "false"));
     }
@@ -158,12 +154,9 @@ public final class Prefs {
 
     public static boolean isLogedIn(Context context) {
 
-        if (getUserId(context).length() > 0
-                && getToken(context).length() > 0) {
-            return true;
-        }
+        return getUserId(context).length() > 0
+                && getToken(context).length() > 0;
 
-        return false;
     }
 
 
@@ -207,7 +200,6 @@ public final class Prefs {
         putLatitude(context, 0);
         putLongitude(context, 0);
     }
-
 
 
 }

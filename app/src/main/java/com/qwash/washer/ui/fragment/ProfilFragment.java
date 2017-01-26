@@ -11,21 +11,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
-import com.qwash.washer.model.availableforjob.AvailableForJob;
+import com.qwash.washer.model.available_for_job.AvailableForJob;
 import com.qwash.washer.service.availableforjob.LocationUpdateService;
 import com.qwash.washer.ui.activity.HomeActivity;
 import com.qwash.washer.ui.activity.TopUpActivity;
@@ -53,46 +51,18 @@ import retrofit2.Response;
 
 public class ProfilFragment extends Fragment {
 
-    String TAG = "ProfilFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-
+    private static final String ACTION_FROM_NOTIFICATION = "isFromNotification";
+    private static final int notifID = 1001;
+    public boolean mIsServiceStarted = false;
+    String TAG = "ProfilFragment";
     @BindView(R.id.available_for_job)
     Switch availableForJob;
     @BindView(R.id.available_for_vaccum)
     Switch availableForVaccum;
     @BindView(R.id.change_saldo)
     RobotoLightTextView changeSaldo;
-    private ProgressDialogBuilder dialogProgress;
-
-    @OnClick(R.id.layout_available_for_job)
-    public void Click() {
-        if (!mIsServiceStarted) {
-            new TedPermission(getActivity())
-                    .setPermissionListener(permissionMapsListener)
-                    .setDeniedMessage("Anda harus menghidupkan permission ACCESS_FINE_LOCATION pada [Setting] > [Permission]")
-                    .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
-                    .check();
-        } else {
-            SendToServer();
-        }
-    }
-
-    @OnCheckedChanged(R.id.available_for_vaccum)
-    void onChecked(boolean b) {
-        if (b)
-            Prefs.putAvailableForVaccum(getActivity(), 1);
-        else
-            Prefs.putAvailableForVaccum(getActivity(), 0);
-    }
-
-
-    @OnClick(R.id.change_saldo)
-    public void changeSaldo() {
-        startActivity(new Intent(getContext(), TopUpActivity.class));
-    }
-
     PermissionListener permissionMapsListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
@@ -106,18 +76,11 @@ public class ProfilFragment extends Fragment {
         }
 
     };
-
+    private ProgressDialogBuilder dialogProgress;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
-    public boolean mIsServiceStarted = false;
-    private static final String ACTION_FROM_NOTIFICATION = "isFromNotification";
-    private static final int notifID = 1001;
-
     private OnProfilFragmentInteractionListener mListener;
-
     public ProfilFragment() {
         // Required empty public constructor
     }
@@ -130,142 +93,6 @@ public class ProfilFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        dialogProgress = new ProgressDialogBuilder(getActivity());
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profil, container, false);
-        ButterKnife.bind(this, view);
-       if (Prefs.getAvailableForJob(getActivity())) {
-           mIsServiceStarted = true;
-           setCheckedButtonStatus();
-        }
-        return view;
-    }
-
-    public void onButtonPressed() {
-        if (mListener != null) {
-            mListener.onProfilFragmentInteraction();
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnProfilFragmentInteractionListener) {
-            mListener = (OnProfilFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnProfilFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnProfilFragmentInteractionListener {
-        void onProfilFragmentInteraction();
-    }
-
-
-    private void startAvaibleForJob() {
-        if (!mIsServiceStarted) {
-            mIsServiceStarted = true;
-            setCheckedButtonStatus();
-            OnGoingLocationNotification(getActivity());
-            Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
-            getActivity().startService(bindIntent);
-        }
-    }
-
-
-    private void stopAvaibleForJob() {
-        if (mIsServiceStarted) {
-            mIsServiceStarted = false;
-            setCheckedButtonStatus();
-            cancelNotification(getActivity(), notifID);
-            Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
-            getActivity().stopService(bindIntent);
-        }
-    }
-
-
-    public void setCheckedButtonStatus() {
-        if (mIsServiceStarted) {
-            availableForJob.setChecked(true);
-            availableForVaccum.setEnabled(true);
-            TastyToast.makeText(getActivity(), "Now, you are available for job", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-        } else {
-            availableForJob.setChecked(false);
-            availableForVaccum.setChecked(false);
-            availableForVaccum.setEnabled(false);
-            Prefs.putAvailableForVaccum(getActivity(), 0);
-            TastyToast.makeText(getActivity(), "Now, you are not available for job", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
-        }
-    }
-
-
-    private void SendToServer() {
-        {
-            Log.d(TAG, "Update To Server");
-            dialogProgress.show("Stop Available for Job ...", "Please wait...");
-            Map<String, String> params = new HashMap<>();
-            params.put(Sample.USER_ID, Prefs.getUserId(getActivity()));
-
-            for (Map.Entry entry : params.entrySet()) {
-                System.out.println(entry.getKey() + ", " + entry.getValue());
-            }
-
-            AvailableForJobService mService = ApiUtils.AvailableForJobService(getActivity());
-            mService.getWasherOffLink(params).enqueue(new Callback<AvailableForJob>() {
-                @Override
-                public void onResponse(Call<AvailableForJob> call, Response<AvailableForJob> response) {
-                    Log.w("response", new Gson().toJson(response));
-                    dialogProgress.hide();
-                    if (response.isSuccessful()) {
-                        if (response.body().getStatus()) {
-                            stopAvaibleForJob();
-                        }
-                        Log.d(TAG, "posts loaded from API");
-                    } else {
-                        int statusCode = response.code();
-                        Log.d(TAG, "error loading from API, status: " + statusCode);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
-                            String message = jsonObject.getString(Sample.MESSAGE);
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException | IOException e) {
-                            e.printStackTrace();
-                            TastyToast.makeText(getActivity(), "Mistakes", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<AvailableForJob> call, Throwable t) {
-                    String message = t.getMessage();
-                    Log.d(TAG, message);
-                    dialogProgress.hide();
-                    TastyToast.makeText(getActivity(), message, TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-                }
-            });
-        }
-    }
-
 
     private static void OnGoingLocationNotification(Context mcontext) {
 
@@ -299,9 +126,162 @@ public class ProfilFragment extends Fragment {
 
     }
 
+    @OnClick(R.id.layout_available_for_job)
+    public void Click() {
+        if (!mIsServiceStarted) {
+            new TedPermission(getActivity())
+                    .setPermissionListener(permissionMapsListener)
+                    .setDeniedMessage("Anda harus menghidupkan permission ACCESS_FINE_LOCATION pada [Setting] > [Permission]")
+                    .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .check();
+        } else {
+            SendToServer();
+        }
+    }
+
+    @OnCheckedChanged(R.id.available_for_vaccum)
+    void onChecked(boolean b) {
+        if (b)
+            Prefs.putAvailableForVaccum(getActivity(), 1);
+        else
+            Prefs.putAvailableForVaccum(getActivity(), 0);
+    }
+
+    @OnClick(R.id.change_saldo)
+    public void changeSaldo() {
+        startActivity(new Intent(getContext(), TopUpActivity.class));
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        dialogProgress = new ProgressDialogBuilder(getActivity());
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profil, container, false);
+        ButterKnife.bind(this, view);
+        if (Prefs.getAvailableForJob(getActivity())) {
+            mIsServiceStarted = true;
+            setCheckedButtonStatus();
+        }
+        return view;
+    }
+
+    public void onButtonPressed() {
+        if (mListener != null) {
+            mListener.onProfilFragmentInteraction();
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnProfilFragmentInteractionListener) {
+            mListener = (OnProfilFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnProfilFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    private void startAvaibleForJob() {
+        if (!mIsServiceStarted) {
+            mIsServiceStarted = true;
+            setCheckedButtonStatus();
+            OnGoingLocationNotification(getActivity());
+            Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
+            getActivity().startService(bindIntent);
+            TastyToast.makeText(getActivity(), "Now, you are available for job", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+
+        }
+    }
+
+
+    private void stopAvaibleForJob() {
+        if (mIsServiceStarted) {
+            mIsServiceStarted = false;
+            setCheckedButtonStatus();
+            cancelNotification(getActivity(), notifID);
+            Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
+            getActivity().stopService(bindIntent);
+            TastyToast.makeText(getActivity(), "Now, you are not available for job", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
+
+        }
+    }
+
+
+    public void setCheckedButtonStatus() {
+        if (mIsServiceStarted) {
+            availableForJob.setChecked(true);
+            availableForVaccum.setEnabled(true);
+        } else {
+            availableForJob.setChecked(false);
+            availableForVaccum.setChecked(false);
+            availableForVaccum.setEnabled(false);
+            Prefs.putAvailableForVaccum(getActivity(), 0);
+        }
+    }
+
+
+    private void SendToServer() {
+        {
+            dialogProgress.show("Stop Available for Job ...", "Please wait...");
+            Map<String, String> params = new HashMap<>();
+            params.put(Sample.USER_ID, Prefs.getUserId(getActivity()));
+
+            AvailableForJobService mService = ApiUtils.AvailableForJobService(getActivity());
+            mService.getWasherOffLink(params).enqueue(new Callback<AvailableForJob>() {
+                @Override
+                public void onResponse(Call<AvailableForJob> call, Response<AvailableForJob> response) {
+                    dialogProgress.hide();
+                    if (response.isSuccessful()) {
+                        if (response.body().getStatus()) {
+                            stopAvaibleForJob();
+                        }
+                    } else {
+                        int statusCode = response.code();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                            String message = jsonObject.getString(Sample.MESSAGE);
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException | IOException e) {
+                            e.printStackTrace();
+                            TastyToast.makeText(getActivity(), "Mistakes", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AvailableForJob> call, Throwable t) {
+                    String message = t.getMessage();
+                    dialogProgress.hide();
+                    TastyToast.makeText(getActivity(), message, TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                }
+            });
+        }
+    }
+
     private void cancelNotification(Context mContext, int mnotinotifId) {
         NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.cancel(mnotinotifId);
+    }
+
+    public interface OnProfilFragmentInteractionListener {
+        void onProfilFragmentInteraction();
     }
 
 }

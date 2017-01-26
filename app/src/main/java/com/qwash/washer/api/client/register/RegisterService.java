@@ -5,8 +5,6 @@ package com.qwash.washer.api.client.register;
  */
 
 
-
-
 import com.qwash.washer.model.register.Register;
 
 import java.util.Map;

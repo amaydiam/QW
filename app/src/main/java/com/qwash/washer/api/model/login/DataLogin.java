@@ -66,15 +66,16 @@ public class DataLogin {
         return phone;
     }
 
-    public void setPhoto(String phone) {
-        this.photo = photo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
     public String getPhoto() {
         return photo;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoto(String phone) {
+        this.photo = photo;
     }
 
     public String getAuthLevel() {

@@ -12,9 +12,11 @@ import okhttp3.Response;
 
 public class ReceivedCookiesInterceptor implements Interceptor {
     private Context context;
+
     public ReceivedCookiesInterceptor(Context context) {
         this.context = context;
     } // AddCookiesInterceptor()
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response originalResponse = chain.proceed(chain.request());

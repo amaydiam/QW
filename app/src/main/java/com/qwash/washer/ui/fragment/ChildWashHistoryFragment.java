@@ -30,11 +30,11 @@ import com.mugen.Mugen;
 import com.mugen.MugenCallbacks;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
-import com.qwash.washer.adapter.FeedbackCustomerAdapter;
+import com.qwash.washer.adapter.WashHistoryAdapter;
 import com.qwash.washer.api.ApiUtils;
-import com.qwash.washer.api.client.feedback_customer.FeedbackCutomerService;
-import com.qwash.washer.api.model.feedback_customer.FeedbackCustomerListResponse;
-import com.qwash.washer.model.feedback_customer.FeedbackCustomer;
+import com.qwash.washer.api.client.wash_history.WashHistoryService;
+import com.qwash.washer.api.model.wash_history.WashHistoryListResponse;
+import com.qwash.washer.model.wash_history.WashHistory;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.TextUtils;
 import com.qwash.washer.utils.Utils;
@@ -54,7 +54,7 @@ import retrofit2.Response;
 /**
  * Created by binderbyte on 10/01/17.
  */
-public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapter.OnFeedbackCustomerItemClickListener,
+public class ChildWashHistoryFragment extends Fragment implements WashHistoryAdapter.OnWashHistoryItemClickListener,
         SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG_MORE = "TAG_MORE";
@@ -64,7 +64,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
 
     private static final String TAG_TOP = "top";
     private static final String TAG_BOTTOM = "bottom";
-    public FeedbackCustomerAdapter adapter;
+    public WashHistoryAdapter adapter;
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
     @BindView(R.id.btn_search)
@@ -94,9 +94,10 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     EditText search;
     @BindView(R.id.parent_search)
     CardView parentSearch;
-    private ArrayList<FeedbackCustomer> data = new ArrayList<>();
+    private ArrayList<WashHistory> data = new ArrayList<>();
     private GridLayoutManager mLayoutManager;
     private String keyword = null;
+    private int type_wash_history;
     private Integer position_delete;
     private ProgressDialog dialogProgress;
     private FragmentActivity activity;
@@ -107,15 +108,21 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     private int page = 1;
     private boolean isRefresh = false;
     private int mPreviousVisibleItem;
-    public FeedbackFragment() {
+    public ChildWashHistoryFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
+     *
+     * @param type_wash_history
      */
-    public static FeedbackFragment newInstance() {
-        return new FeedbackFragment();
+    public static ChildWashHistoryFragment newInstance(int type_wash_history) {
+        ChildWashHistoryFragment fragment = new ChildWashHistoryFragment();
+        Bundle args = new Bundle();
+        args.putInt(Sample.TYPE_WASH_HISTORY, type_wash_history);
+        fragment.setArguments(args);
+        return fragment;
     }
     //  private String session_key;
 
@@ -138,6 +145,15 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = getActivity();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            type_wash_history = getArguments().getInt(Sample.TYPE_WASH_HISTORY);
+        }
     }
 
     @Override
@@ -177,8 +193,8 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         Utils.hideSoftKeyboard(getActivity());
 
         //inisial adapter
-        adapter = new FeedbackCustomerAdapter(activity, data);
-        adapter.setOnFeedbackCustomerItemClickListener(this);
+        adapter = new WashHistoryAdapter(activity, type_wash_history, data);
+        adapter.setOnWashHistoryItemClickListener(this);
 
         //recyclerView
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -222,7 +238,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
                         .colorRes(R.color.blue_1E87DA));
 
 
-        noData.setText(Html.fromHtml("<center><h1>{mdi-calendar}</h1></br> Tidak ada feedback customer ...</center>"));
+        noData.setText(Html.fromHtml("<center><h1>{mdi-calendar}</h1></br> Tidak ada history ...</center>"));
         showNoData(false);
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(Sample.DATA)) {
@@ -252,7 +268,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         String val_search = search.getText().toString().trim();
         if (!TextUtils.isNullOrEmpty(val_search)) {
             search.setText("");
-          /*  Intent intent = new Intent(activity, CariFeedbackCustomerActivity.class);
+          /*  Intent intent = new Intent(activity, CariWashHistoryActivity.class);
             intent.putExtra(Sample.KEYWORD, val_search);
             startActivity(intent);*/
         }
@@ -299,10 +315,10 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
 
         onRetrofitStart(TAG);
 
-        FeedbackCutomerService mService = ApiUtils.getFeedbackCutomer(getActivity());
-        mService.getListFeedbackCustomer(Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<FeedbackCustomerListResponse>() {
+        WashHistoryService mService = ApiUtils.WashHistory(getActivity());
+        mService.getListWashHistory(type_wash_history, Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<WashHistoryListResponse>() {
             @Override
-            public void onResponse(Call<FeedbackCustomerListResponse> call, Response<FeedbackCustomerListResponse> response) {
+            public void onResponse(Call<WashHistoryListResponse> call, Response<WashHistoryListResponse> response) {
 
                 if (response.isSuccessful()) {
                     onRetrofitSuccessResponse(TAG, response);
@@ -314,7 +330,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
             }
 
             @Override
-            public void onFailure(Call<FeedbackCustomerListResponse> call, Throwable t) {
+            public void onFailure(Call<WashHistoryListResponse> call, Throwable t) {
                 onRetrofitErrorResponse(TAG, 0);
                 onRetrofitEnd(TAG);
             }
@@ -322,7 +338,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         });
     }
 
-    protected void DrawDataAllData(String position, String tag, Response<FeedbackCustomerListResponse> response) {
+    protected void DrawDataAllData(String position, String tag, Response<WashHistoryListResponse> response) {
 
 
         if (isRefresh) {
@@ -331,11 +347,11 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
 
         Boolean isSuccess = response.body().getStatus();
         if (isSuccess) {
-            List<FeedbackCustomer> h = response.body().getData();
+            List<WashHistory> h = response.body().getData();
             int jumlah_list_data = h.size();
             if (jumlah_list_data > 0) {
                 for (int i = 0; i < jumlah_list_data; i++) {
-                    FeedbackCustomer obj = h.get(i);
+                    WashHistory obj = h.get(i);
                     setDataObject(position, obj);
                 }
                 adapter.notifyDataSetChanged();
@@ -372,7 +388,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     }
 
 
-    private void ResponeDelete(Response<FeedbackCustomerListResponse> response) {
+    private void ResponeDelete(Response<WashHistoryListResponse> response) {
 
         Boolean isSuccess = response.body().getStatus();
         String message = response.body().getMessage();
@@ -383,31 +399,124 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
     }
 
-    private void setDataObject(String position, FeedbackCustomer obj) {
-        String id = obj.getId();
-        String rate = obj.getRate();
-        String createAt = obj.getCreateAt();
-        String comments = obj.getComments();
-        String ordersRef = obj.getOrdersRef();
+    private void setDataObject(String position, WashHistory washHistory) {
+        String ordersId = washHistory.getOrdersId();
+        String userIdFk = washHistory.getUserIdFk();
+        String washerIdFk = washHistory.getWasherIdFk();
+        String vCustomersIdFk = washHistory.getVCustomersIdFk();
+        String createAt = washHistory.getCreateAt();
+        String pickDate = washHistory.getPickDate();
+        String pickTime = washHistory.getPickTime();
+        String lat = washHistory.getLat();
+        String lng = washHistory.getLng();
+        String nameAddress = washHistory.getNameAddress();
+        String address = washHistory.getAddress();
+        String perfumed = washHistory.getPerfumed();
+        String vacuum = washHistory.getVacuum();
+        String price = washHistory.getPrice();
+        String status = washHistory.getStatus();
+        String description = washHistory.getDescription();
+        String ordersRef = washHistory.getOrdersRef();
+        String vCustomersId = washHistory.getOrdersRef();
+        String vId = washHistory.getVId();
+        String vBrandId = washHistory.getVBrandId();
+        String vModelId = washHistory.getVModelId();
+        String vTransId = washHistory.getVTransId();
+        String vYearsId = washHistory.getVYearsId();
+        String userId = washHistory.getUserId();
+        String vIdFk = washHistory.getVIdFk();
+        String vBrand = washHistory.getVBrand();
 
         //parse object
 
         //set map object
         AddAndSetMapData(
-                position,
-                id,
-                rate,
+                position, ordersId,
+                userIdFk,
+                washerIdFk,
+                vCustomersIdFk,
                 createAt,
-                comments,
-                ordersRef
+                pickDate,
+                pickTime,
+                lat,
+                lng,
+                nameAddress,
+                address,
+                price,
+                perfumed,
+                vacuum,
+                status,
+                description,
+                ordersRef,
+                vCustomersId,
+                vId,
+                vBrandId,
+                vModelId,
+                vTransId,
+                vYearsId,
+                userId,
+                vIdFk,
+                vBrand
         );
 
     }
 
     private void AddAndSetMapData(
-            String position, String id, String rate, String createAt, String comments, String ordersRef) {
+            String position,
+            String ordersId,
+            String userIdFk,
+            String washerIdFk,
+            String vCustomersIdFk,
+            String createAt,
+            String pickDate,
+            String pickTime,
+            String lat,
+            String lng,
+            String nameAddress,
+            String address,
+            String price,
+            String perfumed,
+            String vacuum,
+            String status,
+            String description,
+            String ordersRef,
+            String vCustomersId,
+            String vId,
+            String vBrandId,
+            String vModelId,
+            String vTransId,
+            String vYearsId,
+            String userId,
+            String vIdFk,
+            String vBrand) {
 
-        FeedbackCustomer history = new FeedbackCustomer(id, rate, createAt, comments, ordersRef);
+        WashHistory history = new WashHistory(
+                ordersId,
+                userIdFk,
+                washerIdFk,
+                vCustomersIdFk,
+                createAt,
+                pickDate,
+                pickTime,
+                lat,
+                lng,
+                nameAddress,
+                address,
+                price,
+                perfumed,
+                vacuum,
+                status,
+                description,
+                ordersRef,
+                vCustomersId,
+                vId,
+                vBrandId,
+                vModelId,
+                vTransId,
+                vYearsId,
+                userId,
+                vIdFk,
+                vBrand);
 
 
         if (position.equals(TAG_BOTTOM)) {
@@ -440,7 +549,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
 
     private void startProgress(String TAG) {
         if (TAG.equals(TAG_DELETE)) {
-            TAG = "Delete FeedbackCustomerListResponse";
+            TAG = "Delete WashHistoryListResponse";
         }
         dialogProgress = ProgressDialog.show(getActivity(), TAG,
                 "Please wait...", true);
@@ -485,7 +594,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         }
     }
 
-    public void onRetrofitSuccessResponse(String TAG, Response<FeedbackCustomerListResponse> response) {
+    public void onRetrofitSuccessResponse(String TAG, Response<WashHistoryListResponse> response) {
         if (TAG.equals(TAG_DELETE)) {
             ResponeDelete(response);
 
@@ -537,74 +646,16 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
 
     }
 
-    @Override
-    public void onActionClick(View v, int position) {
-        int viewId = v.getId();
-       /* if (viewId == R.id.btn_action) {
-            OpenAtion(v, position);
-        }*/
-    }
 
     @Override
     public void onRootClick(View v, int position) {
 /*
 
-            Intent intent = new Intent(activity, FeedbackCustomerDetailActivity.class);
+            Intent intent = new Intent(activity, WashHistoryDetailActivity.class);
             intent.putExtra(Sample.FEEDBACK_CUSTOMER_ID, adapter.data.get(position).getId());
             startActivity(intent);
 */
 
     }
-/*
-    public void OpenAtion(View v, final int position) {
-
-        final String id_history = adapter.data.get(position).id_history
-
-        PopupMenu popup = new PopupMenu(activity, v, Gravity.RIGHT);
-        popup.getMenuInflater().inflate(R.menu.action_manage, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                int which = item.getItemId();
-                if (which == R.id.action_edit) {
-                    Intent myIntent = new Intent(getActivity(), actionEditActivity.class);
-                    activity.startActivityForResult(myIntent, 1);
-                }
-                if (which == R.id.action_delete) {
-                    new AlertDialog.Builder(getActivity())
-                            .setIcon(
-                                    new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_alert_octagon)
-                                            .colorRes(R.color.primary)
-                                            .actionBarSize())
-                            .setTitle("Hapus FeedbackCustomer")
-                            .setMessage("Apa anda yakin akan menghapus history ini?")
-                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    position_delete = position;
-                                    queue = customRetrofit.Rest(Request.Method.GET, ApiHelper.getDeleteFeedbackCustomerLink(getActivity(), idgambar), null, TAG_DELETE);
-                                }
-                            })
-                            .setNegativeButton("Tidak", null)
-                            .show();
-                }
-                return true;
-            }
-        });
-
-        // Force icons to show
-        try {
-            Field mFieldPopup = popup.getClass().getDeclaredField("mPopup");
-            mFieldPopup.setAccessible(true);
-
-            MenuPopupHelper mPopup = (MenuPopupHelper) mFieldPopup.get(popup);
-            mPopup.setForceShowIcon(true);
-
-        } catch (Exception e) {
-            return;
-        }
-
-        popup.show();
-    }*/
-
 
 }

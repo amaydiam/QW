@@ -4,13 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.qwash.washer.ui.fragment.InProgressFragment;
-import com.qwash.washer.ui.fragment.CompleteFragment;
+import com.qwash.washer.Sample;
+import com.qwash.washer.ui.fragment.ChildWashHistoryFragment;
 
 /**
  * Created by kundan on 10/16/2015.
  */
-public class PagerAdapter  extends FragmentStatePagerAdapter{
+public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -18,13 +18,13 @@ public class PagerAdapter  extends FragmentStatePagerAdapter{
     @Override
     public Fragment getItem(int position) {
 
-        Fragment frag=null;
-        switch (position){
+        Fragment frag = null;
+        switch (position) {
             case 0:
-                frag=new InProgressFragment();
+                frag = ChildWashHistoryFragment.newInstance(Sample.WASH_HISTORY_IN_PROGRESS);
                 break;
             case 1:
-                frag=new CompleteFragment();
+                frag = ChildWashHistoryFragment.newInstance(Sample.WASH_HISTORY_COMPLETE);
                 break;
         }
         return frag;
@@ -37,13 +37,13 @@ public class PagerAdapter  extends FragmentStatePagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String title=" ";
-        switch (position){
+        String title = " ";
+        switch (position) {
             case 0:
-                title="In Progress";
+                title = "In Progress";
                 break;
             case 1:
-                title="Complete";
+                title = "Complete";
                 break;
         }
 

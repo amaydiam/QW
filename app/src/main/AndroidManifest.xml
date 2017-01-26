@@ -17,8 +17,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-         <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.WelcomeLogin"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,38 +27,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.LoginUserActivity"
             android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.RegisterUserActivity"
             android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.LockWasherActivity"
             android:label="@string/title_activity_lock_washer"
+            android:screenOrientation="portrait"
             android:theme="@style/LocationTheme" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.HomeActivity" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.TopUpActivity"
             android:label="@string/title_activity_lock_washer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.DetailInProgressActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.ProgressOrderActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/DialogActivity" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.RatingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:screenOrientation="portrait"
+        <activity
             android:name=".ui.activity.DetailHistoryActivity"
             android:label="@string/title_activity_lock_washer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
@@ -80,14 +90,13 @@
         <!-- [END firebase_iid_service] -->
 
 
-
         <!-- Avilable for job
         -->
 
         <service
             android:name=".service.availableforjob.LocationUpdateService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

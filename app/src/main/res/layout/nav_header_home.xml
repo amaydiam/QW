@@ -16,9 +16,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="@dimen/activity_vertical_margin"
         android:gravity="left|center"
-        android:layout_margin="@dimen/activity_vertical_margin">
+        android:orientation="horizontal">
 
         <agency.tango.android.avatarview.views.AvatarView
             android:id="@+id/washer_photo"
@@ -26,7 +26,7 @@
             android:layout_height="70dp"
             app:av_border_color="@android:color/white"
             app:av_border_width="2dp"
-            app:av_text_size_percentage="35"  />
+            app:av_text_size_percentage="35" />
 
         <com.qwash.washer.ui.widget.RobotoRegularTextView
             android:id="@+id/washer_name"
@@ -35,9 +35,9 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textSize="16sp"
             android:text="Fahcri"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

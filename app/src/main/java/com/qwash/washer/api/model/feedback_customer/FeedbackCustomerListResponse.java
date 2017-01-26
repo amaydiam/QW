@@ -1,4 +1,4 @@
-package com.qwash.washer.api.model.FeedbackCustomer;
+package com.qwash.washer.api.model.feedback_customer;
 
 /**
  * Created by Amay on 12/29/2016.
@@ -7,7 +7,7 @@ package com.qwash.washer.api.model.FeedbackCustomer;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.qwash.washer.model.FeedbackCustomer;
+import com.qwash.washer.model.feedback_customer.FeedbackCustomer;
 
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.qwash.washer.ui.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.joanzapata.iconify.IconDrawable;
@@ -320,7 +317,7 @@ public class HomeActivity extends AppCompatActivity
         try {
             JSONObject json = new JSONObject(MessageFireBase.getData());
             int action = json.getInt(Sample.ACTION);
-            if (action ==  Sample.ACTION_OPEN_FEED_ORDER) {
+            if (action == Sample.ACTION_OPEN_FEED_ORDER) {
                 setSelectedDrawerItem(Menus.nav_feedback_customer);
             }
         } catch (JSONException e) {
