@@ -43,7 +43,6 @@ public class ApiUtils {
 
     }
 
-
     public static FeedbackCutomerService getFeedbackCutomer(Context context) {
         return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH).create(FeedbackCutomerService.class);
 

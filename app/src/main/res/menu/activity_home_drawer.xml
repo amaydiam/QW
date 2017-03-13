@@ -13,7 +13,7 @@
             android:title="Wash History" />
         <item
             android:id="@+id/nav_feedback_customer"
-            android:title="Feedback_customer" />
+            android:title="Feedback Customer" />
         <item
             android:id="@+id/nav_pusat_bantuan"
             android:title="Pusat Bantuan" />

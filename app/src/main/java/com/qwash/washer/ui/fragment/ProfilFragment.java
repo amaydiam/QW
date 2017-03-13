@@ -6,28 +6,47 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.zagum.switchicon.SwitchIconView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.qwash.washer.MyApplication;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
 import com.qwash.washer.model.available_for_job.AvailableForJob;
+import com.qwash.washer.service.ConnectivityReceiver;
 import com.qwash.washer.service.availableforjob.LocationUpdateService;
 import com.qwash.washer.ui.activity.HomeActivity;
 import com.qwash.washer.ui.activity.TopUpActivity;
 import com.qwash.washer.ui.widget.RobotoLightTextView;
+import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.ProgressDialogBuilder;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -49,7 +68,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfilFragment extends Fragment {
+public class ProfilFragment extends Fragment implements
+        OnChartValueSelectedListener,ConnectivityReceiver.ConnectivityReceiverListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -57,12 +77,8 @@ public class ProfilFragment extends Fragment {
     private static final int notifID = 1001;
     public boolean mIsServiceStarted = false;
     String TAG = "ProfilFragment";
-    @BindView(R.id.available_for_job)
-    Switch availableForJob;
-    @BindView(R.id.available_for_vaccum)
-    Switch availableForVaccum;
-    @BindView(R.id.change_saldo)
-    RobotoLightTextView changeSaldo;
+
+
     PermissionListener permissionMapsListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
@@ -76,11 +92,26 @@ public class ProfilFragment extends Fragment {
         }
 
     };
+
+
+    @BindView(R.id.status_connection)
+    LinearLayout statusConnection;
+    @BindView(R.id.change_saldo)
+    RobotoRegularTextView changeSaldo;
+    @BindView(R.id.rate)
+    RobotoRegularTextView rate;
+    @BindView(R.id.desc_available_for_job)
+    RobotoLightTextView descAvailableForJob;
+    @BindView(R.id.available_for_job)
+    SwitchIconView availableForJob;
+    @BindView(R.id.chart)
+    LineChart mChart;
     private ProgressDialogBuilder dialogProgress;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private OnProfilFragmentInteractionListener mListener;
+
     public ProfilFragment() {
         // Required empty public constructor
     }
@@ -126,7 +157,7 @@ public class ProfilFragment extends Fragment {
 
     }
 
-    @OnClick(R.id.layout_available_for_job)
+    @OnClick(R.id.available_for_job)
     public void Click() {
         if (!mIsServiceStarted) {
             new TedPermission(getActivity())
@@ -139,13 +170,6 @@ public class ProfilFragment extends Fragment {
         }
     }
 
-    @OnCheckedChanged(R.id.available_for_vaccum)
-    void onChecked(boolean b) {
-        if (b)
-            Prefs.putAvailableForVaccum(getActivity(), 1);
-        else
-            Prefs.putAvailableForVaccum(getActivity(), 0);
-    }
 
     @OnClick(R.id.change_saldo)
     public void changeSaldo() {
@@ -155,6 +179,7 @@ public class ProfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getInstance().setConnectivityListener(this);
 
         dialogProgress = new ProgressDialogBuilder(getActivity());
         if (getArguments() != null) {
@@ -168,11 +193,138 @@ public class ProfilFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profil, container, false);
         ButterKnife.bind(this, view);
+
         if (Prefs.getAvailableForJob(getActivity())) {
             mIsServiceStarted = true;
-            setCheckedButtonStatus();
         }
+        setCheckedButtonStatus();
+
+        mChart.setOnChartValueSelectedListener(this);
+
+        // no description text
+        mChart.getDescription().setEnabled(false);
+
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        mChart.setDragDecelerationFrictionCoef(0.9f);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setDrawGridBackground(false);
+        mChart.setHighlightPerDragEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(true);
+
+        // set an alternative background color
+        mChart.setBackgroundColor(Color.LTGRAY);
+
+        // add data
+        setData(7, 30);
+
+        mChart.animateX(2500);
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+
+        // modify the legend ...
+        l.setForm(Legend.LegendForm.LINE);
+        l.setTextSize(11f);
+        l.setTextColor(Color.WHITE);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+//        l.setYOffset(11f);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f); // only intervals of 1 day
+        xAxis.setLabelCount(7);
+
+
         return view;
+    }
+
+    private void setData(int count, float range) {
+
+        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+        for (int i = 0; i < count; i++) {
+            float mult = range / 2f;
+            float val = (float) (Math.random() * mult) + 50;
+            yVals1.add(new Entry(i, val));
+        }
+
+        LineDataSet set1;
+
+        if (mChart.getData() != null &&
+                mChart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+            set1.setValues(yVals1);
+            mChart.getData().notifyDataChanged();
+            mChart.notifyDataSetChanged();
+        } else {
+            // create a dataset and give it a type
+            set1 = new LineDataSet(yVals1, "Pendapatan");
+
+            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+            set1.setColor(ColorTemplate.getHoloBlue());
+            set1.setCircleColor(Color.WHITE);
+            set1.setLineWidth(2f);
+            set1.setCircleRadius(3f);
+            set1.setFillAlpha(65);
+            set1.setFillColor(ColorTemplate.getHoloBlue());
+            set1.setHighLightColor(Color.rgb(244, 117, 117));
+            set1.setDrawCircleHole(false);
+            //set1.setFillFormatter(new MyFillFormatter(0f));
+            //set1.setDrawHorizontalHighlightIndicator(false);
+            //set1.setVisible(false);
+            //set1.setCircleHoleColor(Color.WHITE);
+
+            // create a data object with the datasets
+            LineData data = new LineData(set1);
+            data.setValueTextColor(Color.WHITE);
+            data.setValueTextSize(9f);
+
+            // set data
+            mChart.setData(data);
+        }
+
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+                try{
+                    //do your code here
+                    CheckConnection(ConnectivityReceiver.isConnected(getActivity()), ConnectivityReceiver.isConnectedFast(getActivity()));
+                }
+                catch (Exception e) {
+                    // TODO: handle exception
+                }
+                finally{
+                    //also call the same runnable to call it at regular interval
+                    handler.postDelayed(this, 1000 *30);
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+        Log.i("Entry selected", e.toString());
+
+        mChart.centerViewToAnimated(e.getX(), e.getY(), mChart.getData().getDataSetByIndex(h.getDataSetIndex())
+                .getAxisDependency(), 500);
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 
     public void onButtonPressed() {
@@ -205,8 +357,7 @@ public class ProfilFragment extends Fragment {
             OnGoingLocationNotification(getActivity());
             Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
             getActivity().startService(bindIntent);
-            TastyToast.makeText(getActivity(), "Now, you are available for job", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-
+            TastyToast.makeText(getActivity(), getResources().getString(R.string.ready_job), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
         }
     }
 
@@ -218,7 +369,7 @@ public class ProfilFragment extends Fragment {
             cancelNotification(getActivity(), notifID);
             Intent bindIntent = new Intent(getActivity(), LocationUpdateService.class);
             getActivity().stopService(bindIntent);
-            TastyToast.makeText(getActivity(), "Now, you are not available for job", TastyToast.LENGTH_SHORT, TastyToast.WARNING);
+            TastyToast.makeText(getActivity(), getResources().getString(R.string.not_ready_job), TastyToast.LENGTH_SHORT, TastyToast.WARNING);
 
         }
     }
@@ -226,14 +377,18 @@ public class ProfilFragment extends Fragment {
 
     public void setCheckedButtonStatus() {
         if (mIsServiceStarted) {
-            availableForJob.setChecked(true);
-            availableForVaccum.setEnabled(true);
+            availableForJob.setIconEnabled(true, true);
+            descAvailableForJob.setText(getResources().getString(R.string.ready_job));
+            statusConnection.setVisibility(View.VISIBLE);
+            descAvailableForJob.setTextColor(ContextCompat.getColor(getActivity(), R.color.green_4CAF50));
+
         } else {
-            availableForJob.setChecked(false);
-            availableForVaccum.setChecked(false);
-            availableForVaccum.setEnabled(false);
-            Prefs.putAvailableForVaccum(getActivity(), 0);
+            availableForJob.setIconEnabled(false, true);
+            descAvailableForJob.setText(getResources().getString(R.string.not_ready_job));
+            statusConnection.setVisibility(View.GONE);
+            descAvailableForJob.setTextColor(ContextCompat.getColor(getActivity(), R.color.textColorSecondary));
         }
+        CheckConnection(ConnectivityReceiver.isConnected(getActivity()), ConnectivityReceiver.isConnectedFast(getActivity()));
     }
 
 
@@ -278,6 +433,37 @@ public class ProfilFragment extends Fragment {
     private void cancelNotification(Context mContext, int mnotinotifId) {
         NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.cancel(mnotinotifId);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected, boolean isSlow) {
+       CheckConnection(isConnected,isSlow);
+
+    }
+
+    private void CheckConnection(boolean isConnected, boolean isFastConnection) {
+        statusConnection.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        if(isConnected) {
+            if(isFastConnection) {
+                LinearLayout viewComplete = (LinearLayout) inflater.inflate(R.layout.connection_success, null, false);
+                statusConnection.addView(viewComplete);
+                RobotoLightTextView message_complete = (RobotoLightTextView) viewComplete.findViewById(R.id.message);
+                message_complete.setText("Connected !!");
+            }
+            else {
+                LinearLayout viewSlow = (LinearLayout) inflater.inflate(R.layout.connection_slow, null, false);
+                statusConnection.addView(viewSlow);
+                RobotoLightTextView message_slow = (RobotoLightTextView)viewSlow.findViewById(R.id.message);
+                message_slow.setText("Your Connection is Slowly !!");
+            }
+        }
+        else {
+            LinearLayout viewError = (LinearLayout) inflater.inflate(R.layout.connection_error, null, false);
+            statusConnection.addView(viewError);
+            RobotoLightTextView message_error = (RobotoLightTextView)viewError.findViewById(R.id.message);
+            message_error.setText("Not Connected. Check Your Internet !!");
+        }
     }
 
     public interface OnProfilFragmentInteractionListener {

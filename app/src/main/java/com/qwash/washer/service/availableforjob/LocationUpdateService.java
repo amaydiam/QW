@@ -119,8 +119,6 @@ public class LocationUpdateService extends Service implements
             params.put(Sample.USER_ID, Prefs.getUserId(this));
             params.put(Sample.LAT, String.valueOf(mCurrentLocation.getLatitude()));
             params.put(Sample.LONG, String.valueOf(mCurrentLocation.getLongitude()));
-            params.put(Sample.VACCUM, String.valueOf(Prefs.getAvailableForVaccum(this)));
-
 
             AvailableForJobService mService = ApiUtils.AvailableForJobService(this);
             (count == 1 ? mService.getWasherOnLink(params) : mService.getWasherOnUpdateLink(params)).enqueue(new Callback<AvailableForJob>() {

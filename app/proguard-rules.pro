@@ -17,4 +17,8 @@
 #}
 
 
-
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-dontwarn retrofit2.**
+-keep class com.wang.avi.** { *; }
+-keep class com.wang.avi.indicators.** { *; }

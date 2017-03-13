@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpaper_car_wash"
     tools:context=".ui.activity.LoginUserActivity">
-
-    <include layout="@layout/toolbar" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -26,100 +25,115 @@
                 android:layout_margin="@dimen/activity_vertical_margin"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/activity_vertical_margin"
                     android:layout_marginTop="25dp"
-                    android:gravity="center_horizontal">
+                    android:src="@drawable/logowasher" />
 
-                    <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:src="@drawable/logo" />
-
-                </LinearLayout>
-
-
-                <com.qwash.washer.ui.widget.RobotoBoldTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/sign_in_washer"
-                    android:textColor="@color/black_424242" />
-
-                <RelativeLayout
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="@string/tagline"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-                    <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:background="@color/sembilah_puluh_persen_white"
+                    android:orientation="vertical">
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_halft_vertical_margin"
-                        android:layout_toLeftOf="@+id/right"
-                        android:background="@color/white"
-                        android:orientation="vertical">
+                        android:background="@null"
+                        android:hint="@string/email"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
 
-                        <com.qwash.washer.ui.widget.RobotoRegularEditText
-                            android:id="@+id/email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:hint="@string/email"
-                            android:inputType="textEmailAddress"
-                            android:maxLines="1"
-                            android:padding="10dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#ccc" />
+                    <com.txusballesteros.PasswordEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp"
+                        app:drawableTintCompat="?attr/colorAccent"
+                        app:hideDrawable="@drawable/ic_password_hidden_24dp"
+                        app:showDrawable="@drawable/ic_password_visible_24dp" />
+                </LinearLayout>
 
-                        <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                            android:id="@+id/password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:hint="@string/password"
-                            android:imeOptions="actionGo"
-                            android:inputType="textPassword"
-                            android:maxLength="10"
-                            android:maxLines="1"
-                            android:padding="10dp" />
-                    </LinearLayout>
-
-                </RelativeLayout>
 
                 <com.qwash.washer.ui.widget.RobotoRegularButton
                     android:id="@+id/btn_login"
                     style="@style/btn_blue"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/btn_height"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/button_login" />
 
-                <TextView
-                    android:id="@+id/btn_forgot_password"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:text="@string/forgot_password"
-                    android:textColor="@color/blue_2196F3" />
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                <TextView
-                    android:id="@+id/register"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:text="@string/dont_have_an_account"
-                    android:textColor="@color/black_424242" />
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:textSize="14sp"
+                        android:id="@+id/register"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dont_have_an_account"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
+                        android:shadowColor="@color/text_shadow" />
+
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:layout_weight="1"
+                        android:id="@+id/btn_forgot_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/forgot_password"
+                        android:gravity="right"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
+                        android:shadowColor="@color/text_shadow"/>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

@@ -2,12 +2,14 @@
 <resources>
     <color name="colorPrimary">@color/blue_2196F3</color>
     <color name="colorPrimaryDark">@color/blue_1E87DA</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF5722</color>
     <color name="white">#ffffff</color>
     <color name="blue_1E87DA">#1E87DA</color>
     <color name="blue_2196F3">#2196F3</color>
     <color name="black_424242">#424242</color>
-    <color name="background">#fafafa</color>
+    <color name="background">#EEEEEE</color>
+
+
 
     <color name="black_transparant_25">#40000000</color>
     <color name="orange">#FFC107</color>
@@ -20,4 +22,34 @@
     <color name="green_light">#99CC00</color>[
     <color name="orange_light">#FFBB33</color>
     <color name="red_light">#FF4444</color>
+    <color name="green_cc09891b">#cc09891b</color>
+    <color name="orange_F8C01C">#F8C01C</color>
+
+
+    <color name="mc_title_bar">#FF16C2DD</color>
+    <color name="mc_state_pressed">#FF1088DD</color>
+    <color name="mc_default_pager">#FFF0F0F0</color>
+    <color name="mc_black_t">#55000000</color>
+    <color name="mc_black_t_pic">#22000000</color>
+    <color name="mc_gallery_bg">#FF16C2DD</color>
+
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorHint">#9A9A9A</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textColorPrimaryInverse">#FFFFFF</color>
+    <color name="textColorSecondaryInverse">#C6E4FC</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="text_shadow">#7F000000</color>
+    <color name="sembilah_puluh_persen_white">#E6ffffff</color>
+
+    <color name="disabled">#b7b7b7</color>
+
+    <color name="rate_5">#5DCC4E</color>
+    <color name="rate_4">#ABD846</color>
+    <color name="rate_3">#E0D541</color>
+    <color name="rate_2">#E8993A</color>
+    <color name="rate_1">#F05233</color>
+
+
 </resources>

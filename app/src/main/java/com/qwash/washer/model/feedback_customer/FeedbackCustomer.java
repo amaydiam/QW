@@ -8,17 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class FeedbackCustomer implements Parcelable {
 
-    public static final Creator<FeedbackCustomer> CREATOR = new Creator<FeedbackCustomer>() {
-        @Override
-        public FeedbackCustomer createFromParcel(Parcel in) {
-            return new FeedbackCustomer(in);
-        }
-
-        @Override
-        public FeedbackCustomer[] newArray(int size) {
-            return new FeedbackCustomer[size];
-        }
-    };
     @SerializedName("id")
     @Expose
     private String id;
@@ -34,13 +23,17 @@ public class FeedbackCustomer implements Parcelable {
     @SerializedName("orders_ref")
     @Expose
     private String ordersRef;
+    @SerializedName("name")
+    @Expose
+    private String name;
 
-    public FeedbackCustomer(String id, String rate, String createAt, String comments, String ordersRef) {
+    public FeedbackCustomer(String id, String rate, String createAt, String comments, String ordersRef, String name) {
         this.id = id;
         this.rate = rate;
         this.createAt = createAt;
         this.comments = comments;
         this.ordersRef = ordersRef;
+        this.name = name;
     }
 
     protected FeedbackCustomer(Parcel in) {
@@ -49,7 +42,35 @@ public class FeedbackCustomer implements Parcelable {
         createAt = in.readString();
         comments = in.readString();
         ordersRef = in.readString();
+        name = in.readString();
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(rate);
+        dest.writeString(createAt);
+        dest.writeString(comments);
+        dest.writeString(ordersRef);
+        dest.writeString(name);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<FeedbackCustomer> CREATOR = new Creator<FeedbackCustomer>() {
+        @Override
+        public FeedbackCustomer createFromParcel(Parcel in) {
+            return new FeedbackCustomer(in);
+        }
+
+        @Override
+        public FeedbackCustomer[] newArray(int size) {
+            return new FeedbackCustomer[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -91,17 +112,12 @@ public class FeedbackCustomer implements Parcelable {
         this.ordersRef = ordersRef;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(rate);
-        parcel.writeString(createAt);
-        parcel.writeString(comments);
-        parcel.writeString(ordersRef);
+    public void setName(String name) {
+        this.name = name;
     }
+
 }

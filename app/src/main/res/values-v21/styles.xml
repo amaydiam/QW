@@ -1,6 +1,5 @@
 <resources>
 
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -8,7 +7,7 @@
     </style>
 
 
-    <style name="AppTheme.HomeActivity">
+    <style name="AppTheme.FullActivity">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

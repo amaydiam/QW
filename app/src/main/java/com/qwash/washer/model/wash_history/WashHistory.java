@@ -5,20 +5,12 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.qwash.washer.utils.Utils;
 
 public class WashHistory implements Parcelable {
 
-    public static final Creator<WashHistory> CREATOR = new Creator<WashHistory>() {
-        @Override
-        public WashHistory createFromParcel(Parcel in) {
-            return new WashHistory(in);
-        }
 
-        @Override
-        public WashHistory[] newArray(int size) {
-            return new WashHistory[size];
-        }
-    };
+
     @SerializedName("orders_id")
     @Expose
     private String ordersId;
@@ -28,9 +20,9 @@ public class WashHistory implements Parcelable {
     @SerializedName("washer_id_fk")
     @Expose
     private String washerIdFk;
-    @SerializedName("v_customers_id_fk")
+    @SerializedName("vehicles")
     @Expose
-    private String vCustomersIdFk;
+    private String vehicles;
     @SerializedName("create_at")
     @Expose
     private String createAt;
@@ -57,10 +49,13 @@ public class WashHistory implements Parcelable {
     private String price;
     @SerializedName("perfumed")
     @Expose
-    private String perfumed;
+    private Object perfumed;
     @SerializedName("vacuum")
     @Expose
     private String vacuum;
+    @SerializedName("waterless")
+    @Expose
+    private String waterless;
     @SerializedName("status")
     @Expose
     private String status;
@@ -70,64 +65,19 @@ public class WashHistory implements Parcelable {
     @SerializedName("orders_ref")
     @Expose
     private String ordersRef;
-    @SerializedName("v_customers_id")
+    @SerializedName("name")
     @Expose
-    private String vCustomersId;
-    @SerializedName("v_id")
+    private String name;
+    @SerializedName("rate")
     @Expose
-    private String vId;
-    @SerializedName("v_brand_id")
-    @Expose
-    private String vBrandId;
-    @SerializedName("v_model_id")
-    @Expose
-    private String vModelId;
-    @SerializedName("v_trans_id")
-    @Expose
-    private String vTransId;
-    @SerializedName("v_years_id")
-    @Expose
-    private String vYearsId;
-    @SerializedName("user_id")
-    @Expose
-    private String userId;
-    @SerializedName("v_id_fk")
-    @Expose
-    private String vIdFk;
-    @SerializedName("v_brand")
-    @Expose
-    private String vBrand;
+    private String rate;
 
-    public WashHistory(String ordersId,
-                       String userIdFk,
-                       String washerIdFk,
-                       String vCustomersIdFk,
-                       String createAt,
-                       String pickDate,
-                       String pickTime,
-                       String lat,
-                       String lng,
-                       String nameAddress,
-                       String address,
-                       String price,
-                       String perfumed,
-                       String vacuum,
-                       String status,
-                       String description,
-                       String ordersRef,
-                       String vCustomersId,
-                       String vId,
-                       String vBrandId,
-                       String vModelId,
-                       String vTransId,
-                       String vYearsId,
-                       String userId,
-                       String vIdFk,
-                       String vBrand) {
+
+    public WashHistory(String ordersId, String userIdFk, String washerIdFk, String vehicles, String createAt, String pickDate, String pickTime, String lat, String lng, String nameAddress, String address, String price, Object perfumed, String vacuum, String waterless, String status, String description, String ordersRef, String name, String rate) {
         this.ordersId = ordersId;
         this.userIdFk = userIdFk;
         this.washerIdFk = washerIdFk;
-        this.vCustomersIdFk = vCustomersIdFk;
+        this.vehicles = vehicles;
         this.createAt = createAt;
         this.pickDate = pickDate;
         this.pickTime = pickTime;
@@ -138,25 +88,19 @@ public class WashHistory implements Parcelable {
         this.price = price;
         this.perfumed = perfumed;
         this.vacuum = vacuum;
+        this.waterless = waterless;
         this.status = status;
         this.description = description;
         this.ordersRef = ordersRef;
-        this.vCustomersId = vCustomersId;
-        this.vId = vId;
-        this.vBrandId = vBrandId;
-        this.vModelId = vModelId;
-        this.vTransId = vTransId;
-        this.vYearsId = vYearsId;
-        this.userId = userId;
-        this.vIdFk = vIdFk;
-        this.vBrand = vBrand;
+        this.name = name;
+        this.rate = rate;
     }
 
     protected WashHistory(Parcel in) {
         ordersId = in.readString();
         userIdFk = in.readString();
         washerIdFk = in.readString();
-        vCustomersIdFk = in.readString();
+        vehicles = in.readString();
         createAt = in.readString();
         pickDate = in.readString();
         pickTime = in.readString();
@@ -165,56 +109,26 @@ public class WashHistory implements Parcelable {
         nameAddress = in.readString();
         address = in.readString();
         price = in.readString();
-        perfumed = in.readString();
         vacuum = in.readString();
+        waterless = in.readString();
         status = in.readString();
         description = in.readString();
         ordersRef = in.readString();
-        vCustomersId = in.readString();
-        vId = in.readString();
-        vBrandId = in.readString();
-        vModelId = in.readString();
-        vTransId = in.readString();
-        vYearsId = in.readString();
-        userId = in.readString();
-        vIdFk = in.readString();
-        vBrand = in.readString();
+        name = in.readString();
+        rate = in.readString();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(ordersId);
-        dest.writeString(userIdFk);
-        dest.writeString(washerIdFk);
-        dest.writeString(vCustomersIdFk);
-        dest.writeString(createAt);
-        dest.writeString(pickDate);
-        dest.writeString(pickTime);
-        dest.writeString(lat);
-        dest.writeString(lng);
-        dest.writeString(nameAddress);
-        dest.writeString(address);
-        dest.writeString(price);
-        dest.writeString(perfumed);
-        dest.writeString(vacuum);
-        dest.writeString(status);
-        dest.writeString(description);
-        dest.writeString(ordersRef);
-        dest.writeString(vCustomersId);
-        dest.writeString(vId);
-        dest.writeString(vBrandId);
-        dest.writeString(vModelId);
-        dest.writeString(vTransId);
-        dest.writeString(vYearsId);
-        dest.writeString(userId);
-        dest.writeString(vIdFk);
-        dest.writeString(vBrand);
-    }
+    public static final Creator<WashHistory> CREATOR = new Creator<WashHistory>() {
+        @Override
+        public WashHistory createFromParcel(Parcel in) {
+            return new WashHistory(in);
+        }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+        @Override
+        public WashHistory[] newArray(int size) {
+            return new WashHistory[size];
+        }
+    };
 
     public String getOrdersId() {
         return ordersId;
@@ -240,12 +154,12 @@ public class WashHistory implements Parcelable {
         this.washerIdFk = washerIdFk;
     }
 
-    public String getVCustomersIdFk() {
-        return vCustomersIdFk;
+    public String getVehicles() {
+        return vehicles;
     }
 
-    public void setVCustomersIdFk(String vCustomersIdFk) {
-        this.vCustomersIdFk = vCustomersIdFk;
+    public void setVehicles(String vehicles) {
+        this.vehicles = vehicles;
     }
 
     public String getCreateAt() {
@@ -308,15 +222,19 @@ public class WashHistory implements Parcelable {
         return price;
     }
 
+    public String getPriceOnRupiah() {
+        return Utils.Rupiah(price);
+    }
+
     public void setPrice(String price) {
         this.price = price;
     }
 
-    public String getPerfumed() {
+    public Object getPerfumed() {
         return perfumed;
     }
 
-    public void setPerfumed(String perfumed) {
+    public void setPerfumed(Object perfumed) {
         this.perfumed = perfumed;
     }
 
@@ -326,6 +244,14 @@ public class WashHistory implements Parcelable {
 
     public void setVacuum(String vacuum) {
         this.vacuum = vacuum;
+    }
+
+    public String getWaterless() {
+        return waterless;
+    }
+
+    public void setWaterless(String waterless) {
+        this.waterless = waterless;
     }
 
     public String getStatus() {
@@ -352,76 +278,47 @@ public class WashHistory implements Parcelable {
         this.ordersRef = ordersRef;
     }
 
-    public String getVCustomersId() {
-        return vCustomersId;
+    public String getName() {
+        return name;
     }
 
-    public void setVCustomersId(String vCustomersId) {
-        this.vCustomersId = vCustomersId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getVId() {
-        return vId;
+    public String getRate() {
+        return rate;
     }
 
-    public void setVId(String vId) {
-        this.vId = vId;
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
-    public String getVBrandId() {
-        return vBrandId;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setVBrandId(String vBrandId) {
-        this.vBrandId = vBrandId;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(ordersId);
+        parcel.writeString(userIdFk);
+        parcel.writeString(washerIdFk);
+        parcel.writeString(vehicles);
+        parcel.writeString(createAt);
+        parcel.writeString(pickDate);
+        parcel.writeString(pickTime);
+        parcel.writeString(lat);
+        parcel.writeString(lng);
+        parcel.writeString(nameAddress);
+        parcel.writeString(address);
+        parcel.writeString(price);
+        parcel.writeString(vacuum);
+        parcel.writeString(waterless);
+        parcel.writeString(status);
+        parcel.writeString(description);
+        parcel.writeString(ordersRef);
+        parcel.writeString(name);
+        parcel.writeString(rate);
     }
-
-    public String getVModelId() {
-        return vModelId;
-    }
-
-    public void setVModelId(String vModelId) {
-        this.vModelId = vModelId;
-    }
-
-    public String getVTransId() {
-        return vTransId;
-    }
-
-    public void setVTransId(String vTransId) {
-        this.vTransId = vTransId;
-    }
-
-    public String getVYearsId() {
-        return vYearsId;
-    }
-
-    public void setVYearsId(String vYearsId) {
-        this.vYearsId = vYearsId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getVIdFk() {
-        return vIdFk;
-    }
-
-    public void setVIdFk(String vIdFk) {
-        this.vIdFk = vIdFk;
-    }
-
-    public String getVBrand() {
-        return vBrand;
-    }
-
-    public void setVBrand(String vBrand) {
-        this.vBrand = vBrand;
-    }
-
 }

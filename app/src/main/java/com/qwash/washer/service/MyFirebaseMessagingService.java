@@ -32,17 +32,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
 
-        if (remoteMessage.getData().size() > 0) {
+        if (remoteMessage.getData().size() > 0 && Prefs.isLogedIn(this)) {
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData());
                 int action = json.getInt(Sample.ACTION);
-                if (action == Sample.ACTION_ORDER) {
+                if (action == Sample.ACTION_ORDER && Prefs.isLogedIn(this) && Prefs.getAvailableForJob(this) && Prefs.getProgresWorking(this) == Sample.CODE_NO_ORDER) {
                     String order = json.getString(Sample.ORDER);
                     sendNotification(order);
-                } else if (action == Sample.ACTION_CANCEL_ORDER) {
+                } else if (action == Sample.ACTION_CANCEL_ORDER && Prefs.isLogedIn(this) && Prefs.getAvailableForJob(this) && Prefs.getAvailableForJob(this)) {
                     Prefs.putProgresWorking(this, Sample.CODE_NO_ORDER);
                     EventBus.getDefault().post(new MessageFireBase(remoteMessage.getData()));
-                } else if (action == Sample.ACTION_OPEN_FEED_ORDER) {
+                } else if (action == Sample.ACTION_OPEN_FEED_ORDER && Prefs.isLogedIn(this)) {
                     Bundle args = new Bundle();
                     args.putInt(Sample.ACTION, Sample.ACTION_OPEN_FEED_ORDER);
                     Intent intent = new Intent(this, HomeActivity.class);

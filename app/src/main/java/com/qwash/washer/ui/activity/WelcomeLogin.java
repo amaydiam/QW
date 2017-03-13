@@ -39,7 +39,9 @@ public class WelcomeLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (Prefs.isLogedIn(this)) {
-            if (Prefs.getOrdered(this) != null && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER) {
+            if (Prefs.getOrdered(this) != null
+                    && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
+                    && Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER) {
                 ProgressOrderedrActiivity();
             } else
                 toHomeActivity();

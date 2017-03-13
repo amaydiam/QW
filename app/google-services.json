@@ -1,31 +1,48 @@
 {
   "project_info": {
-    "project_number": "1004282077529",
-    "firebase_url": "https://academic-notch-124623.firebaseio.com",
-    "project_id": "academic-notch-124623",
-    "storage_bucket": "academic-notch-124623.appspot.com"
+    "project_number": "937408409681",
+    "firebase_url": "https://qwfirebaseproject.firebaseio.com",
+    "project_id": "qwfirebaseproject",
+    "storage_bucket": "qwfirebaseproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1004282077529:android:269156c93dd5b50d",
+        "mobilesdk_app_id": "1:937408409681:android:269156c93dd5b50d",
         "android_client_info": {
           "package_name": "com.qwash.washer"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "1004282077529-afhm2n7hvcqqut9ah31ollf9snqfrjrp.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "1004282077529-lmkpimgc8gosnu1ua9euofptqde84de8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAP74yaYxk6K5DhWvY2_ke7Cg9ddCfn0W0"
+          "current_key": "AIzaSyC-oNG046oFDRGA2KgFmNqGHT6Qv1ut5Xo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937408409681:android:dff5c84e34f3af23",
+        "android_client_info": {
+          "package_name": "com.qwash.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-oNG046oFDRGA2KgFmNqGHT6Qv1ut5Xo"
         }
       ],
       "services": {

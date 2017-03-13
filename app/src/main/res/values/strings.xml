@@ -23,21 +23,49 @@
     <string name="office_address">Ruko Parakan Kavling 8E, Jl. Parakan, Pd. Benda, Pamulang, Kota Tangerang Selatan, Banten, 15417</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="no_telp">87778899430</string>
+    <string name="country_code">Country Code</string>
+    <string name="hint_number">877-7889-9430</string>
     <string name="city">City</string>
     <string name="button_continue">CONTINUE</string>
     <string name="title_activity_topup">Top Up</string>
     <string name="val_email_length">Email must be at least 5 chars and 100 chars length</string>
     <string name="val_password_length">Password must be at least 4 chars and 10 chars length</string>
-    <string name="val_first_length">Isi nama depan anda</string>
-    <string name="val_last_length">Isi nama belakang anda</string>
-    <string name="val_telp_length">Isi nomor telpon anda</string>
-    <string name="val_city_length">Isi kota anda</string>
+    <string name="val_full_name">Fill your name</string>
+    <string name="val_last_length">Fill your last name</string>
+    <string name="val_telp_length">Fill your phone number</string>
+    <string name="val_province_length">Complete your province</string>
+    <string name="val_city_length">Complete your city</string>
 
     <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
     <string name="try_again">Try Again?</string>
     <string name="type_search">search ..</string>
+    <string name="full_name">Full Name</string>
+    <string name="ktp">Identity Card Number (KTP)</string>
+    <string name="birthday">Date of Birthday</string>
+    <string name="province">Province</string>
+    <string name="text_gender">You are a</string>
+    <string name="tagline">WE CLEAN YOUR VEHICLE ANYWHERE ANYTIME</string>
+    <string name="new_account">NEW ACCOUNT</string>
+    <string name="button_create_new_account">Create New Account</string>
+    <string name="des_new_account">Create your account to use Q-Wash</string>
+    <string name="val_ktp_length">Identity Card Number (KTP) must 16 chars length</string>
+    <string name="not_ready_job">I am not Ready</string>
+    <string name="ready_vaccum">I have a vaccum</string>
+    <string name="ready_job">I am Ready</string>
+    <string name="not_ready_vaccum">I don\'t have a vaccum</string>
+    <string name="total_price">Total Price</string>
+    <string name="rd_exterior_wash">Exterior Wash</string>
+    <string name="rd_tires_shine">Tires Shine</string>
+    <string name="rd_fullbody_wash">Full Body</string>
+    <string name="rd_perfumed">Perfurmed</string>
+    <string name="rd_interior_vaccum">Interior Vaccum</string>
+    <string name="note_waterless">*Waterless only for cars dusty, but not muddy.</string>
+    <string name="rd_waterless">Waterless</string>
+    <string name="desc_check">Show your equipment to customer.</string>
+    <string name="des_photo">Photo condition of demaged vehichle parts.</string>
+    <string name="des_kunci">Don\'t receive the car key of customer.</string>
+    <string name="des_equipment">Check out tthe entire customer valuables in the car.</string>
 
 
 </resources>

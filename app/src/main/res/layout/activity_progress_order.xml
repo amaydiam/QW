@@ -1,402 +1,600 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#eee">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue_2196F3"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin">
-
-            <include layout="@layout/layout_selected_vehicle" />
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_gravity="top|center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/gbr1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_date_range_black_24px" />
-
-                    <TextView
-                        android:id="@+id/des_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/gbr1"
-                        android:text="Today"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/gbr2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_access_time_black_24px" />
-
-                    <TextView
-                        android:id="@+id/des_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/gbr2"
-                        android:text="18:20 WIB"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Harga Total:"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/estimated_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp. 50.000"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/additional_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#fff">
-
-
-            <LinearLayout
-                android:id="@+id/label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="ADDITIONAL SELECT"
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="#ccc" />
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/layout_perfumed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/label"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:id="@+id/gbr3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/perfumed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/gbr3"
-                    android:text="Perfumed"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_interior_vaccum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/label"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:id="@+id/gbr4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/interior_vaccum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/gbr4"
-                    android:text="Interior Vacuum"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="#fff"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/label"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin">
-
-                <ImageView
-                    android:id="@+id/gbr5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_location_on_black_24px" />
-
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@+id/batas"
-                    android:layout_toRightOf="@id/gbr5"
-                    android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402"
-                    android:textSize="16sp" />
-
-                <View
-                    android:id="@+id/batas"
-                    android:layout_width="0.5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/address"
-                    android:layout_alignTop="@+id/address"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_toLeftOf="@+id/layout_navigation"
-                    android:background="@color/black_777777" />
-
-                <LinearLayout
-                    android:id="@+id/layout_navigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/btn_navigation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/places_ic_clear" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="NAVIGATION" />
-                </LinearLayout>
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="#fff"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/label"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin">
-
-                <agency.tango.android.avatarview.views.AvatarView
-                    android:id="@+id/customer_photo"
-                    android:layout_width="@dimen/image_customer_size"
-                    android:layout_height="@dimen/image_customer_size"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_location_on_black_24px"
-                    app:av_border_color="@android:color/white"
-                    app:av_border_width="4dp"
-                    app:av_text_size_percentage="35" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/layout_sms"
-                    android:layout_toRightOf="@id/customer_photo"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/customer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="customer_name"
-                        android:textSize="16sp" />
-
-
-                    <TextView
-                        android:id="@+id/customer_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="customer_phone"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_sms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:layout_toLeftOf="@+id/layout_call"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/btn_sms"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/places_ic_clear" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SMS" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/btn_call"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/places_ic_clear" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CALL" />
-                </LinearLayout>
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@color/blue_2196F3"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_deacline"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border_red"
-                    android:text="DEACLINE"
-                    android:textColor="#F44336" />
+                <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                    android:id="@+id/fitur_service_motor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_accept"
-                    android:layout_width="0dp"
+                    <net.soulwolf.widget.materialradio.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        app:mcAnimator="true"
+                        app:mcButton="@drawable/radio_button_fullbody_wash_selector"
+                        app:mcChecked="true"
+                        app:mcPadding="5dp"
+                        app:mcText="@string/rd_fullbody_wash"
+                        app:mcTextColor="@drawable/radio_button_order_text_selector"
+                        app:mcTextSize="6sp" />
+                </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+                <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                    android:id="@+id/fitur_service_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <net.soulwolf.widget.materialradio.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:clickable="false"
+                        app:mcAnimator="true"
+                        app:mcButton="@drawable/radio_button_exterior_wash_selector"
+                        app:mcChecked="true"
+                        app:mcPadding="5dp"
+                        app:mcText="@string/rd_exterior_wash"
+                        app:mcTextColor="@drawable/radio_button_order_text_selector"
+                        app:mcTextSize="6sp" />
+                </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+
+                <ImageView
+                    android:id="@+id/vehicle_image"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/border_green"
-                    android:text="ACCEPT"
-                    android:textColor="#4CAF50" />
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/big_citycar" />
+
+                <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <net.soulwolf.widget.materialradio.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:mcAnimator="true"
+                        app:mcButton="@drawable/radio_button_tires_shine_selector"
+                        app:mcChecked="true"
+                        app:mcPadding="5dp"
+                        app:mcText="@string/rd_tires_shine"
+                        app:mcTextColor="@drawable/radio_button_order_text_selector"
+                        app:mcTextSize="6sp" />
+
+                </net.soulwolf.widget.materialradio.MaterialRadioGroup>
             </LinearLayout>
-        </RelativeLayout>
 
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/total_price"
+                            android:textSize="14sp" />
+
+                        <com.qwash.washer.ui.widget.RobotoBoldTextView
+                            android:id="@+id/estimated_price"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="Rp. 50.000"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/additional_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                            android:id="@+id/rg_perfumed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <net.soulwolf.widget.materialradio.MaterialRadioButton
+                                android:id="@+id/rd_perfumed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:mcChecked="true"
+                                app:mcAnimator="true"
+                                app:mcButton="@drawable/radio_button_perfumed_selector"
+                                app:mcPadding="5dp"
+                                app:mcText="@string/rd_perfumed"
+                                app:mcTextColor="@drawable/radio_button_text_selector"
+                                app:mcTextSize="6sp" />
+
+
+                        </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                            android:id="@+id/rg_interior_vaccum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <net.soulwolf.widget.materialradio.MaterialRadioButton
+                                android:id="@+id/rd_interior_vaccum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:mcChecked="true"
+                                app:mcAnimator="true"
+                                app:mcButton="@drawable/radio_button_interior_vaccum_selector"
+                                app:mcPadding="5dp"
+                                app:mcText="@string/rd_interior_vaccum"
+                                app:mcTextColor="@drawable/radio_button_text_selector"
+                                app:mcTextSize="6sp" />
+
+                        </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <net.soulwolf.widget.materialradio.MaterialRadioGroup
+                            android:id="@+id/rg_waterless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <net.soulwolf.widget.materialradio.MaterialRadioButton
+                                android:id="@+id/rd_waterless"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:mcChecked="true"
+                                app:mcAnimator="true"
+                                app:mcButton="@drawable/radio_button_waterless_selector"
+                                app:mcPadding="5dp"
+                                app:mcText="@string/rd_waterless"
+                                app:mcTextColor="@drawable/radio_button_text_selector"
+                                app:mcTextSize="6sp" />
+
+                        </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/label"
+                        android:layout_margin="@dimen/activity_half_vertical_margin">
+
+                        <ImageView
+                            android:id="@+id/gbr5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_location_on_black_24px" />
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_toLeftOf="@+id/batas"
+                            android:layout_toRightOf="@id/gbr5"
+                            android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:id="@+id/batas"
+                            android:layout_width="0.5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/address"
+                            android:layout_alignTop="@+id/address"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_toLeftOf="@+id/layout_navigation"
+                            android:background="@color/divider" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_navigation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/btn_navigation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/places_ic_clear" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="NAVIGATION"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/label"
+                        android:layout_margin="@dimen/activity_half_vertical_margin">
+
+                        <agency.tango.android.avatarview.views.AvatarView
+                            android:id="@+id/customer_photo"
+                            android:layout_width="@dimen/image_customer_size"
+                            android:layout_height="@dimen/image_customer_size"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_location_on_black_24px"
+                            app:av_border_color="@android:color/white"
+                            app:av_border_width="4dp"
+                            app:av_text_size_percentage="35"
+                            android:layout_alignBottom="@+id/layout_sms"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/customer_photo"
+                            android:layout_toLeftOf="@+id/layout_sms"
+                            android:orientation="vertical">
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:id="@+id/customer_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="customer_name"
+                                android:textSize="14sp" />
+
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:id="@+id/customer_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="customer_phone"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_sms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:layout_toLeftOf="@+id/layout_call"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/btn_sms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/places_ic_clear" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SMS"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_call"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/btn_call"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/places_ic_clear" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CALL"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/kunci"/>
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/des_kunci"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/equipment"/>
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/des_equipment"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/photo"/>
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/des_photo"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/check"/>
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/desc_check"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
+                        android:orientation="horizontal">
+
+                        <com.qwash.washer.ui.widget.RobotoRegularButton
+                            android:id="@+id/btn_deacline"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/btn_height"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_red"
+                            android:text="DEACLINE"
+                            android:textColor="#F44336" />
+
+                        <com.qwash.washer.ui.widget.RobotoRegularButton
+                            android:id="@+id/btn_accept"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/btn_height"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_green"
+                            android:text="ACCEPT"
+                            android:textColor="#4CAF50" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.qwash.washer.ui.widget.RobotoRegularTextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:shadowColor="@color/text_shadow"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="8"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+</RelativeLayout>

@@ -2,8 +2,9 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_2196F3"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@drawable/wallpaper_car_wash"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,17 +31,18 @@
 
             <com.qwash.washer.ui.widget.RobotoRegularButton
                 android:id="@+id/sign_in_washer"
+                style="@style/btn_accent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/btn_height"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@drawable/border_white"
-                android:text="@string/button_login"
-                android:textColor="@color/white" />
+                android:text="@string/button_login"/>
 
-            <TextView
+
+            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                android:textSize="14sp"
                 android:id="@+id/create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +51,8 @@
                 android:text="Create Account\nI'm new washers"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                 />
+
 
         </RelativeLayout>
 

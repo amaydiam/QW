@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <com.qwash.washer.ui.widget.RobotoRegularTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="title"
+            android:textColor="@color/blue_2196F3"
+            android:textSize="18sp" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            style="@style/AVLoadingIndicatorView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+            app:indicatorColor="@color/blue_2196F3"
+            app:indicatorName="BallPulseIndicator" />
+
+        <com.qwash.washer.ui.widget.RobotoRegularTextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="message"
+            android:textColor="@color/blue_2196F3"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -16,6 +16,6 @@ import retrofit2.http.POST;
 
 public interface RegisterService {
     @FormUrlEncoded
-    @POST("users/addCustomer")
+    @POST("users/addWasher")
     Call<Register> getRegisterLink(@FieldMap Map<String, String> params);
 }

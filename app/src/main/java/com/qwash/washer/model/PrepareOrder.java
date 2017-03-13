@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class PrepareOrder implements Serializable {
 
+    //
     public String orders_ref;
 
     // customer order
@@ -25,28 +26,24 @@ public class PrepareOrder implements Serializable {
     public String type;
 
     //vehicle order
-    public String vCustomersId;
-    public String vName;
-    public String vBrand;
-    public String models;
-    public String vTransmission;
-    public String years;
-    public String vId;
-    public String vBrandId;
-    public String vModelId;
-    public String vTransId;
-    public String vYearsId;
-
+    public int vehicles_type;
+    public int vehicles;
 
     //order detail
     public int price;
-    public int perfumed;
-    public int interior_vaccum;
+    public int perfum_price;
+    public int perfum_status;
+
+    public int interior_vaccum_price;
+    public int interior_vaccum_status;
+
+    public int waterless_price;
+    public int waterless_status;
+
     public int estimated_price;
+
     public String pick_date;
     public String pick_time;
-    public int perfumed_status;
-    public int interior_vaccum_status;
 
 
 }

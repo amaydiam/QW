@@ -2,22 +2,17 @@ package com.qwash.washer.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
-import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -30,9 +25,13 @@ import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.register.RegisterService;
 import com.qwash.washer.model.register.Register;
+import com.qwash.washer.ui.widget.RobotoRegularButton;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.ProgressDialogBuilder;
+
+import net.soulwolf.widget.materialradio.MaterialRadioButton;
+import net.soulwolf.widget.materialradio.MaterialRadioGroup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,18 +52,28 @@ import retrofit2.Response;
 public class RegisterUserActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterUserActivity";
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     @NotEmpty
-    @Length(min = 2, max = 30, trim = true, messageResId = R.string.val_first_length)
-    @BindView(R.id.first_name)
-    RobotoRegularEditText firstName;
+    @Length(min = 2, max = 30, trim = true, messageResId = R.string.val_full_name)
+    @BindView(R.id.full_name)
+    RobotoRegularEditText fullName;
 
     @NotEmpty
-    @Length(min = 2, max = 30, trim = true, messageResId = R.string.val_last_length)
-    @BindView(R.id.last_name)
-    RobotoRegularEditText lastName;
+    @Length(min = 16, max = 16, trim = true, messageResId = R.string.val_ktp_length)
+    @BindView(R.id.ktp)
+    RobotoRegularEditText ktp;
+
+    @BindView(R.id.washer_photo)
+    AvatarView washerPhoto;
+
+    @NotEmpty
+    @Length(min = 1, max = 15, trim = true, messageResId = R.string.val_telp_length)
+    @BindView(R.id.no_telp)
+    RobotoRegularEditText noTelp;
+
+    @NotEmpty
+    @BindView(R.id.birthday)
+    RobotoRegularEditText birthday;
 
     @NotEmpty
     @Length(min = 5, max = 100, trim = true, messageResId = R.string.val_email_length)
@@ -72,26 +82,39 @@ public class RegisterUserActivity extends AppCompatActivity {
     RobotoRegularEditText email;
 
     @NotEmpty
-    @Length(min = 1, max = 15, trim = true, messageResId = R.string.val_telp_length)
-    @BindView(R.id.no_telp)
-    RobotoRegularEditText noTelp;
-
-    @NotEmpty
     @Length(min = 5, max = 100, trim = true, messageResId = R.string.val_password_length)
     @BindView(R.id.password)
     RobotoRegularEditText password;
 
     @NotEmpty
+    @Length(min = 1, max = 100, trim = true, messageResId = R.string.val_province_length)
+    @BindView(R.id.province)
+    RobotoRegularEditText province;
+
+    @NotEmpty
     @Length(min = 1, max = 100, trim = true, messageResId = R.string.val_city_length)
     @BindView(R.id.city)
     RobotoRegularEditText city;
-    @BindView(R.id.pick_code_country)
-    ImageView pickCodeCountry;
+    @BindView(R.id.gender)
+    MaterialRadioGroup gender;
+    @BindView(R.id.male)
+    MaterialRadioButton male;
+    @BindView(R.id.female)
+    MaterialRadioButton female;
+    @BindView(R.id.btn_new_account)
+    RobotoRegularButton btnContinue;
+
     private ProgressDialogBuilder dialogProgress;
     private Context context;
     private Validator validator;
 
-    @OnClick(R.id.btn_continue)
+
+    @OnClick(R.id.birthday)
+    void BirthDate() {
+
+    }
+
+    @OnClick(R.id.btn_new_account)
     void Lock() {
         validator.validate();
     }
@@ -111,19 +134,6 @@ public class RegisterUserActivity extends AppCompatActivity {
                 .with(new SimpleLineIconsModule());
         context = getApplicationContext();
         dialogProgress = new ProgressDialogBuilder(this);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(
-                new IconDrawable(this, MaterialIcons.md_arrow_back)
-                        .colorRes(R.color.black_424242)
-                        .actionBarSize());
-        toolbar.setTitleTextColor(Color.GRAY);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        getSupportActionBar().setTitle("Create Account");
 
     }
 
@@ -163,14 +173,19 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         String firebase_id = FirebaseInstanceId.getInstance().getToken();
         Map<String, String> params = new HashMap<>();
-        params.put(Sample.EMAIL, email.getText().toString());
-        params.put(Sample.NAME, firstName.getText().toString() + " " + lastName.getText().toString());
-        params.put(Sample.PASSWORD, password.getText().toString());
         params.put(Sample.AUTH_LEVEL, String.valueOf(10));
-        params.put(Sample.PHONE, noTelp.getText().toString());
-        params.put(Sample.CITY, city.getText().toString());
-
         params.put(Sample.FIREBASE_ID, firebase_id);
+
+
+        params.put(Sample.NAME, fullName.getText().toString());
+        params.put(Sample.NIK, ktp.getText().toString());
+        params.put(Sample.PHONE, noTelp.getText().toString());
+        params.put(Sample.BIRTHDATE, birthday.getText().toString());
+        params.put(Sample.GENDER, male.isSelected() ? "Male" : "Female");
+        params.put(Sample.EMAIL, email.getText().toString());
+        params.put(Sample.PASSWORD, password.getText().toString());
+        params.put(Sample.PROVINCE, province.getText().toString());
+        params.put(Sample.CITY, city.getText().toString());
 
         RegisterService mService = ApiUtils.RegisterService(this);
         mService.getRegisterLink(params).enqueue(new Callback<Register>() {

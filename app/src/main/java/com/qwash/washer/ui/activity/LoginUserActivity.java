@@ -28,6 +28,7 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
@@ -35,9 +36,10 @@ import com.qwash.washer.api.client.auth.LoginService;
 import com.qwash.washer.api.model.login.DataLogin;
 import com.qwash.washer.api.model.login.Login;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
+import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.ProgressDialogBuilder;
-import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
+import com.txusballesteros.PasswordEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,11 +54,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginUserActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     @NotEmpty
     @Length(min = 5, max = 100, trim = true, messageResId = R.string.val_email_length)
@@ -65,9 +66,29 @@ public class LoginUserActivity extends AppCompatActivity {
     RobotoRegularEditText email;
 
     @NotEmpty
-    @Length(min = 4, max = 10, trim = true, messageResId = R.string.val_password_length)
+    @Password(min = 4, messageResId = R.string.val_password_length)
     @BindView(R.id.password)
-    ShowHidePasswordEditText password;
+    PasswordEditText password;
+
+    @BindView(R.id.btn_forgot_password)
+    RobotoRegularTextView btnForgotPassword;
+    @BindView(R.id.register)
+    RobotoRegularTextView register;
+
+    @OnClick(R.id.btn_login)
+    void Login() {
+        validator.validate();
+    }
+
+    @OnClick(R.id.btn_forgot_password)
+    void ForgotPassword() {
+      //  startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+    }
+
+    @OnClick(R.id.register)
+    void Register() {
+          startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+    }
 
     private Validator validator;
     private ProgressDialogBuilder dialogProgress;
@@ -84,20 +105,7 @@ public class LoginUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_user);
         ButterKnife.bind(this);
-
         dialogProgress = new ProgressDialogBuilder(this);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(
-                new IconDrawable(this, MaterialIcons.md_arrow_back)
-                        .colorRes(R.color.black_424242)
-                        .actionBarSize());
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        getSupportActionBar().setTitle("");
         setValidator();
         password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -145,20 +153,6 @@ public class LoginUserActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btn_login)
-    void Login() {
-        validator.validate();
-    }
-
-    @OnClick(R.id.btn_forgot_password)
-    void ForgotPassword() {
-        startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
-    }
-
-    @OnClick(R.id.register)
-    void Register() {
-        startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
-    }
 
 
     private void remoteLogin() {
@@ -174,7 +168,7 @@ public class LoginUserActivity extends AppCompatActivity {
         LoginService mService = ApiUtils.LoginService(this);
         mService.getLoginLink(params).enqueue(new Callback<Login>() {
             @Override
-            public void onResponse(Call<Login> call, retrofit2.Response<Login> response) {
+            public void onResponse(Call<Login> call, Response<Login> response) {
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
@@ -233,13 +227,38 @@ public class LoginUserActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-
         if (Prefs.isLogedIn(this)) {
-            toHomeActivity();
+            if (Prefs.getOrdered(this) != null
+                    && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
+                    && Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER) {
+                ProgressOrderedrActiivity();
+            } else
+                toHomeActivity();
+        } else if (Prefs.getLockMapRegister(this)) {
+            LockMapRegisterActiivity();
         }
+    }
+
+
+    private void LockMapRegisterActiivity() {
+        Intent intent = new Intent(this, LockWasherActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void ProgressOrderedrActiivity() {
+        Bundle args = new Bundle();
+        args.putString(Sample.ORDER, Prefs.getOrdered(this));
+        Intent intent = new Intent(this, ProgressOrderActivity.class);
+        intent.putExtras(args);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 }

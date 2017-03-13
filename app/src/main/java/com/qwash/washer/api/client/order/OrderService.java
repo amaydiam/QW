@@ -5,6 +5,7 @@ package com.qwash.washer.api.client.order;
  */
 
 
+import com.qwash.washer.api.model.order.DeaclineOrder;
 import com.qwash.washer.api.model.order.OrderFinish;
 import com.qwash.washer.api.model.order.OrderStartWash;
 import com.qwash.washer.api.model.order.PickOrder;
@@ -17,6 +18,12 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface OrderService {
+
+
+    @FormUrlEncoded
+    @POST("findmatch/cancelOrderWasher")
+    Call<DeaclineOrder> getDeaclineOrderLink(@FieldMap Map<String, String> params);
+
     @FormUrlEncoded
     @POST("findmatch/pickOrder")
     Call<PickOrder> getPickOrderLink(@FieldMap Map<String, String> params);

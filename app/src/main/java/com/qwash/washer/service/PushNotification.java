@@ -16,7 +16,6 @@ import okhttp3.RequestBody;
 
 public class PushNotification {
 
-
     private static OkHttpClient mClient = new OkHttpClient();
     private static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

@@ -8,19 +8,20 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="android.support.multidex.MultiDexApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.WelcomeLogin"
+            android:name=".ui.activity.LoginUserActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.FullActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,15 +29,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.LoginUserActivity"
-            android:label="@string/title_activity_register"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.activity.RegisterUserActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.FullActivity" />
         <activity
             android:name=".ui.activity.LockWasherActivity"
             android:label="@string/title_activity_lock_washer"
@@ -46,7 +42,7 @@
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.HomeActivity" />
+            android:theme="@style/AppTheme.FullActivity" />
         <activity
             android:name=".ui.activity.TopUpActivity"
             android:label="@string/title_activity_lock_washer"
@@ -87,16 +83,17 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <!-- [END firebase_iid_service] -->
-
-
-        <!-- Avilable for job
-        -->
-
         <service
             android:name=".service.availableforjob.LocationUpdateService"
             android:enabled="true"
             android:exported="false" />
+        <receiver
+            android:name=".service.ConnectivityReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

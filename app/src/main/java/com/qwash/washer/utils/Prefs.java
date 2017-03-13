@@ -128,14 +128,6 @@ public final class Prefs {
         return e.equals("true");
     }
 
-    public static void putAvailableForVaccum(final Context context, int isAvailableForVaccum) {
-        Prefs.putPref(context, Sample.VACCUM, String.valueOf(isAvailableForVaccum));
-    }
-
-    public static int getAvailableForVaccum(Context context) {
-        return Integer.parseInt(Prefs.getPref(context, Sample.VACCUM, "0"));
-    }
-
     public static void putLatitude(final Context context, double latitude) {
         Prefs.putPref(context, Sample.LATITUDE, String.valueOf(latitude));
     }

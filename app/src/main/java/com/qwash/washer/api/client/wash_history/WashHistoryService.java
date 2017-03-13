@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface WashHistoryService {
-    @GET("washer/getHistoryJobs/{type}/{washer_id}/{page}/{limit}")
-    Call<WashHistoryListResponse> getListWashHistory(@Path("type") int type, @Path("washer_id") String washer_id, @Path("page") int page, @Path("limit") String limit);
+    @GET("washer/getHistoryJobs/{washer_id}/{page}/{limit}")
+    Call<WashHistoryListResponse> getListWashHistory( @Path("washer_id") String washer_id, @Path("page") int page, @Path("limit") String limit);
 
 }

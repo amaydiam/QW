@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/background"
+        android:background="@color/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black_424242" />
+            android:textColor="@color/textColorPrimaryInverse" />
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

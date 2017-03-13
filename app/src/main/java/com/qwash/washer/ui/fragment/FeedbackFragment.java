@@ -107,6 +107,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     private int page = 1;
     private boolean isRefresh = false;
     private int mPreviousVisibleItem;
+
     public FeedbackFragment() {
     }
 
@@ -335,8 +336,8 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
             int jumlah_list_data = h.size();
             if (jumlah_list_data > 0) {
                 for (int i = 0; i < jumlah_list_data; i++) {
-                    FeedbackCustomer obj = h.get(i);
-                    setDataObject(position, obj);
+                    FeedbackCustomer feedbackCustomer = h.get(i);
+                    setDataObject(position, feedbackCustomer);
                 }
                 adapter.notifyDataSetChanged();
             } else {
@@ -383,38 +384,13 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
     }
 
-    private void setDataObject(String position, FeedbackCustomer obj) {
-        String id = obj.getId();
-        String rate = obj.getRate();
-        String createAt = obj.getCreateAt();
-        String comments = obj.getComments();
-        String ordersRef = obj.getOrdersRef();
-
-        //parse object
-
-        //set map object
-        AddAndSetMapData(
-                position,
-                id,
-                rate,
-                createAt,
-                comments,
-                ordersRef
-        );
-
-    }
-
-    private void AddAndSetMapData(
-            String position, String id, String rate, String createAt, String comments, String ordersRef) {
-
-        FeedbackCustomer history = new FeedbackCustomer(id, rate, createAt, comments, ordersRef);
-
-
+    private void setDataObject(String position, FeedbackCustomer feedbackCustomer) {
         if (position.equals(TAG_BOTTOM)) {
-            data.add(history);
+            data.add(feedbackCustomer);
         } else {
-            data.add(0, history);
+            data.add(0, feedbackCustomer);
         }
+
     }
 
 

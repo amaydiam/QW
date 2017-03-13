@@ -3,6 +3,9 @@ package com.qwash.washer.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
@@ -11,23 +14,26 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.joanzapata.iconify.widget.IconButton;
 import com.qwash.washer.R;
+import com.qwash.washer.Sample;
 import com.qwash.washer.model.feedback_customer.FeedbackCustomer;
-import com.qwash.washer.ui.widget.RobotoLightTextView;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.utils.TextUtils;
 
 import java.util.ArrayList;
 
+import agency.tango.android.avatarview.loader.PicassoLoader;
+import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.techery.properratingbar.ProperRatingBar;
 
-public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustomerAdapter.ViewHolder> implements View.OnTouchListener, View.OnClickListener {
+public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustomerAdapter.ViewHolder> implements  View.OnClickListener {
 
     public final ArrayList<FeedbackCustomer> data;
-    private final GestureDetector gestureDetector;
+
     private boolean isTablet = false;
     private Activity activity;
     private SparseBooleanArray mSelectedItemsIds;
@@ -40,7 +46,6 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
         this.activity = activity;
         this.data = feedbackCustomerList;
         mSelectedItemsIds = new SparseBooleanArray();
-        gestureDetector = new GestureDetector(activity, new SingleTapConfirm());
 
     }
 
@@ -48,22 +53,6 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
         this.OnFeedbackCustomerItemClickListener = onFeedbackCustomerItemClickListener;
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-
-        final int viewId = v.getId();
-        if (viewId == R.id.btn_action) {
-            if (gestureDetector.onTouchEvent(event)) {
-                if (OnFeedbackCustomerItemClickListener != null) {
-                    AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.playSoundEffect(SoundEffectConstants.CLICK);
-                    OnFeedbackCustomerItemClickListener.onActionClick(v, (Integer) v.getTag());
-                }
-            }
-        }
-
-        return false;
-    }
 
     @Override
     public void onClick(View v) {
@@ -97,18 +86,75 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
                 .inflate(R.layout.item_feedback, parent, false);
         ViewHolder holder = new ViewHolder(v);
         holder.rootParent.setOnClickListener(this);
-        holder.btnAction.setOnTouchListener(this);
         return holder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBindViewHolder(final ViewHolder holder, int position) {
         FeedbackCustomer FeedbackCustomer = data.get(position);
 
-        holder.dateFeedback.setText(FeedbackCustomer.getCreateAt());
-        holder.rating.setText(FeedbackCustomer.getRate());
-        holder.deskripsiFeedback.setText(FeedbackCustomer.getComments());
+        final int sdk = Build.VERSION.SDK_INT;
+        int rate = Integer.parseInt(FeedbackCustomer.getRate());
+        if (rate == 5) {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
 
-        holder.btnAction.setTag(position);
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
+            }
+
+        } else if (rate == 4) {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
+
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
+            }
+
+        } else if (rate == 3) {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
+
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
+            }
+
+        } else if (rate == 2) {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
+
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
+            }
+
+        } else if (rate == 1) {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
+
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
+            }
+
+        } else {
+            if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
+                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_default));
+
+            } else {
+                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_default));
+            }
+
+        }
+
+
+        holder.dateFeedback.setText(FeedbackCustomer.getCreateAt());
+
+        PicassoLoader imageLoader = new PicassoLoader();
+        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_IMAGE + "", FeedbackCustomer.getName());
+        holder.customerName.setText(FeedbackCustomer.getName());
+
+        holder.deskripsiFeedback.setText(TextUtils.isNullOrEmpty(FeedbackCustomer.getComments())?"-":FeedbackCustomer.getComments());
+        holder.rating.setRating(Integer.parseInt(FeedbackCustomer.getRate()));
+
         holder.rootParent.setTag(position);
 
     }
@@ -160,16 +206,18 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.customer_photo)
+        AvatarView customerPhoto;
         @BindView(R.id.date_feedback)
         RobotoRegularTextView dateFeedback;
+        @BindView(R.id.customer_name)
+        RobotoRegularTextView customerName;
         @BindView(R.id.deskripsi_feedback)
-        RobotoLightTextView deskripsiFeedback;
+        RobotoRegularTextView deskripsiFeedback;
         @BindView(R.id.rating)
-        RobotoRegularTextView rating;
-        @BindView(R.id.btn_action)
-        IconButton btnAction;
+        ProperRatingBar rating;
         @BindView(R.id.root_parent)
-        LinearLayout rootParent;
+        RelativeLayout rootParent;
 
         public ViewHolder(View vi) {
             super(vi);

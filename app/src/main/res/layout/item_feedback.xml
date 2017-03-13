@@ -1,96 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_half_vertical_margin"
-    android:background="@drawable/border_orange"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_margin="@dimen/activity_half_vertical_margin"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/linearLayout2"
-                android:gravity="left|center"
-                android:orientation="horizontal">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="{mdi-clock}"
-                    android:textColor="@color/blue_2196F3"
-                    android:textSize="12sp" />
-
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:id="@+id/date_feedback"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Today, 26 January 2017"
-                    android:textColor="@color/black_424242"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:gravity="left|center"
-                android:orientation="horizontal">
-
-                <com.joanzapata.iconify.widget.IconTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="{mdi-star}"
-                    android:textColor="@color/orange"
-                    android:textSize="12sp" />
-
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="3.4"
-                    android:textColor="@color/black_777777"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <com.qwash.washer.ui.widget.RobotoLightTextView
-            android:id="@+id/deskripsi_feedback"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:lines="2"
-            android:text="Lorem ipsum doler asmet, Lorem ipsum doler asmet sinuka diasdn asdn sdjasd nasndansdn sanan nnaf asn fnaafa "
-            android:textSize="14sp" />
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+            android:orientation="horizontal">
 
 
-        <com.joanzapata.iconify.widget.IconButton
-            android:id="@+id/btn_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@null"
-            android:text="{mdi-menu-down}"
-            android:textColor="@color/blue_2196F3"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <agency.tango.android.avatarview.views.AvatarView
+                    android:id="@+id/customer_photo"
+                    android:layout_width="@dimen/image_customer_size"
+                    android:layout_height="@dimen/image_customer_size"
+                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_launcher"
+                    app:av_border_color="@android:color/white"
+                    app:av_border_width="4dp"
+                    app:av_text_size_percentage="35" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/customer_photo"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:orientation="horizontal">
+
+                        <com.joanzapata.iconify.widget.IconTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="{mdi-clock}"
+                            android:textSize="12sp" />
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:id="@+id/date_feedback"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="Today, 26 January 2017"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:id="@+id/customer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="customer_name"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="14sp" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                        android:id="@+id/deskripsi_feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="deskripsi_feedback"
+                        android:textSize="14sp" />
+
+                    <io.techery.properratingbar.ProperRatingBar
+                        android:layout_gravity="right"
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:prb_clickable="false"
+                        app:prb_tickNormalDrawable="@drawable/rate_small"
+                        app:prb_tickSelectedDrawable="@drawable/rate_small_sell"
+                        app:prb_totalTicks="5" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>

@@ -281,7 +281,9 @@ public class HomeActivity extends AppCompatActivity
         EventBus.getDefault().register(this);
         if (!Prefs.isLogedIn(this)) {
             //   toHomeActivity();
-        } else if (Prefs.getOrdered(this) != null && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER) {
+        } else if (Prefs.getOrdered(this) != null
+                && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
+                && Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER) {
             //  ProgressOrderedrActiivity();
         } else {
 

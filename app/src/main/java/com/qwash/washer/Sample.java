@@ -19,7 +19,7 @@ public class Sample {
     public static final String DATA = "data";
 
 
-    public static final String SERVER_KEY_FIREBASE = "AAAA6dPgYVk:APA91bHI2HxHsoiiqS6_8pdO84jNMU-Rq_Rhg9nWAmwETLsiyn5Do8zB_MW-__aGu1keJOIS3_moL-csuAsvUYeOBcdBCZp93GJGk1JKm3VMfxQ_0AWlxrpGjqNJNojtbmjM_3UItK90";
+    public static final String SERVER_KEY_FIREBASE = "AAAA2kHlMFE:APA91bHojkPnnebXqNs8IWgL37K0HCvFJyXkipFXbTbYmigL1bsUPJIjv5P1kJDgBbWzbzR6QkxMGNMgLDzb7f_uC-BFfzhb7cEbwnov5ErnjvHSyRw0gKBtfiCqKhz55pOr0zgyld2z";
     public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
 
     public static final String message = "message";
@@ -67,27 +67,23 @@ public class Sample {
     public static final String ORDER_TYPE = "type";
 
     //vehicle order
-    public static final String ORDER_VCUSTOMERSID = "vCustomersId";
-    public static final String ORDER_VNAME = "vName";
-    public static final String ORDER_VBRAND = "vBrand";
-    public static final String ORDER_MODELS = "models";
-    public static final String ORDER_VTRANSMISSION = "vTransmission";
-    public static final String ORDER_YEARS = "years";
-    public static final String ORDER_VID = "vId";
-    public static final String ORDER_VBRANDID = "vBrandId";
-    public static final String ORDER_VMODELID = "vModelId";
-    public static final String ORDER_VTRANSID = "vTransId";
-    public static final String ORDER_VYEARSID = "vYearsId";
+    public static final String ORDER_VEHICLES_TYPE = "vehicles_type";
+    public static final String ORDER_VEHICLES = "vehicles";
 
     //order detail
     public static final String ORDER_PRICE = "price";
-    public static final String ORDER_PERFUMED = "perfumed_price";
-    public static final String ORDER_PERFUMED_STATUS = "perfumed_price";
-    public static final String ORDER_INTERIOR_VACCUM = "interior_vaccum_price";
-    public static final String ORDER_INTERIOR_VACCUM_STATUS = "perfumed_price";
+
+    public static final String ORDER_PERFUM_PRICE = "perfum_price";
+    public static final String ORDER_PERFUM_STATUS = "perfum_stattus";
+
+    public static final String ORDER_INTERIOR_VACUUM_PRICE = "interior_vacuum";
+    public static final String ORDER_INTERIOR_VACUUM_STATUS = "interior_vacuum_status";
+
+    public static final String ORDER_WATERLESS_PRICE = "waterless_price";
+    public static final String ORDER_WATERLESS_STATUS = "waterless_status";
+
     public static final String ORDER_ESTIMATED_PRICE = "estimated_price";
-    public static final String ORDER_PICK_DATE = "pick_date";
-    public static final String ORDER_PICK_TIME = "pick_time";
+
 
     //PickOrder Accept
     public static final String WASHER_PHONE = "phone";
@@ -105,10 +101,11 @@ public class Sample {
     //
 
     public static final int CODE_NO_ORDER = 1;
-    public static final int CODE_DEACLINE = 2;
-    public static final int CODE_ACCEPT = 3;
-    public static final int CODE_START = 4;
-    public static final int CODE_FINISH_WORKING = 5;
+    public static final int CODE_GET_ORDER = 2;
+    public static final int CODE_DEACLINE_ORDER = 3;
+    public static final int CODE_ACCEPT_ORDER = 4;
+    public static final int CODE_START_WORKING = 5;
+    public static final int CODE_FINISH_WORKING = 6;
 
 
     //
@@ -133,4 +130,20 @@ public class Sample {
     public static final String TYPE_WASH_HISTORY = "type_wash_history";
     public static final int WASH_HISTORY_IN_PROGRESS = 1;
     public static final int WASH_HISTORY_COMPLETE = 2;
+    public static final String NIK = "nik";
+    public static final String BIRTHDATE = "birthdate";
+    public static final String GENDER = "gender";
+    public static final String PROVINCE = "province";
+
+
+    public static final int VEHICLE_CAR = 1;
+    public static final int VEHICLE_CAR_CITY_CAR = 1;
+    public static final int VEHICLE_CAR_MINIVAN = 2;
+    public static final int VEHICLE_CAR_SUV = 3;
+
+    public static final int VEHICLE_MOTORCYCLE = 2;
+
+    public static final int VEHICLE_MOTORCYCLE_UNDER_150 = 4;
+    public static final int VEHICLE_MOTORCYCLE_150 = 5;
+    public static final int VEHICLE_MOTORCYCLE_ABOVE_150 = 6;
 }
