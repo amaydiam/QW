@@ -1,37 +1,49 @@
 package com.qwash.washer.service.availableforjob;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
 import com.qwash.washer.model.available_for_job.AvailableForJob;
+import com.qwash.washer.ui.activity.HomeActivity;
 import com.qwash.washer.utils.Prefs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.qwash.washer.Sample.ACTION_FROM_NOTIFICATION;
+import static com.qwash.washer.Sample.notifID;
 
 /**
  * Created by Grishma on 16/5/16.
@@ -41,19 +53,14 @@ public class LocationUpdateService extends Service implements
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 3 * 10000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-    protected static final String TAG = "LocationUpdateService";
     public static Boolean mRequestingLocationUpdates;
-    public static boolean isEnded = false;
-    protected String mLastUpdateTime;
+    private static LocationUpdateService service;
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
     protected Location mCurrentLocation;
     private int count = 1;
+    private NotificationManager nm;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
 
     @Nullable
     @Override
@@ -61,18 +68,21 @@ public class LocationUpdateService extends Service implements
         return null;
     }
 
-
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Prefs.putAvailableForJob(this, true);
-        isEnded = false;
+    public void onCreate() {
+        super.onCreate();
+        LocationUpdateService.service = this;
+        // Prefs.putAvailableForJob(this, true);
         mRequestingLocationUpdates = false;
-        mLastUpdateTime = "";
         buildGoogleApiClient();
         if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
             startLocationUpdates();
         }
-        return Service.START_REDELIVER_INTENT;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
     }
 
 
@@ -89,9 +99,8 @@ public class LocationUpdateService extends Service implements
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
-        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-        Prefs.putLatitude(this, mCurrentLocation.getLatitude());
-        Prefs.putLongitude(this, mCurrentLocation.getLongitude());
+        Prefs.putGeometryLat(this, mCurrentLocation.getLatitude());
+        Prefs.putGeometryLong(this, mCurrentLocation.getLongitude());
         SendToServer();
     }
 
@@ -116,12 +125,21 @@ public class LocationUpdateService extends Service implements
     private void SendToServer() {
         {
             Map<String, String> params = new HashMap<>();
-            params.put(Sample.USER_ID, Prefs.getUserId(this));
+            params.put(Sample.WASHERS_ID, Prefs.getUserId(this));
             params.put(Sample.LAT, String.valueOf(mCurrentLocation.getLatitude()));
             params.put(Sample.LONG, String.valueOf(mCurrentLocation.getLongitude()));
+            Set keys = params.keySet();
+            for (Object key1 : keys) {
+                String key = (String) key1;
+                String value = params.get(key);
+                Log.v(key + "", value);
+            }
+            Log.v("Auth", "Bearer " + Prefs.getToken(this));
+
 
             AvailableForJobService mService = ApiUtils.AvailableForJobService(this);
-            (count == 1 ? mService.getWasherOnLink(params) : mService.getWasherOnUpdateLink(params)).enqueue(new Callback<AvailableForJob>() {
+            //  (count == 1 ? mService.getWasherOnLink(params) : mService.getWasherOnUpdateLink(params)).enqueue(new Callback<AvailableForJob>() {
+            mService.getWasherOnLink("Bearer " + Prefs.getToken(this), params).enqueue(new Callback<AvailableForJob>() {
                 @Override
                 public void onResponse(Call<AvailableForJob> call, Response<AvailableForJob> response) {
                     if (response.isSuccessful()) {
@@ -177,9 +195,44 @@ public class LocationUpdateService extends Service implements
             }
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
-            isEnded = true;
+            OnGoingLocationNotification();
         }
     }
+
+
+    private void OnGoingLocationNotification() {
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSound(alarmSound)
+                        .setSmallIcon(R.drawable.ic_cast_off_light)
+                        .setContentTitle("Available for Job")
+                        .setOngoing(true).setContentText("Active");
+        mBuilder.setAutoCancel(false);
+
+        // Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, HomeActivity.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        resultIntent.setAction(ACTION_FROM_NOTIFICATION);
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        nm =
+                (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        nm.cancel(notifID);
+
+        Notification mNotification = mBuilder.build();
+        mNotification.defaults |= Notification.DEFAULT_VIBRATE;
+        mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
+
+        nm.notify(notifID, mNotification);
+
+    }
+
+
 
     /**
      * Removes location updates from the FusedLocationApi.
@@ -194,8 +247,9 @@ public class LocationUpdateService extends Service implements
     @Override
     public void onDestroy() {
         super.onDestroy();
+        nm.cancel(notifID);
         stopLocationUpdates();
-        Prefs.putAvailableForJob(this, false);
+        // Prefs.putAvailableForJob(this, false);
     }
 
 

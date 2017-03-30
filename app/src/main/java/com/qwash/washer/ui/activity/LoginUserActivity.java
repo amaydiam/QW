@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -15,12 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
-import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -33,8 +30,13 @@ import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.auth.LoginService;
-import com.qwash.washer.api.model.login.DataLogin;
 import com.qwash.washer.api.model.login.Login;
+import com.qwash.washer.api.model.washer.DataWasher;
+import com.qwash.washer.ui.activity.register.LockWasherActivity;
+import com.qwash.washer.ui.activity.register.RegisterUserActivity;
+import com.qwash.washer.ui.activity.register.VerificationCodeActivity;
+import com.qwash.washer.ui.activity.register.VerifyDocumentActivity;
+import com.qwash.washer.ui.activity.register.VerifyToolsActivity;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Prefs;
@@ -74,6 +76,7 @@ public class LoginUserActivity extends AppCompatActivity {
     RobotoRegularTextView btnForgotPassword;
     @BindView(R.id.register)
     RobotoRegularTextView register;
+    private Context context;
 
     @OnClick(R.id.btn_login)
     void Login() {
@@ -82,12 +85,12 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_forgot_password)
     void ForgotPassword() {
-      //  startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+        //  startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
     }
 
     @OnClick(R.id.register)
     void Register() {
-          startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+        startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
     }
 
     private Validator validator;
@@ -105,6 +108,7 @@ public class LoginUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_user);
         ButterKnife.bind(this);
+        context = getApplicationContext();
         dialogProgress = new ProgressDialogBuilder(this);
         setValidator();
         password.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -154,7 +158,6 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
 
-
     private void remoteLogin() {
         dialogProgress.show("LoginService ...", "Please wait...");
 
@@ -163,7 +166,6 @@ public class LoginUserActivity extends AppCompatActivity {
         params.put(Sample.EMAIL, email.getText().toString());
         params.put(Sample.PASSWORD, password.getText().toString());
         params.put(Sample.FIREBASE_ID, firebase_id);
-        params.put(Sample.AUTH_LEVEL, "5");
 
         LoginService mService = ApiUtils.LoginService(this);
         mService.getLoginLink(params).enqueue(new Callback<Login>() {
@@ -173,18 +175,28 @@ public class LoginUserActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
 
-                        DataLogin dataLogin = response.body().getDataLogin();
+                        DataWasher data = response.body().getDataWasher();
+                        Prefs.putToken(context, response.body().getToken());
 
-                        Prefs.putToken(LoginUserActivity.this, response.body().getToken());
-                        Prefs.putFirebaseId(LoginUserActivity.this, firebase_id);
-
-                        Prefs.putUserId(LoginUserActivity.this, dataLogin.getUserId());
-                        Prefs.putUsername(LoginUserActivity.this, dataLogin.getUsername());
-                        Prefs.putEmail(LoginUserActivity.this, dataLogin.getEmail());
-                        Prefs.putName(LoginUserActivity.this, dataLogin.getName());
-                        Prefs.putPhone(LoginUserActivity.this, dataLogin.getPhone());
-                        Prefs.putPhoto(LoginUserActivity.this, dataLogin.getPhoto());
-                        Prefs.putAuthLevel(LoginUserActivity.this, String.valueOf(dataLogin.getAuthLevel()));
+                        Prefs.putUserId(context, data.getUserId());
+                        Prefs.putEmail(context, data.getEmail());
+                        Prefs.putUsername(context, data.getUsername());
+                        Prefs.putType(context, data.getType());
+                        Prefs.putFullName(context, data.getFullName());
+                        Prefs.putSaldo(context, data.getSaldo());
+                        Prefs.putFirebaseId(context, data.getFirebaseId());
+                        Prefs.putGeometryLat(context, data.getGeometryLat());
+                        Prefs.putGeometryLong(context, data.getGeometryLong());
+                        Prefs.putProfileGender(context, data.getProfileGender());
+                        Prefs.putProfilePhoto(context, data.getProfilePhoto());
+                        Prefs.putProfileProvince(context, data.getProfileProvince());
+                        Prefs.putProfileCity(context, data.getProfileCity());
+                        Prefs.putProfileNik(context, data.getProfileNik());
+                        Prefs.putOnline(context, data.getOnline());
+                        Prefs.putStatus(context, data.getStatus());
+                        Prefs.putCreatedAt(context, data.getCreatedAt());
+                        Prefs.putUpdatedAt(context, data.getUpdatedAt());
+                        Prefs.putActivityIndex(context, Sample.ACTIVATION_CODE_INDEX);
 
                         toHomeActivity();
 
@@ -212,12 +224,6 @@ public class LoginUserActivity extends AppCompatActivity {
         });
     }
 
-    private void toHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
 
     void hideKeyboard() {
         View view = this.getCurrentFocus();
@@ -232,19 +238,52 @@ public class LoginUserActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (Prefs.isLogedIn(this)) {
-            if (Prefs.getOrdered(this) != null
-                    && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
-                    && Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER) {
+            if (Prefs.getOrderedData(this) != null
+                    && (Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
+                    || Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER)) {
                 ProgressOrderedrActiivity();
             } else
                 toHomeActivity();
-        } else if (Prefs.getLockMapRegister(this)) {
-            LockMapRegisterActiivity();
+        } else if (Prefs.getActivityIndex(this) == Sample.ACTIVATION_CODE_INDEX) {
+            ActivationCodeActivity();
+        } else if (Prefs.getActivityIndex(this) == Sample.VERIFY_DOCUMENT_INDEX) {
+            VerifyDocumentActivity();
+        } else if (Prefs.getActivityIndex(this) == Sample.VERIFY_TOOLS_INDEX) {
+            VerifyToolsActivity();
+        } else if (Prefs.getActivityIndex(this) == Sample.LOCK_MAP_AFTER_REGISTER_INDEX) {
+            LockMapRegisterActivity();
         }
     }
 
+    private void toHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
-    private void LockMapRegisterActiivity() {
+    private void ActivationCodeActivity() {
+        Intent intent = new Intent(this, VerificationCodeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void VerifyDocumentActivity() {
+        Intent intent = new Intent(this, VerifyDocumentActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void VerifyToolsActivity() {
+        Intent intent = new Intent(this, VerifyToolsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void LockMapRegisterActivity() {
         Intent intent = new Intent(this, LockWasherActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -253,7 +292,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
     private void ProgressOrderedrActiivity() {
         Bundle args = new Bundle();
-        args.putString(Sample.ORDER, Prefs.getOrdered(this));
+        args.putString(Sample.ORDER, Prefs.getOrderedData(this));
         Intent intent = new Intent(this, ProgressOrderActivity.class);
         intent.putExtras(args);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

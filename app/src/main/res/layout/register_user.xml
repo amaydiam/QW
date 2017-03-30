@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/wallpaper_car_wash"
-    tools:context=".ui.activity.RegisterUserActivity">
+    tools:context=".ui.activity.register.RegisterUserActivity">
 
 
     <android.support.v4.widget.NestedScrollView
@@ -20,55 +20,51 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/activity_vertical_margin">
-
-            <ImageView
-                android:layout_gravity="center"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/activity_vertical_margin"
-                android:layout_marginTop="25dp"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/logowasher" />
-            <com.qwash.washer.ui.widget.RobotoBoldTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/new_account"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:shadowColor="@color/text_shadow"/>
-            <com.qwash.washer.ui.widget.RobotoRegularTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/des_new_account"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:shadowColor="@color/text_shadow"/>
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="@color/sembilah_puluh_persen_white"
-                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/logowasher" />
+
+                <com.qwash.washer.ui.widget.RobotoBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="@string/new_account"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="@string/des_new_account"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@+id/right"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:background="@color/sembilah_puluh_persen_white"
                     android:orientation="vertical">
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
@@ -77,64 +73,40 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/full_name"
+                        android:imeOptions="actionNext"
                         android:inputType="textPersonName"
                         android:maxLines="1"
-                        android:imeOptions="actionNext"
-                        android:textSize="16sp"
-                        android:padding="@dimen/activity_half_vertical_margin" />
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/divider"
                         android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
                         android:id="@+id/ktp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
+                        android:digits="1234567890"
                         android:hint="@string/ktp"
-                        android:maxLines="1"
-                        android:textSize="16sp"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:maxLength="16"
-                        android:digits="1234567890"
-                        android:padding="@dimen/activity_half_vertical_margin" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/activity_half_vertical_margin"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <agency.tango.android.avatarview.views.AvatarView
-                        android:id="@+id/washer_photo"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_user"
-                        app:av_border_color="@android:color/white"
-                        app:av_border_width="2dp"
-                        app:av_text_size_percentage="35" />
-                </LinearLayout>
-            </RelativeLayout>
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
 
 
-
-
-            <LinearLayout
-                android:background="@color/sembilah_puluh_persen_white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -155,59 +127,61 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:lines="1"
-                            android:textSize="14sp"
                             android:paddingBottom="@dimen/activity_half_vertical_margin"
                             android:paddingTop="@dimen/activity_half_vertical_margin"
                             android:text="+62"
-                            android:textColor="@color/textColorPrimary"/>
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="14sp" />
 
                         <com.qwash.washer.ui.widget.RobotoRegularEditText
                             android:id="@+id/no_telp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:digits="1234567890"
                             android:hint="@string/hint_number"
-                            android:maxLines="1"
-                            android:textSize="16sp"
                             android:imeOptions="actionNext"
-                            android:padding="@dimen/activity_half_vertical_margin"
                             android:inputType="number"
-                            android:digits="1234567890"/>
+                            android:maxLines="1"
+                            android:padding="@dimen/activity_half_vertical_margin"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/divider"
                         android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
                         android:id="@+id/birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="@string/birthday"
-                        android:maxLines="1"
-                        android:textSize="16sp"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/activity_half_vertical_margin"
                         android:clickable="true"
-                        android:focusable="false"/>
+                        android:focusable="false"
+                        android:hint="@string/birthday"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/divider"
                         android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin"/>
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
+
                     <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:layout_margin="@dimen/activity_half_vertical_margin"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_margin="@dimen/activity_half_vertical_margin"
                         android:gravity="center"
-                        android:text="@string/text_gender"/>
+                        android:text="@string/text_gender" />
+
                     <net.soulwolf.widget.materialradio.MaterialRadioGroup
                         android:id="@+id/gender"
                         android:layout_width="match_parent"
@@ -220,36 +194,72 @@
                             android:id="@+id/male"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:mcTextSize="6sp"
-                            app:mcText="Male"
-                            app:mcPadding="5dp"
-                            app:mcChecked="true"
                             app:mcAnimator="true"
+                            app:mcButton="@drawable/radio_button_boy_selector"
+                            app:mcChecked="true"
+                            app:mcPadding="5dp"
+                            app:mcText="Male"
                             app:mcTextColor="@drawable/radio_button_text_selector"
-                            app:mcButton="@drawable/radio_button_boy_selector"/>
+                            app:mcTextSize="6sp" />
 
                         <net.soulwolf.widget.materialradio.MaterialRadioButton
                             android:id="@+id/female"
                             android:layout_width="wrap_content"
-                            android:layout_marginLeft="30dp"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
                             app:mcAnimator="true"
-                            app:mcTextSize="6sp"
+                            app:mcButton="@drawable/radio_button_girl_selector"
                             app:mcPadding="5dp"
                             app:mcText="Female"
                             app:mcTextColor="@drawable/radio_button_text_selector"
-                            app:mcButton="@drawable/radio_button_girl_selector"/>
+                            app:mcTextSize="6sp" />
 
                     </net.soulwolf.widget.materialradio.MaterialRadioGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/province"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/province"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularEditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/city"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
-
-
                 <LinearLayout
-                    android:background="@color/sembilah_puluh_persen_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:background="@color/sembilah_puluh_persen_white"
                     android:orientation="vertical">
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
@@ -258,18 +268,18 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/email"
+                        android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:textSize="16sp"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/activity_half_vertical_margin" />
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/divider"
                         android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
                         android:id="@+id/password"
@@ -277,131 +287,117 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/password"
+                        android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textSize="16sp"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/activity_half_vertical_margin" />
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/divider"
                         android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:background="@color/divider" />
 
                     <com.qwash.washer.ui.widget.RobotoRegularEditText
-                        android:id="@+id/province"
+                        android:id="@+id/confirm_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="@string/province"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="16sp"
-                        android:imeOptions="actionNext"
-                        android:padding="@dimen/activity_half_vertical_margin" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/divider"
-                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
-
-                    <com.qwash.washer.ui.widget.RobotoRegularEditText
-                        android:id="@+id/city"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/city"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textSize="16sp"
+                        android:hint="@string/confirm_password"
                         android:imeOptions="actionDone"
-                        android:padding="@dimen/activity_half_vertical_margin" />
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="@dimen/activity_half_vertical_margin"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
-            <com.qwash.washer.ui.widget.RobotoRegularButton
-                android:id="@+id/btn_new_account"
-                style="@style/btn_blue"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_height"
-                android:text="@string/button_create_new_account"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/cb_agree"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="4">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="0.5dp"
-                        android:background="@color/divider"
-                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
-                </LinearLayout>
-
-
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="OR"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:shadowColor="@color/text_shadow"
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
-                    android:shadowColor="@color/text_shadow" />
+                    android:text="@string/agree_term_and_condition_qwash"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <com.qwash.washer.ui.widget.RobotoRegularButton
+                    android:id="@+id/btn_new_account"
+                    style="@style/btn_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:text="@string/button_create_new_account" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="4">
+                    android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-                    <View
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="4">
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:background="@color/divider" />
+                    </LinearLayout>
+
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0.5dp"
-                        android:background="@color/divider"
-                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-                        android:layout_marginRight="@dimen/activity_half_vertical_margin" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:shadowColor="@color/text_shadow"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
+                        android:text="OR"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="4">
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="0.5dp"
+                            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                            android:background="@color/divider" />
+                    </LinearLayout>
                 </LinearLayout>
+
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:id="@+id/sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="Sign in with washer account"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue_2196F3"
+                    android:textSize="14sp" />
+
             </LinearLayout>
-
-            <com.qwash.washer.ui.widget.RobotoRegularTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:text="Sign up with washer account"
-                android:textAlignment="center"
-                android:textColor="@color/blue_2196F3"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:shadowColor="@color/text_shadow"
-                android:textSize="14sp" />
-
-            <com.qwash.washer.ui.widget.RobotoRegularTextView
-                android:textColor="@color/white"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:shadowColor="@color/text_shadow"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="By proceeding, I agree that Q-Lap or it's representatived may contact me by email, phone, or SMS at the email address or number I provide, including for marketing purpose. I have read and understand the relevant Washer privacy statement." />
-
-        </LinearLayout>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

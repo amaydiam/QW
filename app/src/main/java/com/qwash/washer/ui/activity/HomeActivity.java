@@ -34,6 +34,7 @@ import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.service.MessageFireBase;
 import com.qwash.washer.ui.fragment.FeedbackFragment;
+import com.qwash.washer.ui.fragment.HomeFragment;
 import com.qwash.washer.ui.fragment.ProfilFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
 import com.qwash.washer.ui.fragment.WashHistoryFragment;
@@ -55,7 +56,7 @@ import butterknife.OnClick;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProfilFragment.OnProfilFragmentInteractionListener, WalletFragment.OnWalletInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnProfilFragmentInteractionListener, WalletFragment.OnWalletInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -67,6 +68,7 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
 
     private Fragment fragment;
+
     private AvatarView washer_photo;
     private RobotoRegularTextView washer_name;
 
@@ -87,6 +89,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
         Bundle bundle = getIntent().getExtras();
         setSupportActionBar(toolbar);
 
@@ -119,57 +122,14 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_logout) {
-
-            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("Are you sure, you wanted to logout?");
-            alertDialogBuilder.setPositiveButton("yes",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            // Logout email
-                            Prefs.Reset(HomeActivity.this);
-                            // Google sign out
-                            FirebaseAuth.getInstance().signOut();
-
-                            Intent intent = new Intent(HomeActivity.this, LoginUserActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-
-            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == Menus.nav_profil) {
+        if (id == Menus.nav_home) {
+            setSelectedDrawerItem(id);
+        } else if (id == Menus.nav_profil) {
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_wallet) {
             setSelectedDrawerItem(id);
@@ -181,6 +141,8 @@ public class HomeActivity extends AppCompatActivity
             setSelectedDrawerItem(id);
         } else if (id == Menus.nav_info) {
             setSelectedDrawerItem(id);
+        } else if (id == Menus.nav_logout) {
+            setSelectedDrawerItem(id);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -190,6 +152,10 @@ public class HomeActivity extends AppCompatActivity
 
     public void setSelectedDrawerItem(int id) {
         switch (id) {
+            case Menus.nav_home:
+                fragment = new HomeFragment();
+                setFragment(id, fragment);
+                break;
             case Menus.nav_profil:
                 fragment = new ProfilFragment();
                 setFragment(id, fragment);
@@ -212,8 +178,11 @@ public class HomeActivity extends AppCompatActivity
             case Menus.nav_info:
 
                 break;
+            case Menus.nav_logout:
+                Logout();
+                break;
             default:
-                fragment = new ProfilFragment();
+                fragment = new HomeFragment();
                 setFragment(id, fragment);
                 break;
         }
@@ -238,8 +207,11 @@ public class HomeActivity extends AppCompatActivity
         washer_photo = (AvatarView) header.findViewById(R.id.washer_photo);
         washer_name = (RobotoRegularTextView) header.findViewById(R.id.washer_name);
 
+
         // ============ list menu drawer ==============
         Menu menu = navView.getMenu();
+        MenuItem nav_home = menu.findItem(R.id.nav_home);
+        nav_home.setIcon(new IconDrawable(this, EntypoIcons.entypo_home).actionBarSize());
         MenuItem nav_profil = menu.findItem(R.id.nav_profil);
         nav_profil.setIcon(new IconDrawable(this, EntypoIcons.entypo_user).actionBarSize());
         MenuItem nav_wallet = menu.findItem(R.id.nav_wallet);
@@ -252,15 +224,16 @@ public class HomeActivity extends AppCompatActivity
         nav_pusat_bantuan.setIcon(new IconDrawable(this, FontAwesomeIcons.fa_question_circle).actionBarSize());
         MenuItem nav_info = menu.findItem(R.id.nav_info);
         nav_info.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_alert_circle).actionBarSize());
+        MenuItem nav_logout = menu.findItem(R.id.nav_logout);
+        nav_logout.setIcon(new IconDrawable(this, MaterialCommunityIcons.mdi_logout).actionBarSize());
 
     }
 
     public void SetDataUser() {
 
-        //  washer_name.setText(Prefs.getNamaLengkap(this));
         PicassoLoader imageLoader = new PicassoLoader();
-        //  imageLoader.loadImage(washer_photo, url, Prefs.getNamaLengkap(this));
-        imageLoader.loadImage(washer_photo, "ht", "Fachri");
+        imageLoader.loadImage(washer_photo, Prefs.getProfilePhoto(this), Prefs.getFullName(this));
+        washer_name.setText(Prefs.getFullName(this));
 
     }
 
@@ -281,7 +254,7 @@ public class HomeActivity extends AppCompatActivity
         EventBus.getDefault().register(this);
         if (!Prefs.isLogedIn(this)) {
             //   toHomeActivity();
-        } else if (Prefs.getOrdered(this) != null
+        } else if (Prefs.getOrderedData(this) != null
                 && Prefs.getProgresWorking(this) != Sample.CODE_NO_ORDER
                 && Prefs.getProgresWorking(this) != Sample.CODE_GET_ORDER) {
             //  ProgressOrderedrActiivity();
@@ -304,10 +277,9 @@ public class HomeActivity extends AppCompatActivity
         if (getIntent().getAction() != null) {
             String action = getIntent().getAction();
             if (action.equalsIgnoreCase(Sample.ACTION_FROM_NOTIFICATION)) {
-                setSelectedDrawerItem(Menus.nav_profil);
-                ProfilFragment fragment = (ProfilFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                setSelectedDrawerItem(Menus.nav_home);
+                HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
                 if (fragment != null) {
-                    fragment.mIsServiceStarted = true;
                     fragment.setCheckedButtonStatus();
                 }
             }
@@ -332,6 +304,36 @@ public class HomeActivity extends AppCompatActivity
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    public void Logout() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure, you wanted to logout?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // Logout email
+                        Prefs.Reset(HomeActivity.this);
+                        // Google sign out
+                        FirebaseAuth.getInstance().signOut();
+
+                        Intent intent = new Intent(HomeActivity.this, LoginUserActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }

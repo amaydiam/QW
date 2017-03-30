@@ -1,17 +1,13 @@
 package com.qwash.washer.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.AudioManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -30,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.techery.properratingbar.ProperRatingBar;
 
-public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustomerAdapter.ViewHolder> implements  View.OnClickListener {
+public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustomerAdapter.ViewHolder> implements View.OnClickListener {
 
     public final ArrayList<FeedbackCustomer> data;
 
@@ -149,10 +145,10 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
         holder.dateFeedback.setText(FeedbackCustomer.getCreateAt());
 
         PicassoLoader imageLoader = new PicassoLoader();
-        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_IMAGE + "", FeedbackCustomer.getName());
+        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", FeedbackCustomer.getName());
         holder.customerName.setText(FeedbackCustomer.getName());
 
-        holder.deskripsiFeedback.setText(TextUtils.isNullOrEmpty(FeedbackCustomer.getComments())?"-":FeedbackCustomer.getComments());
+        holder.deskripsiFeedback.setText(TextUtils.isNullOrEmpty(FeedbackCustomer.getComments()) ? "-" : FeedbackCustomer.getComments());
         holder.rating.setRating(Integer.parseInt(FeedbackCustomer.getRate()));
 
         holder.rootParent.setTag(position);

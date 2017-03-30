@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/img_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="20dp"
+            android:textSize="30sp"
+            android:text="{mdi-cellphone-android}"
+/>
+        <com.qwash.washer.ui.widget.RobotoRegularTextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verification_title"
+            android:textAlignment="center"
+            android:textColor="#333"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <com.qwash.washer.ui.widget.RobotoRegularTextView
+            android:id="@+id/verification_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView6"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/verification_desc"
+            android:textAlignment="center"
+            android:textColor="#333"
+            android:textSize="14dp" />
+
+
+        <com.qwash.washer.ui.widget.RobotoRegularEditText
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/et_verification_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:layout_marginBottom="40px"
+            android:digits="1234567890"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="8"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:background="@null"/>
+
+
+        <com.qwash.washer.ui.widget.RobotoRegularButton
+            android:id="@+id/btn_verification_code"
+            style="@style/btn_blue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="@string/btn_verification_code" />
+
+        <com.qwash.washer.ui.widget.RobotoRegularButton
+            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+            android:id="@+id/resend_the_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:text="@string/resend_the_text"
+            style="@style/btn_blue_outline"/>
+
+        <com.qwash.washer.ui.widget.RobotoRegularButton
+            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+            android:id="@+id/change_number"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:text="@string/change_number"
+            style="@style/btn_blue_outline"/>
+
+
+    </LinearLayout>
+</LinearLayout>

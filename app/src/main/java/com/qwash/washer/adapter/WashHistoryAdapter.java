@@ -185,7 +185,7 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
         PicassoLoader imageLoader = new PicassoLoader();
         holder.address.setText(WashHistory.getAddress());
 
-        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_IMAGE + "", WashHistory.getName());
+        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", WashHistory.getName());
         holder.customerName.setText(WashHistory.getName());
 
         holder.status.setVisibility(View.VISIBLE);

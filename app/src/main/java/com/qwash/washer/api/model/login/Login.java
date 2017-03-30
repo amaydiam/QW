@@ -5,6 +5,7 @@ package com.qwash.washer.api.model.login; /**
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.qwash.washer.api.model.washer.DataWasher;
 
 public class Login {
 
@@ -17,7 +18,7 @@ public class Login {
     private String token;
     @SerializedName("data")
     @Expose
-    private DataLogin data;
+    private DataWasher data;
 
     public Boolean getStatus() {
         return status;
@@ -35,11 +36,11 @@ public class Login {
         this.token = token;
     }
 
-    public DataLogin getDataLogin() {
+    public DataWasher getDataWasher() {
         return data;
     }
 
-    public void setDataLogin(DataLogin data) {
+    public void setDataLogin(DataWasher data) {
         this.data = data;
     }
 

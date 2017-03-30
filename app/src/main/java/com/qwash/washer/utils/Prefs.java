@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.qwash.washer.Sample;
+import com.qwash.washer.ui.activity.ProgressOrderActivity;
 
 
 public final class Prefs {
@@ -31,15 +32,6 @@ public final class Prefs {
     }
 
 
-    //Data User
-    public static void putFirebaseId(final Context context, String token) {
-        Prefs.putPref(context, Sample.FIREBASE_ID, token);
-    }
-
-    public static String getFirebaseId(final Context context) {
-        return Prefs.getPref(context, Sample.FIREBASE_ID, "");
-    }
-
     public static void putToken(final Context context, String token) {
         Prefs.putPref(context, Sample.TOKEN, token);
     }
@@ -48,28 +40,12 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.TOKEN, "");
     }
 
-    public static void putUserId(final Context context, String id_user) {
-        Prefs.putPref(context, Sample.USER_ID, id_user);
+    public static void putUserId(final Context context, String userId) {
+        Prefs.putPref(context, Sample.USER_ID, userId);
     }
 
     public static String getUserId(final Context context) {
         return Prefs.getPref(context, Sample.USER_ID, "");
-    }
-
-    public static void putName(final Context context, String name) {
-        Prefs.putPref(context, Sample.NAME, name);
-    }
-
-    public static String getName(final Context context) {
-        return Prefs.getPref(context, Sample.NAME, "");
-    }
-
-    public static void putAuthLevel(final Context context, String auth_level) {
-        Prefs.putPref(context, Sample.AUTH_LEVEL, auth_level);
-    }
-
-    public static String getAuthLevel(final Context context) {
-        return Prefs.getPref(context, Sample.AUTH_LEVEL, "");
     }
 
     public static void putEmail(final Context context, String email) {
@@ -88,35 +64,140 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.USERNAME, "");
     }
 
-
-    public static void putPhone(final Context context, String phone) {
-        Prefs.putPref(context, Sample.PHONE, phone);
+    public static void putType(final Context context, Integer type) {
+        Prefs.putPref(context, Sample.TYPE, String.valueOf(type));
     }
 
-    public static String getPhone(final Context context) {
-        return Prefs.getPref(context, Sample.PHONE, "");
+    public static String getType(final Context context) {
+        return Prefs.getPref(context, Sample.TYPE, "");
     }
 
-    public static void putPhoto(final Context context, String photo) {
-        Prefs.putPref(context, Sample.PHOTO, photo);
+    public static void putFullName(final Context context, String fullName) {
+        Prefs.putPref(context, Sample.FULL_NAME, fullName);
     }
 
-    public static String getPhoto(final Context context) {
-        return Prefs.getPref(context, Sample.PHOTO, "");
+    public static String getFullName(final Context context) {
+        return Prefs.getPref(context, Sample.FULL_NAME, "");
+    }
+
+    public static void putSaldo(final Context context, Integer saldo) {
+        Prefs.putPref(context, Sample.SALDO, String.valueOf(saldo));
+    }
+
+    public static String getSaldo(final Context context) {
+        return Prefs.getPref(context, Sample.SALDO, "");
     }
 
 
-    public static void putRating(final Context context, String phone) {
-        Prefs.putPref(context, Sample.RATING, phone);
+    public static void putFirebaseId(final Context context, String firebaseId) {
+        Prefs.putPref(context, Sample.FIREBASE_ID, firebaseId);
+    }
+
+    public static String getFirebaseId(final Context context) {
+        return Prefs.getPref(context, Sample.FIREBASE_ID, "");
+    }
+
+
+    public static void putGeometryLat(final Context context, Double geometryLat) {
+        Prefs.putPref(context, Sample.GEOMETRY_LAT, String.valueOf(geometryLat));
+    }
+
+    public static Double getGeometryLat(final Context context) {
+        return Double.valueOf(Prefs.getPref(context, Sample.GEOMETRY_LAT, "0.0"));
+    }
+
+    public static void putGeometryLong(final Context context, Double geometryLong) {
+        Prefs.putPref(context, Sample.GEOMETRY_LONG, String.valueOf(geometryLong));
+    }
+
+    public static Double getGeometryLong(final Context context) {
+        return Double.valueOf(Prefs.getPref(context, Sample.GEOMETRY_LONG, "0.0"));
+    }
+
+    public static void putProfileGender(final Context context, String profileGender) {
+        Prefs.putPref(context, Sample.PROFILE_GENDER, profileGender);
+    }
+
+    public static String getProfileGender(final Context context) {
+        return Prefs.getPref(context, Sample.PROFILE_GENDER, "");
+    }
+
+    public static void putProfilePhoto(final Context context, String profilePhoto) {
+        Prefs.putPref(context, Sample.PROFILE_PHOTO, profilePhoto);
+    }
+
+    public static String getProfilePhoto(final Context context) {
+        return Sample.BASE_URL_QWASH_PUBLIC + "" + Prefs.getPref(context, Sample.PROFILE_PHOTO, "");
+    }
+
+    public static void putProfileProvince(final Context context, String profileProvince) {
+        Prefs.putPref(context, Sample.PROFILE_PROVINCE, profileProvince);
+    }
+
+    public static String getProfileProvince(final Context context) {
+        return Prefs.getPref(context, Sample.PROFILE_PROVINCE, "");
+    }
+
+    public static void putProfileCity(final Context context, String profileCity) {
+        Prefs.putPref(context, Sample.PROFILE_CITY, profileCity);
+    }
+
+    public static String getProfileCity(final Context context) {
+        return Prefs.getPref(context, Sample.PROFILE_CITY, "");
+    }
+
+    public static void putProfileNik(final Context context, String profileNik) {
+        Prefs.putPref(context, Sample.PROFILE_NIK, profileNik);
+    }
+
+    public static String getProfileNik(final Context context) {
+        return Prefs.getPref(context, Sample.PROFILE_NIK, "");
+    }
+
+    public static void putOnline(final Context context, Integer Online) {
+        Prefs.putPref(context, Sample.ONLINE, String.valueOf(Online));
+    }
+
+    public static String getOnline(final Context context) {
+        return Prefs.getPref(context, Sample.ONLINE, "");
+    }
+
+
+    public static void putStatus(final Context context, Integer status) {
+        Prefs.putPref(context, Sample.STATUS, String.valueOf(status));
+    }
+
+    public static int getStatus(final Context context) {
+        return Integer.parseInt(Prefs.getPref(context, Sample.STATUS, ""));
+    }
+
+
+    public static void putCreatedAt(final Context context, String status) {
+        Prefs.putPref(context, Sample.CREATED_AT, status);
+    }
+
+    public static String getCreatedAt(final Context context) {
+        return Prefs.getPref(context, Sample.CREATED_AT, "");
+    }
+
+    public static void putUpdatedAt(final Context context, String updatedAt) {
+        Prefs.putPref(context, Sample.UPDATED_AT, updatedAt);
+    }
+
+    public static String getUpdatedAt(final Context context) {
+        return Prefs.getPref(context, Sample.UPDATED_AT, "");
+    }
+
+    public static void putRating(final Context context, String Rating) {
+        Prefs.putPref(context, Sample.RATING, Rating);
     }
 
     public static String getRating(final Context context) {
-        return Prefs.getPref(context, Sample.RATING, "0");
+        return Prefs.getPref(context, Sample.RATING, "5");
     }
 
 
     //end data user
-
 
     public static void putAvailableForJob(final Context context, boolean enabled) {
         Prefs.putPref(context, Sample.AVAILABLE_FOR_JOB, (enabled ? "true" : "false"));
@@ -128,38 +209,14 @@ public final class Prefs {
         return e.equals("true");
     }
 
-    public static void putLatitude(final Context context, double latitude) {
-        Prefs.putPref(context, Sample.LATITUDE, String.valueOf(latitude));
-    }
 
-    public static float getLatitude(Context context) {
-        return Float.parseFloat(Prefs.getPref(context, Sample.LATITUDE, "0f"));
-    }
-
-    public static void putLongitude(final Context context, double Longitude) {
-        Prefs.putPref(context, Sample.LONGITUDE, String.valueOf(Longitude));
-    }
-
-    public static float getLongitude(Context context) {
-        return Float.parseFloat(Prefs.getPref(context, Sample.LONGITUDE, "0f"));
-    }
-
-    public static boolean isLogedIn(Context context) {
-
-        return getUserId(context).length() > 0
-                && getToken(context).length() > 0;
-
+    public static void putActivityIndex(final Context context, int activity_index) {
+        Prefs.putPref(context, Sample.ACTIVITY_INDEX, String.valueOf(activity_index));
     }
 
 
-    public static void putLockMapRegister(final Context context, boolean enabled) {
-        Prefs.putPref(context, Sample.LOCK_AFTER_REGISTER, (enabled ? "true" : "false"));
-    }
-
-
-    public static boolean getLockMapRegister(final Context context) {
-        String e = Prefs.getPref(context, Sample.LOCK_AFTER_REGISTER, "false");
-        return e.equals("true");
+    public static int getActivityIndex(final Context context) {
+        return Integer.parseInt(Prefs.getPref(context, Sample.ACTIVITY_INDEX, String.valueOf(Sample.NO_INDEX)));
     }
 
 
@@ -172,25 +229,56 @@ public final class Prefs {
     }
 
 
-    public static void putOrderedData(final Context context, String phone) {
-        Prefs.putPref(context, Sample.ORDER, phone);
+    public static void putOrderedData(final Context context, String order) {
+        Prefs.putPref(context, Sample.ORDER, order);
     }
 
-    public static String getOrdered(final Context context) {
+    public static String getOrderedData(final Context context) {
         return Prefs.getPref(context, Sample.ORDER, null);
+    }
+
+    public static void putLastOrdersId(final Context context, String ordersId) {
+        Prefs.putPref(context, Sample.ORDERS_ID, ordersId);
+    }
+
+    public static String getLastOrdersId(final Context context) {
+        return Prefs.getPref(context, Sample.ORDERS_ID, null);
+    }
+
+
+
+    public static boolean isLogedIn(Context context) {
+        return getUserId(context).length() > 0
+                && getToken(context).length() > 0
+                && getStatus(context) == 1;
     }
 
 
     public static void Reset(Context context) {
         putToken(context, "");
         putUserId(context, "");
-        putName(context, "");
-        putAuthLevel(context, "");
         putEmail(context, "");
         putUsername(context, "");
-        putPhone(context, "");
-        putLatitude(context, 0);
-        putLongitude(context, 0);
+        putType(context, 0);
+        putFullName(context, "");
+        putSaldo(context, 0);
+        putFirebaseId(context, "");
+        putGeometryLat(context, 0.0);
+        putGeometryLong(context, 0.0);
+        putProfileGender(context, "");
+        putProfilePhoto(context, "");
+        putProfileProvince(context, "");
+        putProfileCity(context, "");
+        putProfileNik(context, "");
+        putOnline(context, 0);
+        putStatus(context, 0);
+        putCreatedAt(context, "");
+        putUpdatedAt(context, "");
+        putRating(context, "5");
+        putOrderedData(context, null);
+        putLastOrdersId(context, null);
+        putActivityIndex(context, Sample.NO_INDEX);
+
     }
 
 

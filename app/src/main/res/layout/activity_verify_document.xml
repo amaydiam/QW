@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_2196F3"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_vertical_margin">
+
+                <agency.tango.android.avatarview.views.AvatarView
+                    android:id="@+id/washer_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_user"
+                    app:av_border_color="@android:color/white"
+                    app:av_border_width="2dp"
+                    app:av_text_size_percentage="35" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                    android:textSize="14sp"
+                    android:text="@string/desc_verify_document"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:layout_weight="1"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_ktp"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="@color/black_777777" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_img_ktp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="{fa-camera}"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="KTP"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                        android:layout_weight="1">>
+
+                        <ImageView
+                            android:id="@+id/img_skck"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="@color/black_777777" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_img_skck"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="{fa-camera}"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SKCK"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <com.qwash.washer.ui.widget.RobotoRegularButton
+                    android:id="@+id/btn_continue"
+                    style="@style/btn_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                    android:text="@string/btn_upload" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
+
+

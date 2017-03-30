@@ -12,9 +12,9 @@ public class DeaclineOrder {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("message")
+    @SerializedName("messages")
     @Expose
-    private String message;
+    private String messages;
 
     public Boolean getStatus() {
         return status;
@@ -24,12 +24,12 @@ public class DeaclineOrder {
         this.status = status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessages(String messages) {
+        this.messages = messages;
     }
 
 }

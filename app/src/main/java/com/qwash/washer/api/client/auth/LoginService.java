@@ -16,6 +16,6 @@ import retrofit2.http.POST;
 
 public interface LoginService {
     @FormUrlEncoded
-    @POST("login/authenticate")
+    @POST("auth/login/washers")
     Call<Login> getLoginLink(@FieldMap Map<String, String> params);
 }

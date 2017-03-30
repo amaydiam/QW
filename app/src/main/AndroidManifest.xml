@@ -2,14 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qwash.washer">
 
-    <!--set alarm -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- set alarm -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Permission to start Alarm on device reboot -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
@@ -29,15 +34,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RegisterUserActivity"
+            android:name=".ui.activity.register.RegisterUserActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullActivity" />
         <activity
-            android:name=".ui.activity.LockWasherActivity"
+            android:name=".ui.activity.register.VerificationCodeActivity"
+            android:label="@string/title_activity_verification_code"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.register.ChangeNumberActivity"
+            android:label="@string/title_activity_change_number"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.activity.register.VerifyDocumentActivity"
+            android:label="@string/title_activity_verify_document"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.register.VerifyToolsActivity"
+            android:label="@string/title_activity_verify_tools"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.register.LockWasherActivity"
             android:label="@string/title_activity_lock_washer"
             android:screenOrientation="portrait"
-            android:theme="@style/LocationTheme" />
+            android:theme="@style/AppTheme.FullActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"
@@ -55,7 +81,7 @@
         <activity
             android:name=".ui.activity.ProgressOrderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/DialogActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.RatingActivity"
             android:screenOrientation="portrait"
@@ -83,10 +109,18 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <service
             android:name=".service.availableforjob.LocationUpdateService"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver android:name=".service.BootCompleteAvailableForJobReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <receiver
             android:name=".service.ConnectivityReceiver"
             android:enabled="true">
@@ -94,6 +128,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

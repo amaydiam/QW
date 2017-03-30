@@ -12,6 +12,9 @@ public class AvailableForJob {
     @SerializedName("status")
     @Expose
     private Boolean status;
+    @SerializedName("messages")
+    @Expose
+    private String messages;
 
     public Boolean getStatus() {
         return status;
@@ -20,6 +23,15 @@ public class AvailableForJob {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    public String getMessage() {
+        return messages;
+    }
+
+    public void setMessage(String messages) {
+        this.messages = messages;
+    }
+
 
 }
 

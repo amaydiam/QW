@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:title="Home" />
+        <item
             android:id="@+id/nav_profil"
             android:title="Profile" />
         <item
@@ -20,6 +23,9 @@
         <item
             android:id="@+id/nav_info"
             android:title="Info" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout" />
 
     </group>
 </menu>
