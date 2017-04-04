@@ -2,6 +2,7 @@ package com.qwash.washer.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.renderscript.Double2;
 
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.activity.ProgressOrderActivity;
@@ -80,12 +81,12 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.FULL_NAME, "");
     }
 
-    public static void putSaldo(final Context context, Integer saldo) {
+    public static void putSaldo(final Context context, String saldo) {
         Prefs.putPref(context, Sample.SALDO, String.valueOf(saldo));
     }
 
     public static String getSaldo(final Context context) {
-        return Prefs.getPref(context, Sample.SALDO, "");
+        return Utils.Rupiah(Prefs.getPref(context, Sample.SALDO, ""));
     }
 
 
@@ -193,7 +194,7 @@ public final class Prefs {
     }
 
     public static String getRating(final Context context) {
-        return Prefs.getPref(context, Sample.RATING, "5");
+        return String.format("%.2f", Double.parseDouble(Prefs.getPref(context, Sample.RATING, "5")));
     }
 
 
@@ -261,7 +262,7 @@ public final class Prefs {
         putUsername(context, "");
         putType(context, 0);
         putFullName(context, "");
-        putSaldo(context, 0);
+        putSaldo(context, String.valueOf(0));
         putFirebaseId(context, "");
         putGeometryLat(context, 0.0);
         putGeometryLong(context, 0.0);

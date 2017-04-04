@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.model.feedback_customer.FeedbackCustomer;
+import com.qwash.washer.model.wash_history.WashHistory;
+import com.qwash.washer.ui.widget.RobotoBoldTextView;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.TextUtils;
 
@@ -87,69 +90,95 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        FeedbackCustomer FeedbackCustomer = data.get(position);
+        FeedbackCustomer feedbackCustomer = data.get(position);
+
+        try {
+            String[] n = feedbackCustomer.getCreateAt().split(" ");
+            String[] d = n[1].split(":");
+            String h = TextUtils.getTodayYestFromMilli(activity, n[0], TextUtils.getDate(feedbackCustomer.getCreateAt()).getTime());
+
+            try {
+                FeedbackCustomer feedbackCustomer_s = data.get(position - 1);
+                String[] s = feedbackCustomer_s.getCreateAt().split(" ");
+                if (n[0].equalsIgnoreCase(s[0])) {
+                    holder.header.setVisibility(View.GONE);
+                } else {
+                    holder.header.setVisibility(View.VISIBLE);
+                    holder.header.setText(h);
+                }
+
+            } catch (Exception e) {
+                holder.header.setVisibility(View.VISIBLE);
+                holder.header.setText(h);
+            }
+
+            holder.dateFeedback.setText(d[0] + ":" + d[1]);
+        } catch (Exception x) {
+            holder.header.setVisibility(View.VISIBLE);
+            holder.header.setText(feedbackCustomer.getCreateAt());
+            holder.dateFeedback.setText(feedbackCustomer.getCreateAt());
+        }
+
 
         final int sdk = Build.VERSION.SDK_INT;
-        int rate = Integer.parseInt(FeedbackCustomer.getRate());
+        int rate = Integer.parseInt(feedbackCustomer.getRate());
         if (rate == 5) {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_5));
             }
 
         } else if (rate == 4) {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_4));
             }
 
         } else if (rate == 3) {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_3));
             }
 
         } else if (rate == 2) {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_2));
             }
 
         } else if (rate == 1) {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_rate_1));
             }
 
         } else {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_default));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_default));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_default));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_default));
             }
 
         }
 
 
-        holder.dateFeedback.setText(FeedbackCustomer.getCreateAt());
-
         PicassoLoader imageLoader = new PicassoLoader();
-        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", FeedbackCustomer.getName());
-        holder.customerName.setText(FeedbackCustomer.getName());
+        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", feedbackCustomer.getFullName());
+        holder.customerName.setText(feedbackCustomer.getFullName());
 
-        holder.deskripsiFeedback.setText(TextUtils.isNullOrEmpty(FeedbackCustomer.getComments()) ? "-" : FeedbackCustomer.getComments());
-        holder.rating.setRating(Integer.parseInt(FeedbackCustomer.getRate()));
+        holder.deskripsiFeedback.setText(TextUtils.isNullOrEmpty(feedbackCustomer.getComments()) ? "-" : feedbackCustomer.getComments());
+        holder.rating.setRating(Integer.parseInt(feedbackCustomer.getRate()));
 
         holder.rootParent.setTag(position);
 
@@ -202,6 +231,9 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+
+        @BindView(R.id.header)
+        RobotoBoldTextView header;
         @BindView(R.id.customer_photo)
         AvatarView customerPhoto;
         @BindView(R.id.date_feedback)
@@ -212,8 +244,10 @@ public class FeedbackCustomerAdapter extends RecyclerView.Adapter<FeedbackCustom
         RobotoRegularTextView deskripsiFeedback;
         @BindView(R.id.rating)
         ProperRatingBar rating;
+        @BindView(R.id.content)
+        LinearLayout content;
         @BindView(R.id.root_parent)
-        RelativeLayout rootParent;
+        LinearLayout rootParent;
 
         public ViewHolder(View vi) {
             super(vi);

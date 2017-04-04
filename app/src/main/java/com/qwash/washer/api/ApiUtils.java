@@ -4,9 +4,12 @@ import android.content.Context;
 
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.client.RetrofitClient;
+import com.qwash.washer.api.client.account.AccountService;
 import com.qwash.washer.api.client.auth.LoginService;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
+import com.qwash.washer.api.client.dashboard.DashboardService;
 import com.qwash.washer.api.client.feedback_customer.FeedbackCutomerService;
+import com.qwash.washer.api.client.forgotpassword.ForgotPasswordService;
 import com.qwash.washer.api.client.order.OrderService;
 import com.qwash.washer.api.client.register.DocumentService;
 import com.qwash.washer.api.client.register.RegisterService;
@@ -55,6 +58,21 @@ public class ApiUtils {
 
     public static FeedbackCutomerService getFeedbackCutomer(Context context) {
         return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH_API).create(FeedbackCutomerService.class);
+
+    }
+
+    public static AccountService AccountService(Context context) {
+        return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH_API).create(AccountService.class);
+
+    }
+
+    public static ForgotPasswordService ForgotPasswordService(Context context) {
+        return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH_API).create(ForgotPasswordService.class);
+
+    }
+
+    public static DashboardService DashboardService(Context context) {
+        return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH_API).create(DashboardService.class);
 
     }
 

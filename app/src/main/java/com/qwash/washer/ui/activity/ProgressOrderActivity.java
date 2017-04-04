@@ -266,6 +266,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
         Map<String, String> params = new HashMap<>();
         params.put(Sample.CUSTOMERS_ID, prepareOrder.getCustomersId());
         params.put(Sample.WASHERS_ID, Prefs.getUserId(this));
+        params.put(Sample.VEHICLES, String.valueOf(prepareOrder.getVehicles()));
         params.put(Sample.LAT, prepareOrder.getLat());
         params.put(Sample.LONG, prepareOrder.getLong());
         params.put(Sample.NAMEADDRESS, prepareOrder.getNameAddress());
@@ -282,6 +283,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
 
             Log.v(key, value);
         }
+
 
         OrderService mService = ApiUtils.OrderService(this);
         mService.getPickOrderLink("Bearer " + Prefs.getToken(this), params).enqueue(new Callback<PickOrder>() {
@@ -730,4 +732,5 @@ public class ProgressOrderActivity extends AppCompatActivity {
     public void onBackPressed() {
         // super.onBackPressed();
     }
+
 }

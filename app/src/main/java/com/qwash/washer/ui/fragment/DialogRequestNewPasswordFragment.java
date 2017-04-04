@@ -11,11 +11,14 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.account.AccountService;
-import com.qwash.washer.api.model.account.ChangePasswordRespone;
+import com.qwash.washer.api.model.account.RequestNewPassword;
 import com.qwash.washer.model.temporary.ChangePassword;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.Prefs;
@@ -27,9 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,17 +40,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DialogChangePasswordFragment extends DialogFragment {
+public class DialogRequestNewPasswordFragment extends DialogFragment {
 
+    @NotEmpty
+    @Password(min = 5, messageResId = R.string.val_new_password_length)
+    @BindView(R.id.new_password)
+    RobotoRegularEditText newPassword;
 
-    @BindView(R.id.verification)
-    RobotoRegularEditText codeV;
+    @NotEmpty
+    @ConfirmPassword()
+    @BindView(R.id.confirm_new_password)
+    RobotoRegularEditText confirmNewPassword;
 
     private Unbinder butterKnife;
+    private Validator validator;
     private ProgressDialogBuilder dialogProgress;
-    private String password;
 
-    public DialogChangePasswordFragment() {
+    public DialogRequestNewPasswordFragment() {
 
     }
 
@@ -60,12 +67,7 @@ public class DialogChangePasswordFragment extends DialogFragment {
 
     @OnClick(R.id.btn_change_password)
     void ChangePassword() {
-        String inputStr = codeV.getText().toString();
-        if (!TextUtils.isNullOrEmpty(inputStr.toString().trim())) {
-            ActionRequestChangePassword(inputStr);
-        } else {
-            Toast.makeText(getActivity(), getString(R.string.please_input_verification_code), Toast.LENGTH_SHORT).show();
-        }
+        validator.validate();
     }
 
     @Override
@@ -84,9 +86,22 @@ public class DialogChangePasswordFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         View view = inflater.inflate(
-                R.layout.dialog_change_password, container);
+                R.layout.dialog_request_new_password, container);
         butterKnife = ButterKnife.bind(this, view);
-       
+        validator = new Validator(this);
+        validator.setValidationListener(new Validator.ValidationListener() {
+            @Override
+            public void onValidationSucceeded() {
+
+              ActionRequestChangePassword();
+            }
+
+            @Override
+            public void onValidationFailed(List<ValidationError> errors) {
+                TextUtils.errorValidation(getContext(), errors);
+            }
+        });
+
 
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -98,23 +113,18 @@ public class DialogChangePasswordFragment extends DialogFragment {
 
 
 
-    private void ActionRequestChangePassword(String inputStr) {
-        dialogProgress.show(getString(R.string.change_password_action), getString(R.string.please_wait));
-
-        Map<String, String> params = new HashMap<>();
-
-        params.put(Sample.USER_ID, Prefs.getUserId(getActivity()));
-        params.put(Sample.PASSWORD, getPassword());
-        params.put(Sample.CODE, inputStr);
+    private void ActionRequestChangePassword() {
+        dialogProgress.show(getString(R.string.request_new_password_action), getString(R.string.please_wait));
 
         AccountService mService = ApiUtils.AccountService(getActivity());
-        mService.getChangePasswordLink("Bearer " + Prefs.getToken(getActivity()),params).enqueue(new Callback<ChangePasswordRespone>() {
+        mService.getRequestNewPasswordLink("Bearer " + Prefs.getToken(getActivity()), Prefs.getUserId(getActivity())).enqueue(new Callback<RequestNewPassword>() {
             @Override
-            public void onResponse(Call<ChangePasswordRespone> call, Response<ChangePasswordRespone> response) {
+            public void onResponse(Call<RequestNewPassword> call, Response<RequestNewPassword> response) {
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
                         Toast.makeText(getActivity(),response.body().getMessages(), Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().postSticky(new ChangePassword(true,newPassword.getText().toString()));
                         dismiss();
                     }
                 } else {
@@ -128,12 +138,13 @@ public class DialogChangePasswordFragment extends DialogFragment {
                         e.printStackTrace();
                     }
 
-                    codeV.setText("");
+                    newPassword.setText("");
+                    confirmNewPassword.setText("");
                 }
             }
 
             @Override
-            public void onFailure(Call<ChangePasswordRespone> call, Throwable t) {
+            public void onFailure(Call<RequestNewPassword> call, Throwable t) {
                 String message = t.getMessage();
                 dialogProgress.hide();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -154,11 +165,5 @@ public class DialogChangePasswordFragment extends DialogFragment {
     }
 
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getPassword() {
-        return password;
-    }
 }

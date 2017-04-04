@@ -33,6 +33,9 @@ import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.availableforjob.AvailableForJobService;
+import com.qwash.washer.api.client.dashboard.DashboardService;
+import com.qwash.washer.api.model.dashboard.Balance;
+import com.qwash.washer.api.model.dashboard.Ratings;
 import com.qwash.washer.model.available_for_job.AvailableForJob;
 import com.qwash.washer.service.ConnectivityReceiver;
 import com.qwash.washer.service.availableforjob.LocationUpdateService;
@@ -155,6 +158,8 @@ public class HomeFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
+        SetData();
+
         setCheckedButtonStatus();
 
         mChart.setOnChartValueSelectedListener(this);
@@ -203,6 +208,8 @@ public class HomeFragment extends Fragment implements
         xAxis.setGranularity(1f); // only intervals of 1 day
         xAxis.setLabelCount(7);
 
+        getRatings();
+        getBalance();
 
         return view;
     }
@@ -414,6 +421,70 @@ public class HomeFragment extends Fragment implements
 
     public interface OnProfilFragmentInteractionListener {
         void onProfilFragmentInteraction();
+    }
+
+
+
+
+    private void getRatings() {
+
+        DashboardService mService = ApiUtils.DashboardService(getActivity());
+        mService.getRatingsLink("Bearer " + Prefs.getToken(getActivity()), Prefs.getUserId(getActivity())).enqueue(new Callback<Ratings>() {
+            @Override
+            public void onResponse(Call<Ratings> call, Response<Ratings> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+
+                        Prefs.putRating(getActivity(), String.valueOf(response.body().getData().get(0).getRatings()));
+                        SetData();
+                    }
+
+                } else {
+                    int statusCode = response.code();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Ratings> call, Throwable t) {
+                String message = t.getMessage();
+
+            }
+        });
+
+    }
+
+
+    private void getBalance() {
+
+        DashboardService mService = ApiUtils.DashboardService(getActivity());
+        mService.getBalanceLink("Bearer " + Prefs.getToken(getActivity()), Prefs.getUserId(getActivity())).enqueue(new Callback<Balance>() {
+            @Override
+            public void onResponse(Call<Balance> call, Response<Balance> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        Prefs.putSaldo(getActivity(), String.valueOf(response.body().getData().get(0).getBalance()));
+                        SetData();
+                    }
+
+                } else {
+                    int statusCode = response.code();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Balance> call, Throwable t) {
+                String message = t.getMessage();
+
+            }
+        });
+
+    }
+
+    private void SetData() {
+        rate.setText(Prefs.getRating(getActivity()));
+        changeSaldo.setText(Prefs.getSaldo(getActivity()));
     }
 
 }

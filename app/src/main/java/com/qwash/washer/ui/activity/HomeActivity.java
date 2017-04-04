@@ -1,5 +1,6 @@
 package com.qwash.washer.ui.activity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
+import com.qwash.washer.BuildConfig;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.service.MessageFireBase;
@@ -49,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
+import agency.tango.android.avatarview.utils.StringUtils;
 import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,6 +74,7 @@ public class HomeActivity extends AppCompatActivity
 
     private AvatarView washer_photo;
     private RobotoRegularTextView washer_name;
+    private MenuItem prevMenuItem;
 
     @OnClick(R.id.fab)
     void clickFab(View view) {
@@ -173,13 +177,17 @@ public class HomeActivity extends AppCompatActivity
                 setFragment(id, fragment);
                 break;
             case Menus.nav_pusat_bantuan:
-
+                Uri uriUrl = Uri.parse(Sample.URL_PUSAT_BANTUAN_WASHER);
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case Menus.nav_info:
-
+                ShowAbout();
+                checkItem();
                 break;
             case Menus.nav_logout:
                 Logout();
+                checkItem();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -189,16 +197,122 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+    private void ShowAbout() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_about_application);
+
+        RobotoRegularTextView versionApp = (RobotoRegularTextView) dialog.findViewById(R.id.version_app);
+        FloatingActionButton btnTwitter = (FloatingActionButton) dialog.findViewById(R.id.btn_twitter);
+        FloatingActionButton btnFacebook = (FloatingActionButton) dialog.findViewById(R.id.btn_facebook);
+        FloatingActionButton btnInstagram = (FloatingActionButton) dialog.findViewById(R.id.btn_instagram);
+
+        btnTwitter.setImageDrawable(
+                new IconDrawable(this, EntypoIcons.entypo_twitter)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        btnFacebook.setImageDrawable(
+                new IconDrawable(this, EntypoIcons.entypo_facebook)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        btnInstagram.setImageDrawable(
+                new IconDrawable(this, EntypoIcons.entypo_instagram)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+
+        btnTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    Intent intent = null;
+                    try {
+                        // get the Twitter app if possible
+                        getPackageManager().getPackageInfo("com.twitter.android", 0);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=qwash_indonesia"));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    } catch (Exception e) {
+                        // no Twitter app, revert to browser
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/qwash_indonesia"));
+                    }
+                    startActivity(intent);
+                    dialog.dismiss();
+                }
+            }
+        });
+        btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    Intent intent;
+                    try {
+                        // get the Twitter app if possible
+                        int versionCode = getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
+                        String url_facebook;
+                        if (versionCode >= 3002850) { //newer versions of fb app
+                            url_facebook = "fb://facewebmodal/f?href=https://www.facebook.com/qwashindonesia";
+                        } else { //older versions of fb app
+                            url_facebook = "fb://page/qwashindonesia";
+                        }
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url_facebook));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    } catch (Exception e) {
+                        // no Twitter app, revert to browser
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/qwashindonesia"));
+                    }
+                    startActivity(intent);
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        btnInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    Intent intent;
+                    try {
+                        getPackageManager().getPackageInfo("com.instagram.android", 0);
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/qwash_indonesia"));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    } catch (Exception e) {
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/qwash_indonesia"));
+                    }
+                    startActivity(intent);
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        versionApp.setText("v" + BuildConfig.VERSION_NAME);
+
+
+        dialog.show();
+    }
+
     private void setFragment(int id, Fragment fragment) {
-        Bundle args = new Bundle();
+
+        if (prevMenuItem != null) {
+            prevMenuItem.setChecked(false);
+        }
         MenuItem item = navView.getMenu().findItem(id);
-        item.setChecked(true);
-        toolbar.setTitle(item.getTitle());
+        prevMenuItem = item;
+
+        checkItem();
+
+        Bundle args = new Bundle();
         fragment.setArguments(args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment, Sample.TAG_FRAGMENT);
         transaction.commitAllowingStateLoss();
     }
+
+    private void checkItem() {
+        if (prevMenuItem != null) {
+            prevMenuItem.setChecked(true);
+            toolbar.setTitle(prevMenuItem.getTitle());
+        }
+    }
+
 
     private void SetMenuDrawer() {
 
@@ -284,6 +398,8 @@ public class HomeActivity extends AppCompatActivity
                 }
             }
         }
+
+        checkItem();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -335,5 +451,6 @@ public class HomeActivity extends AppCompatActivity
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 
 }

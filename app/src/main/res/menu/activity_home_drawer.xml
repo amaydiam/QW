@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_home"
+            android:checkable="true"
             android:title="Home" />
         <item
             android:id="@+id/nav_profil"
+            android:checkable="true"
             android:title="Profile" />
         <item
             android:id="@+id/nav_wallet"
+            android:checkable="true"
             android:title="Wallet" />
         <item
             android:id="@+id/nav_wash_history"
+            android:checkable="true"
             android:title="Wash History" />
         <item
             android:id="@+id/nav_feedback_customer"
+            android:checkable="true"
             android:title="Feedback Customer" />
         <item
             android:id="@+id/nav_pusat_bantuan"
+            android:checkable="false"
             android:title="Pusat Bantuan" />
         <item
             android:id="@+id/nav_info"
+            android:checkable="false"
             android:title="Info" />
         <item
             android:id="@+id/nav_logout"
+            android:checkable="false"
             android:title="Logout" />
 
     </group>

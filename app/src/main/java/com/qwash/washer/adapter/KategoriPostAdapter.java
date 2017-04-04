@@ -99,7 +99,7 @@ public class KategoriPostAdapter extends RecyclerView.Adapter<KategoriPostAdapte
         }
 
         holder.rootParent.setTag(position);
-        //  setAnimation(holder.rootParent, position);
+        //  setAnimation(holder.content, position);
 
 
     }

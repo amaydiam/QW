@@ -1,222 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/activity_half_vertical_margin"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.qwash.washer.ui.widget.RobotoBoldTextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_half_vertical_margin"
+        android:paddingBottom="@dimen/activity_half_vertical_margin"
+        android:text="TODAY"
+        android:textColor="@color/blue_2196F3"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-            android:layout_marginRight="@dimen/activity_half_vertical_margin"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/vehicle_photo"
-                    android:layout_width="@dimen/image_customer_size"
-                    android:layout_height="@dimen/image_customer_size"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/big_citycar" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/layout_sms"
-                    android:layout_toRightOf="@id/vehicle_photo"
-                    android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|center"
-                    android:orientation="horizontal">
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="{mdi-clock}"
-                        android:textSize="14sp" />
-                    <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:id="@+id/date_in_progress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="date_in_progress"
-                        android:textSize="14sp" />
-</LinearLayout>
-                    <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:id="@+id/vehicle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="vehicle"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="14sp" />
-
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_half_vertical_margin"
-            android:background="@color/divider" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-            android:layout_marginRight="@dimen/activity_half_vertical_margin"
-            android:orientation="horizontal">
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <agency.tango.android.avatarview.views.AvatarView
-                    android:id="@+id/customer_photo"
-                    android:layout_width="@dimen/image_customer_size"
-                    android:layout_height="@dimen/image_customer_size"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_location_on_black_24px"
-                    app:av_border_color="@android:color/white"
-                    app:av_border_width="4dp"
-                    app:av_text_size_percentage="35" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/layout_sms"
-                    android:layout_toRightOf="@id/customer_photo"
-                    android:orientation="vertical">
-
-                    <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:id="@+id/customer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="customer_name"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="14sp" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="{mdi-map-marker}"
-                        android:textSize="14sp" />
-                    <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:id="@+id/address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="address"
-                        android:textSize="14sp" />
-</LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_half_vertical_margin"
-            android:background="@color/divider" />
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_half_vertical_margin"
-            android:orientation="horizontal">
+            android:layout_margin="@dimen/activity_half_vertical_margin"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_rating"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_half_vertical_margin"
                 android:layout_marginRight="@dimen/activity_half_vertical_margin"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Rate by Customer"
-                    android:textSize="12sp" />
+                    android:layout_weight="1">
 
-                <io.techery.properratingbar.ProperRatingBar
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:prb_clickable="false"
-                    app:prb_tickNormalDrawable="@drawable/rate_small"
-                    app:prb_tickSelectedDrawable="@drawable/rate_small_sell"
-                    app:prb_totalTicks="5" />
+                    <ImageView
+                        android:id="@+id/vehicle_photo"
+                        android:layout_width="@dimen/image_customer_size"
+                        android:layout_height="@dimen/image_customer_size"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/big_citycar" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/vehicle_photo"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center"
+                            android:orientation="horizontal">
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text="{mdi-clock}"
+                                android:textSize="14sp" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:id="@+id/date_in_progress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="date_in_progress"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:id="@+id/vehicle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="vehicle"
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:orientation="vertical">
-                <com.qwash.washer.ui.widget.RobotoBoldTextView
-                    android:id="@+id/estimated_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="Rp. 50.000"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                android:background="@color/divider" />
 
-                <com.qwash.washer.ui.widget.RobotoRegularTextView
-                    android:id="@+id/status"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <agency.tango.android.avatarview.views.AvatarView
+                        android:id="@+id/customer_photo"
+                        android:layout_width="@dimen/image_customer_size"
+                        android:layout_height="@dimen/image_customer_size"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_location_on_black_24px"
+                        app:av_border_color="@android:color/white"
+                        app:av_border_width="4dp"
+                        app:av_text_size_percentage="35" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/customer_photo"
+                        android:orientation="vertical">
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:id="@+id/customer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="customer_name"
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text="{mdi-map-marker}"
+                                android:textSize="14sp" />
+
+                            <com.qwash.washer.ui.widget.RobotoRegularTextView
+                                android:id="@+id/address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="address"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/layout_rating"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="center"
-                    android:text="status"
-                    android:textSize="12dp" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Rate by Customer"
+                        android:textSize="12sp" />
+
+                    <io.techery.properratingbar.ProperRatingBar
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:prb_clickable="false"
+                        app:prb_tickNormalDrawable="@drawable/rate_small"
+                        app:prb_tickSelectedDrawable="@drawable/rate_small_sell"
+                        app:prb_totalTicks="5" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <com.qwash.washer.ui.widget.RobotoBoldTextView
+                        android:id="@+id/estimated_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="Rp. 50.000"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:text="status"
+                        android:textSize="12dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

@@ -15,39 +15,40 @@ public class WashHistoryListResponse {
 
 
 
-        @SerializedName("status")
-        @Expose
-        private Boolean status;
-        @SerializedName("message")
-        @Expose
-        private String message;
-        @SerializedName("data")
-        @Expose
-        private List<WashHistory> data = null;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("messages")
+    @Expose
+    private String messages;
+    @SerializedName("data")
+    @Expose
+    private List<WashHistory> data = null;
 
-        public Boolean getStatus() {
-            return status;
-        }
+    public Boolean getStatus() {
+        return status;
+    }
 
-        public void setStatus(Boolean status) {
-            this.status = status;
-        }
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-        public String getMessage() {
-            return message;
-        }
+    public String getMessages() {
+        return messages;
+    }
 
-        public void setMessage(String message) {
-            this.message = message;
-        }
+    public void setMessages(String messages) {
+        this.messages = messages;
+    }
 
-        public List<WashHistory> getData() {
-            return data;
-        }
+    public List<WashHistory> getData() {
+        return data;
+    }
 
-        public void setData(List<WashHistory> data) {
-            this.data = data;
-        }
-
+    public void setData(List<WashHistory> data) {
+        this.data = data;
+    }
 
 }
+
+

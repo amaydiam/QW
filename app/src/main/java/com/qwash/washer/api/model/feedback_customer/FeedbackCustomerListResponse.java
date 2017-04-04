@@ -16,9 +16,9 @@ public class FeedbackCustomerListResponse {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("message")
+    @SerializedName("messages")
     @Expose
-    private String message;
+    private String messages;
     @SerializedName("data")
     @Expose
     private List<FeedbackCustomer> data = null;
@@ -34,12 +34,12 @@ public class FeedbackCustomerListResponse {
         this.status = status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessages(String messages) {
+        this.messages = messages;
     }
 
     public List<FeedbackCustomer> getData() {

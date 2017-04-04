@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -15,9 +17,13 @@ import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
-import com.qwash.washer.Sample;
+import com.qwash.washer.model.temporary.ChangePassword;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Prefs;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -46,8 +52,8 @@ public class ProfilFragment extends Fragment {
     public void ChangePassword() {
 
         FragmentManager ft = getChildFragmentManager();
-        DialogChangePasswordFragment dialogChangePasswordFragment = new DialogChangePasswordFragment();
-        dialogChangePasswordFragment.show(ft, "change_password");
+        DialogRequestNewPasswordFragment dialogRequestNewPasswordFragment = new DialogRequestNewPasswordFragment();
+        dialogRequestNewPasswordFragment.show(ft, "request_password");
     }
 
 
@@ -88,6 +94,35 @@ public class ProfilFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onChangePassword(ChangePassword cp) {
+        if (cp.getStatus()) {
+            FragmentManager ft = getChildFragmentManager();
+            DialogChangePasswordFragment changePasswordFragment = new DialogChangePasswordFragment();
+            changePasswordFragment.setPassword(cp.getPassword());
+            changePasswordFragment.show(ft, "change_password");
+        }
+
+        ChangePassword stickyEvent = EventBus.getDefault().getStickyEvent(ChangePassword.class);
+        if (stickyEvent != null) {
+            EventBus.getDefault().removeStickyEvent(stickyEvent);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
 

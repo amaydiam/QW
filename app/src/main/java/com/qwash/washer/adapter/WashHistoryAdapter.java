@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
@@ -92,33 +91,60 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_history_wash, parent, false);
         ViewHolder holder = new ViewHolder(v);
-        holder.rootParent.setOnClickListener(this);
+        holder.content.setOnClickListener(this);
         return holder;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        WashHistory WashHistory = data.get(position);
+        WashHistory washHistory = data.get(position);
+        try {
+            String[] n = washHistory.getCreatedAt().split(" ");
+            String[] d = n[1].split(":");
+            String h = TextUtils.getTodayYestFromMilli(activity, n[0], TextUtils.getDate(washHistory.getCreatedAt()).getTime());
 
-        if (WashHistory.getVehicles().equalsIgnoreCase("1")) {
+            try {
+                WashHistory washHistory_s = data.get(position - 1);
+                String[] s = washHistory_s.getCreatedAt().split(" ");
+                if (n[0].equalsIgnoreCase(s[0])) {
+                    holder.header.setVisibility(View.GONE);
+                } else {
+                    holder.header.setVisibility(View.VISIBLE);
+                    holder.header.setText(h);
+                }
+
+            } catch (Exception e) {
+                holder.header.setVisibility(View.VISIBLE);
+                holder.header.setText(h);
+            }
+
+            holder.dateInProgress.setText(d[0] + ":" + d[1]);
+
+        } catch (Exception x) {
+            holder.header.setVisibility(View.VISIBLE);
+            holder.header.setText(washHistory.getCreatedAt());
+            holder.dateInProgress.setText(washHistory.getCreatedAt());
+        }
+
+        if (washHistory.getVehicles().equalsIgnoreCase("1")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_citycar));
             holder.vehicle.setText("SMALL");
-        } else if (WashHistory.getVehicles().equalsIgnoreCase("2")) {
+        } else if (washHistory.getVehicles().equalsIgnoreCase("2")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_minivan));
             holder.vehicle.setText("MEDIUM");
-        } else if (WashHistory.getVehicles().equalsIgnoreCase("3")) {
+        } else if (washHistory.getVehicles().equalsIgnoreCase("3")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_suv));
             holder.vehicle.setText("BIG");
 
-        } else if (WashHistory.getVehicles().equalsIgnoreCase("4")) {
+        } else if (washHistory.getVehicles().equalsIgnoreCase("4")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_under_srp_cc));
             holder.vehicle.setText("SMALL");
 
-        } else if (WashHistory.getVehicles().equalsIgnoreCase("5")) {
+        } else if (washHistory.getVehicles().equalsIgnoreCase("5")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_srp_cc));
             holder.vehicle.setText("MEDIUM");
 
-        } else if (WashHistory.getVehicles().equalsIgnoreCase("6")) {
+        } else if (washHistory.getVehicles().equalsIgnoreCase("6")) {
             holder.vehiclePhoto.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.big_above_srp_cc));
             holder.vehicle.setText("BIG");
 
@@ -127,39 +153,38 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
             holder.vehicle.setText("-");
         }
 
-
         final int sdk = Build.VERSION.SDK_INT;
-        if (WashHistory.getStatus().equalsIgnoreCase("3")) {
+        if (washHistory.getStatus() == 4) {
 
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_green));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_green));
                 holder.status.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_complete));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_green));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_green));
                 holder.status.setBackground(activity.getResources().getDrawable(R.drawable.shape_complete));
             }
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.green_cc09891b));
 
-        } else if (WashHistory.getStatus().equalsIgnoreCase("4") || WashHistory.getStatus().equalsIgnoreCase("5")) {
+        } else if (washHistory.getStatus() == 2 || washHistory.getStatus() == 3) {
 
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_red));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_red));
                 holder.status.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_cancel));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_red));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_red));
                 holder.status.setBackground(activity.getResources().getDrawable(R.drawable.shape_cancel));
             }
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.red_light));
 
         } else {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
-                holder.rootParent.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_default));
+                holder.content.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.border_set_default));
                 holder.status.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.shape_default));
 
             } else {
-                holder.rootParent.setBackground(activity.getResources().getDrawable(R.drawable.border_set_default));
+                holder.content.setBackground(activity.getResources().getDrawable(R.drawable.border_set_default));
                 holder.status.setBackground(activity.getResources().getDrawable(R.drawable.shape_default));
             }
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.divider));
@@ -167,26 +192,26 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
         }
 
 
-        if (WashHistory.getStatus().equalsIgnoreCase("3") && !TextUtils.isNullOrEmpty(WashHistory.getRate())) {
+        if (washHistory.getStatus() == 4 && !TextUtils.isNullOrEmpty(String.valueOf(washHistory.getRatings()))) {
             holder.layoutRating.setVisibility(View.VISIBLE);
-            holder.rating.setRating(Integer.parseInt(WashHistory.getRate()));
+            holder.rating.setRating(washHistory.getRatings());
             holder.estimatedPrice.setTextColor(ContextCompat.getColor(activity, R.color.blue_2196F3));
         } else {
             holder.layoutRating.setVisibility(View.GONE);
             holder.estimatedPrice.setTextColor(ContextCompat.getColor(activity, R.color.orange));
         }
 
-        holder.status.setText(WashHistory.getDescription());
+        holder.status.setText(washHistory.getDescription());
 
-        holder.dateInProgress.setText(WashHistory.getCreateAt());
 
-        holder.estimatedPrice.setText(WashHistory.getPriceOnRupiah());
+        holder.estimatedPrice.setText(washHistory.getGrandTotalRupiah());
 
         PicassoLoader imageLoader = new PicassoLoader();
-        holder.address.setText(WashHistory.getAddress());
 
-        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", WashHistory.getName());
-        holder.customerName.setText(WashHistory.getName());
+        holder.address.setText(washHistory.getAddress());
+
+        imageLoader.loadImage(holder.customerPhoto, Sample.BASE_URL_QWASH_PUBLIC + "", washHistory.getCustomersName());
+        holder.customerName.setText(washHistory.getCustomersName());
 
         holder.status.setVisibility(View.VISIBLE);
         holder.rootParent.setTag(position);
@@ -260,8 +285,15 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
         RobotoRegularTextView status;
         @BindView(R.id.layout_rating)
         LinearLayout layoutRating;
+
+        @BindView(R.id.header)
+        RobotoBoldTextView header;
+
         @BindView(R.id.root_parent)
-        RelativeLayout rootParent;
+        LinearLayout rootParent;
+
+        @BindView(R.id.content)
+        LinearLayout content;
 
         public ViewHolder(View vi) {
             super(vi);

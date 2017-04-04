@@ -161,6 +161,9 @@ public class Sample {
     public static final String WATERLESS = "waterless";
     public static final String SERVICES = "services";
     public static final String ORDERS_ID = "ordersId";
+    public static final String VEHICLES = "vehicles";
+
+    public static final String URL_PUSAT_BANTUAN_WASHER = "https://qwash-indonesia.com/panduan-washer";
 
     public static final String[] listMontOfYear(Context context) {
         return new String[]{

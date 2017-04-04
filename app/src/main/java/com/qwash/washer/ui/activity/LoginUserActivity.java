@@ -1,10 +1,12 @@
 package com.qwash.washer.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -32,6 +34,8 @@ import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.auth.LoginService;
 import com.qwash.washer.api.model.login.Login;
 import com.qwash.washer.api.model.washer.DataWasher;
+import com.qwash.washer.ui.activity.forgotpassword.ForgotPasswordActivity;
+import com.qwash.washer.ui.activity.forgotpassword.RequestForgotPasswordActivity;
 import com.qwash.washer.ui.activity.register.LockWasherActivity;
 import com.qwash.washer.ui.activity.register.RegisterUserActivity;
 import com.qwash.washer.ui.activity.register.VerificationCodeActivity;
@@ -85,7 +89,8 @@ public class LoginUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_forgot_password)
     void ForgotPassword() {
-        //  startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+        Intent intent = new Intent(this, RequestForgotPasswordActivity.class);
+        startActivityForResult(intent, 1);
     }
 
     @OnClick(R.id.register)
@@ -167,6 +172,8 @@ public class LoginUserActivity extends AppCompatActivity {
         params.put(Sample.PASSWORD, password.getText().toString());
         params.put(Sample.FIREBASE_ID, firebase_id);
 
+        Log.v("sebelum_login", firebase_id);
+
         LoginService mService = ApiUtils.LoginService(this);
         mService.getLoginLink(params).enqueue(new Callback<Login>() {
             @Override
@@ -178,12 +185,15 @@ public class LoginUserActivity extends AppCompatActivity {
                         DataWasher data = response.body().getDataWasher();
                         Prefs.putToken(context, response.body().getToken());
 
+
+                        Log.v("setelah_login", data.getFirebaseId());
+
                         Prefs.putUserId(context, data.getUserId());
                         Prefs.putEmail(context, data.getEmail());
                         Prefs.putUsername(context, data.getUsername());
                         Prefs.putType(context, data.getType());
                         Prefs.putFullName(context, data.getFullName());
-                        Prefs.putSaldo(context, data.getSaldo());
+                        Prefs.putSaldo(context, String.valueOf(data.getSaldo()));
                         Prefs.putFirebaseId(context, data.getFirebaseId());
                         Prefs.putGeometryLat(context, data.getGeometryLat());
                         Prefs.putGeometryLong(context, data.getGeometryLong());
@@ -298,6 +308,19 @@ public class LoginUserActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Intent intent = new Intent(this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+            }
+        }
     }
 
 }

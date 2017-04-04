@@ -301,7 +301,7 @@ public class WashHistoryFragment extends Fragment implements WashHistoryAdapter.
         onRetrofitStart(TAG);
 
         WashHistoryService mService = ApiUtils.WashHistory(getActivity());
-        mService.getListWashHistory(Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<WashHistoryListResponse>() {
+        mService.getListWashHistory("Bearer " + Prefs.getToken(getActivity()),Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<WashHistoryListResponse>() {
             @Override
             public void onResponse(Call<WashHistoryListResponse> call, Response<WashHistoryListResponse> response) {
 
@@ -376,7 +376,7 @@ public class WashHistoryFragment extends Fragment implements WashHistoryAdapter.
     private void ResponeDelete(Response<WashHistoryListResponse> response) {
 
         Boolean isSuccess = response.body().getStatus();
-        String message = response.body().getMessage();
+        String message = response.body().getMessages();
         if (isSuccess) {
             adapter.remove(position_delete);
             checkData();

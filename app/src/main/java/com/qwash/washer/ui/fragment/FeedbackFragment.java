@@ -301,7 +301,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
         onRetrofitStart(TAG);
 
         FeedbackCutomerService mService = ApiUtils.getFeedbackCutomer(getActivity());
-        mService.getListFeedbackCustomer(Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<FeedbackCustomerListResponse>() {
+        mService.getListFeedbackCustomer("Bearer " + Prefs.getToken(getActivity()),Prefs.getUserId(getActivity()), page, Sample.LIMIT_DATA).enqueue(new Callback<FeedbackCustomerListResponse>() {
             @Override
             public void onResponse(Call<FeedbackCustomerListResponse> call, Response<FeedbackCustomerListResponse> response) {
 
@@ -376,7 +376,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
     private void ResponeDelete(Response<FeedbackCustomerListResponse> response) {
 
         Boolean isSuccess = response.body().getStatus();
-        String message = response.body().getMessage();
+        String message = response.body().getMessages();
         if (isSuccess) {
             adapter.remove(position_delete);
             checkData();
@@ -552,7 +552,7 @@ public class FeedbackFragment extends Fragment implements FeedbackCustomerAdapte
                                             .colorRes(R.color.primary)
                                             .actionBarSize())
                             .setTitle("Hapus FeedbackCustomer")
-                            .setMessage("Apa anda yakin akan menghapus history ini?")
+                            .setMessages("Apa anda yakin akan menghapus history ini?")
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

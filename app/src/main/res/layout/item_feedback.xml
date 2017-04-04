@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/activity_half_vertical_margin"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.qwash.washer.ui.widget.RobotoBoldTextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_half_vertical_margin"
+        android:paddingBottom="@dimen/activity_half_vertical_margin"
+        android:text="TODAY"
+        android:textColor="@color/blue_2196F3"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
-            android:layout_marginRight="@dimen/activity_half_vertical_margin"
-            android:orientation="horizontal">
+            android:layout_margin="@dimen/activity_half_vertical_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                android:orientation="horizontal">
 
 
             <RelativeLayout
@@ -75,20 +90,36 @@
                         android:textColor="@color/textColorPrimary"
                         android:textSize="14sp" />
 
-                    <com.qwash.washer.ui.widget.RobotoRegularTextView
-                        android:layout_marginTop="@dimen/activity_half_vertical_margin"
-                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-                        android:id="@+id/deskripsi_feedback"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="deskripsi_feedback"
-                        android:textSize="14sp" />
+                        android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_half_vertical_margin"
+                        android:gravity="left|center"
+                        android:orientation="horizontal">
+
+                        <com.joanzapata.iconify.widget.IconTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="{mdi-comment-text}"
+                            android:textSize="12sp" />
+
+                        <com.qwash.washer.ui.widget.RobotoRegularTextView
+                            android:id="@+id/deskripsi_feedback"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="deskripsi_feedback"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                     <io.techery.properratingbar.ProperRatingBar
-                        android:layout_gravity="right"
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right"
                         app:prb_clickable="false"
                         app:prb_tickNormalDrawable="@drawable/rate_small"
                         app:prb_tickSelectedDrawable="@drawable/rate_small_sell"
@@ -98,9 +129,10 @@
                 </LinearLayout>
 
             </RelativeLayout>
+                </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

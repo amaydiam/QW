@@ -64,6 +64,19 @@
             android:label="@string/title_activity_lock_washer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullActivity" />
+
+        <activity
+            android:name=".ui.activity.forgotpassword.RequestForgotPasswordActivity"
+            android:label="@string/title_activity_forgot_password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.forgotpassword.ForgotPasswordActivity"
+            android:label="@string/title_activity_request_forgot_password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_lock_washer"

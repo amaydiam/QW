@@ -266,7 +266,7 @@ public class RegisterUserActivity extends AppCompatActivity implements DatePicke
                         Prefs.putUsername(context, data.getUsername());
                         Prefs.putType(context, data.getType());
                         Prefs.putFullName(context, data.getFullName());
-                        Prefs.putSaldo(context, data.getSaldo());
+                        Prefs.putSaldo(context, String.valueOf(data.getSaldo()));
                         Prefs.putFirebaseId(context, data.getFirebaseId());
                         Prefs.putGeometryLat(context, data.getGeometryLat());
                         Prefs.putGeometryLong(context, data.getGeometryLong());
@@ -363,7 +363,7 @@ public class RegisterUserActivity extends AppCompatActivity implements DatePicke
 
             @Override
             public void onFailure(Call<CheckEmail> call, Throwable t) {
-                String message = t.getMessage();
+                String message = t.getMessages();
 
                 msgEmail.setText("");
             }
