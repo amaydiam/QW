@@ -71,6 +71,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ui.activity.forgotpassword.VerificationCodeForgotPasswordActivity"
+            android:label="@string/title_activity_verification_code_forgot_password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.activity.forgotpassword.ForgotPasswordActivity"
             android:label="@string/title_activity_request_forgot_password"
             android:screenOrientation="portrait"

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,19 +14,19 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.forgotpassword.ForgotPasswordService;
-import com.qwash.washer.api.model.forgotpassword.ForgotPassword;
+import com.qwash.washer.api.model.forgotpassword.RequestForgotPassword;
+import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.ProgressDialogBuilder;
 import com.qwash.washer.utils.TextUtils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,10 +39,12 @@ public class RequestForgotPasswordActivity extends AppCompatActivity {
 
     private static final String TAG = "RequestForgotPasswordActivity";
 
-    @Length(min = 6, max = 20, trim = true, messageResId = R.string.lengt_phone_val)
     @NotEmpty
-    @BindView(R.id.et_phone_number)
-    EditText etPhoneNumber;
+    @Length(min = 5, max = 100, trim = true, messageResId = R.string.val_email_length)
+    @Email
+    @BindView(R.id.email)
+    RobotoRegularEditText email;
+
     @BindView(R.id.title_toolbar)
     TextView titleToolbar;
     @BindView(R.id.toolbar)
@@ -87,9 +88,8 @@ public class RequestForgotPasswordActivity extends AppCompatActivity {
         validator.setValidationListener(new Validator.ValidationListener() {
             @Override
             public void onValidationSucceeded() {
-                String inputStr = etPhoneNumber.getText().toString().trim();
-                String num = "+62" + TextUtils.ReplaceFirstCaracters(inputStr);
-                checkCode(num);
+                String inputStr = email.getText().toString().trim();
+                RequestForgotPassword(inputStr);
             }
 
             @Override
@@ -101,21 +101,19 @@ public class RequestForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-    private void checkCode(final String num) {
+    private void RequestForgotPassword(final String email) {
         dialogProgress.show(getString(R.string.request_forgot_password_action), getString(R.string.please_wait));
-        Map<String, String> params = new HashMap<>();
-        params.put(Sample.USERNAME, num);
-
         ForgotPasswordService mService = ApiUtils.ForgotPasswordService(this);
-        mService.getRequestForgotPasswordLink(params).enqueue(new Callback<ForgotPassword>() {
+        mService.getRequestForgotPasswordLink(email).enqueue(new Callback<RequestForgotPassword>() {
             @Override
-            public void onResponse(Call<ForgotPassword> call, Response<ForgotPassword> response) {
+            public void onResponse(Call<RequestForgotPassword> call, Response<RequestForgotPassword> response) {
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
                         String msg = response.body().getMessages();
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         Intent returnIntent = new Intent();
+                        returnIntent.putExtra(Sample.EMAIL,email);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }
@@ -127,7 +125,7 @@ public class RequestForgotPasswordActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ForgotPassword> call, Throwable t) {
+            public void onFailure(Call<RequestForgotPassword> call, Throwable t) {
                 String message = t.getMessage();
 
                 dialogProgress.hide();

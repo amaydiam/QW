@@ -14,6 +14,7 @@ import com.qwash.washer.api.client.order.OrderService;
 import com.qwash.washer.api.client.register.DocumentService;
 import com.qwash.washer.api.client.register.RegisterService;
 import com.qwash.washer.api.client.sms.VerificationCodeService;
+import com.qwash.washer.api.client.wallet.WalletService;
 import com.qwash.washer.api.client.wash_history.WashHistoryService;
 
 
@@ -76,4 +77,8 @@ public class ApiUtils {
 
     }
 
+    public static WalletService WalletService(Context context) {
+        return RetrofitClient.getClient(context, Sample.BASE_URL_QWASH_API).create(WalletService.class);
+
+    }
 }

@@ -59,7 +59,7 @@ import butterknife.OnClick;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnProfilFragmentInteractionListener, WalletFragment.OnWalletInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnProfilFragmentInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -353,11 +353,6 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onProfilFragmentInteraction() {
-
-    }
-
-    @Override
-    public void OnWalletInteraction(Uri uri) {
 
     }
 

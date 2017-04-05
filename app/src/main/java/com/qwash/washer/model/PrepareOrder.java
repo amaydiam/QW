@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class PrepareOrder implements Serializable {
 
     //
-    private String washersId;
+    private String token;
 
     // customer order
     private String customersId;
@@ -46,8 +46,8 @@ public class PrepareOrder implements Serializable {
     private int estimated_price;
 
 
-    public PrepareOrder(String washersId, String customersId, String username, String email, String name, String firebase_id, String usersDetailsId, String userIdFk, String nameAddress, String address, String lat, String Long, String type, int vehicles_type, int vehicles, int price, int perfum_price, int perfum_status, int interior_vaccum_price, int interior_vaccum_status, int waterless_price, int waterless_status, int estimated_price) {
-        this.washersId = washersId;
+    public PrepareOrder(String token, String customersId, String username, String email, String name, String firebase_id, String usersDetailsId, String userIdFk, String nameAddress, String address, String lat, String Long, String type, int vehicles_type, int vehicles, int price, int perfum_price, int perfum_status, int interior_vaccum_price, int interior_vaccum_status, int waterless_price, int waterless_status, int estimated_price) {
+        this.token = token;
         this.customersId = customersId;
         this.username = username;
         this.email = email;
@@ -73,12 +73,12 @@ public class PrepareOrder implements Serializable {
     }
 
 
-    public String getWashersId() {
-        return washersId;
+    public String getToken() {
+        return token;
     }
 
-    public void setWashersId(String washersId) {
-        this.washersId = washersId;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getCustomersId() {

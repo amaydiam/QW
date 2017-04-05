@@ -36,6 +36,7 @@ import com.qwash.washer.api.model.login.Login;
 import com.qwash.washer.api.model.washer.DataWasher;
 import com.qwash.washer.ui.activity.forgotpassword.ForgotPasswordActivity;
 import com.qwash.washer.ui.activity.forgotpassword.RequestForgotPasswordActivity;
+import com.qwash.washer.ui.activity.forgotpassword.VerificationCodeForgotPasswordActivity;
 import com.qwash.washer.ui.activity.register.LockWasherActivity;
 import com.qwash.washer.ui.activity.register.RegisterUserActivity;
 import com.qwash.washer.ui.activity.register.VerificationCodeActivity;
@@ -72,7 +73,7 @@ public class LoginUserActivity extends AppCompatActivity {
     RobotoRegularEditText email;
 
     @NotEmpty
-    @Password(min = 4, messageResId = R.string.val_password_length)
+    @Password(min = 5, messageResId = R.string.val_password_length)
     @BindView(R.id.password)
     PasswordEditText password;
 
@@ -315,7 +316,9 @@ public class LoginUserActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                Intent intent = new Intent(this, ForgotPasswordActivity.class);
+                String email=data.getStringExtra(Sample.EMAIL);
+                Intent intent = new Intent(this, VerificationCodeForgotPasswordActivity.class);
+                intent.putExtra(Sample.EMAIL, email);
                 startActivity(intent);
             }
             if (resultCode == Activity.RESULT_CANCELED) {

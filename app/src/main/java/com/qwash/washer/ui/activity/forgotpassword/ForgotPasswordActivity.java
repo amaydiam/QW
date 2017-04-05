@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -27,9 +26,8 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
-import com.qwash.washer.api.client.auth.LoginService;
-import com.qwash.washer.api.model.login.Login;
-import com.qwash.washer.api.model.washer.DataWasher;
+import com.qwash.washer.api.client.forgotpassword.ForgotPasswordService;
+import com.qwash.washer.api.model.forgotpassword.ForgotPassword;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.ProgressDialogBuilder;
 
@@ -66,6 +64,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private Context context;
+    private String userId;
 
     @OnClick(R.id.btn_save)
     void Save() {
@@ -88,6 +87,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
+        userId= getIntent().getStringExtra(Sample.USER_ID);
         context = getApplicationContext();
         dialogProgress = new ProgressDialogBuilder(this);
         setSupportActionBar(toolbar);
@@ -142,21 +142,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void ResetPassword() {
         dialogProgress.show(getString(R.string.reset_password_action), getString(R.string.please_wait));
 
-        final String firebase_id = FirebaseInstanceId.getInstance().getToken();
-        Map<String, String> params = new HashMap<>();/*
-        params.put(Sample.EMAIL, email.getText().toString());
-        params.put(Sample.PASSWORD, password.getText().toString());
-        params.put(Sample.FIREBASE_ID, firebase_id);*/
+        Map<String, String> params = new HashMap<>();
+        params.put(Sample.USER_ID, userId);
+        params.put(Sample.PASSWORD, newPassword.getText().toString());
 
-        LoginService mService = ApiUtils.LoginService(this);
-        mService.getLoginLink(params).enqueue(new Callback<Login>() {
+        ForgotPasswordService mService = ApiUtils.ForgotPasswordService(this);
+        mService.getForgotPasswordLink(params).enqueue(new Callback<ForgotPassword>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
+            public void onResponse(Call<ForgotPassword> call, Response<ForgotPassword> response) {
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
-
-                        DataWasher data = response.body().getDataWasher();
+                        Toast.makeText(getApplicationContext(), response.body().getMessages(), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 } else {
@@ -175,7 +172,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<ForgotPassword> call, Throwable t) {
                 String message = t.getMessage();
                 dialogProgress.hide();
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

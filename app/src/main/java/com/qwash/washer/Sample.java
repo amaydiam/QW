@@ -66,6 +66,7 @@ public class Sample {
     public static final String ORDER_VEHICLES = "vehicles";
 
     //order detail
+    public static final String ORDER_TOKEN = "token";
     public static final String ORDER_PRICE = "price";
 
     public static final String ORDER_PERFUM_PRICE = "perfum_price";

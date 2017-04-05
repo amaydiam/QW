@@ -267,6 +267,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
         params.put(Sample.CUSTOMERS_ID, prepareOrder.getCustomersId());
         params.put(Sample.WASHERS_ID, Prefs.getUserId(this));
         params.put(Sample.VEHICLES, String.valueOf(prepareOrder.getVehicles()));
+        params.put(Sample.TYPE, String.valueOf(prepareOrder.getVehicles_type()));
         params.put(Sample.LAT, prepareOrder.getLat());
         params.put(Sample.LONG, prepareOrder.getLong());
         params.put(Sample.NAMEADDRESS, prepareOrder.getNameAddress());
@@ -276,6 +277,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
         params.put(Sample.VACUM, String.valueOf(prepareOrder.getInterior_vaccum_status()));
         params.put(Sample.WATERLESS, String.valueOf(prepareOrder.getWaterless_status()));
         params.put(Sample.SERVICES, "service");
+        params.put(Sample.TOKEN, prepareOrder.getToken());
 
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
@@ -532,9 +534,6 @@ public class ProgressOrderActivity extends AppCompatActivity {
         try {
             JSONObject jsonOrder = new JSONObject(Prefs.getOrderedData(this));
 
-            JSONObject whasher = new JSONObject(jsonOrder.getString(Sample.WASHER));
-            String washersId = whasher.getString(Sample.WASHERS_ID);
-
             JSONObject customer = new JSONObject(jsonOrder.getString(Sample.CUSTOMER));
             String customersId = customer.getString(Sample.ORDER_USERID);
             String username = customer.getString(Sample.ORDER_USERNAME);
@@ -559,6 +558,8 @@ public class ProgressOrderActivity extends AppCompatActivity {
 
 
             JSONObject details = new JSONObject(jsonOrder.getString(Sample.DETAILS));
+
+            String token = details.getString(Sample.ORDER_TOKEN);
             int price = Integer.parseInt(details.getString(Sample.ORDER_PRICE));
 
             int perfum_price = Integer.parseInt(details.getString(Sample.ORDER_PERFUM_PRICE));
@@ -574,7 +575,7 @@ public class ProgressOrderActivity extends AppCompatActivity {
 
             int estimated_price = Integer.parseInt(details.getString(Sample.ORDER_ESTIMATED_PRICE));
 
-            prepareOrder = new PrepareOrder(washersId, customersId, username, email, name, firebase_id, usersDetailsId, userIdFk, nameAddress, order_address, lat, Long, type, vehicles_type, vehicles, price, perfum_price, perfum_status, interior_vaccum_price, interior_vaccum_status, waterless_price, waterless_status, estimated_price);
+            prepareOrder = new PrepareOrder(token, customersId, username, email, name, firebase_id, usersDetailsId, userIdFk, nameAddress, order_address, lat, Long, type, vehicles_type, vehicles, price, perfum_price, perfum_status, interior_vaccum_price, interior_vaccum_status, waterless_price, waterless_status, estimated_price);
 
 
         } catch (JSONException e) {
