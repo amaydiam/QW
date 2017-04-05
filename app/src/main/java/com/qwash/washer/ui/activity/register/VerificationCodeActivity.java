@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
@@ -15,6 +15,7 @@ import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.sms.VerificationCodeService;
 import com.qwash.washer.api.model.register.SendSms;
 import com.qwash.washer.api.model.register.VerificationCode;
+import com.qwash.washer.ui.activity.BaseActivity;
 import com.qwash.washer.ui.activity.LoginUserActivity;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
@@ -36,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerificationCodeActivity extends AppCompatActivity {
+public class VerificationCodeActivity extends BaseActivity {
 
     private static final String TAG = "VerificationCodeActivity";
 

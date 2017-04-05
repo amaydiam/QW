@@ -404,18 +404,18 @@ public class HomeFragment extends Fragment implements
                 LinearLayout viewComplete = (LinearLayout) inflater.inflate(R.layout.connection_success, null, false);
                 statusConnection.addView(viewComplete);
                 RobotoLightTextView message_complete = (RobotoLightTextView) viewComplete.findViewById(R.id.message);
-                message_complete.setText("Connected !!");
+                message_complete.setText(getString(R.string.connection_connected));
             } else {
                 LinearLayout viewSlow = (LinearLayout) inflater.inflate(R.layout.connection_slow, null, false);
                 statusConnection.addView(viewSlow);
                 RobotoLightTextView message_slow = (RobotoLightTextView) viewSlow.findViewById(R.id.message);
-                message_slow.setText("Your Connection is Slowly !!");
+                message_slow.setText(getString(R.string.connection_slowly));
             }
         } else {
             LinearLayout viewError = (LinearLayout) inflater.inflate(R.layout.connection_error, null, false);
             statusConnection.addView(viewError);
             RobotoLightTextView message_error = (RobotoLightTextView) viewError.findViewById(R.id.message);
-            message_error.setText("Not Connected. Check Your Internet !!");
+            message_error.setText(getString(R.string.connection_not_connected));
         }
     }
 

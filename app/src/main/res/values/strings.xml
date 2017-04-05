@@ -5,20 +5,11 @@
     <string name="dont_have_an_account">Don\'t Have An Account?</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="title_activity_register">Register</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-
     <string name="button_login">Login</string>
-
     <string name="message_denied">Permission \"%1$s\" has been denied.</string>
-    <string name="action_logout">Logout</string>
     <string name="title_activity_lock_washer">Lock Washer</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="button_top_up">Top Up</string>
     <string name="office_address">Ruko Parakan Kavling 8E, Jl. Parakan, Pd. Benda, Pamulang, Kota Tangerang Selatan, Banten, 15417</string>
     <string name="hint_number">877–7889–9430</string>
     <string name="city">City</string>
@@ -29,14 +20,11 @@
     <string name="val_new_password_length">New password must be at least 5 chars</string>
     <string name="val_full_name">Fill your name</string>
     <string name="val_telp_length">Fill your phone number</string>
-    <string name="val_address_length">Complete your address</string>
     <string name="val_province_length">Complete your province</string>
     <string name="val_city_length">Complete your city</string>
-
-    <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
     <string name="try_again">Try Again?</string>
-    <string name="type_search">search ..</string>
+    <string name="type_search">search …</string>
     <string name="full_name">Full Name</string>
     <string name="ktp">Identity Card Number (KTP)</string>
     <string name="birthday">Date of Birthday</string>
@@ -59,7 +47,7 @@
     <string name="desc_check">Show your equipment to customer.</string>
     <string name="des_photo">Photo condition of demaged vehichle parts.</string>
     <string name="des_key">Don\'t receive the car key of customer.</string>
-    <string name="des_equipment">Check out tthe entire customer valuables in the car.</string>
+    <string name="des_equipment">Check out the entire customer valuables in the car.</string>
     <string name="phone">Phone</string>
     <string name="change_password">Change Password</string>
     <string name="term_of_service">Term of Service</string>
@@ -71,15 +59,11 @@
     <string name="desc_request_forgot_password">Request forgot password</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="new_password">New password</string>
-    <string name="resend_the_text">resend</string>
-    <string name="change_number">change number</string>
-
-
-    <string name="verification_title">Masukkan kode verifikasi</string>
-    <string name="verification_desc">Cek kode verifikasi yang sudah dikirimkan ke nomormu  %1$s Tuliskan di sini:</string>
-    <string name="verification_code_desc">Cek kode verifikasi yang sudah dikirimkan ke nomormu. Tuliskan di sini:</string>
-    <string name="code_verification">Enter Kode verifikasi</string>
-
+    <string name="resend_the_text">Resend</string>
+    <string name="change_number">Change Number</string>
+    <string name="verification_title">Input Verification Code</string>
+    <string name="verification_desc">Please check the verification code that was sent to your number  %1$s Input here:</string>
+    <string name="verification_code_desc">Please check the verification code that was sent to your number. Input here:</string>
     <string name="save_and_verify"><![CDATA[Save & Verify]]></string>
     <string name="change_number_to_verify_code">Change number to verify code</string>
     <string name="must_input_diff_number">You must input different phone number</string>
@@ -93,30 +77,25 @@
     <string name="title_activity_verify_document">Verify Document</string>
     <string name="desc_verify_document">Please attact your indentity card (KTP) and a certificate of your police (SKCK).</string>
     <string name="pick_source">Pick Image</string>
-    <string name="upload_document_permission"><![CDATA[Kamu harus unggah gambar %s. Aktifkan izin (permission) WRITE_EXTERNAL_STORAGE di [Setting] > [Permission]]]></string>
+    <string name="upload_document_permission"><![CDATA[You must upload an image %s. Enable permissions WRITE_EXTERNAL_STORAGE at [Setting] > [Permission]]]></string>
     <string name="title_activity_verify_tools">Verify Tools</string>
     <string name="desc_verify_tools">Please complete equipment for washing vehicles, check the equipment that you ready have, You can also buy or installment in the nearest dealer.</string>
-    <string name="verify_tools">Verify Your Tools</string>
-    <string name="agree_term_and_condition_qwash">Saya setuju dengan syarat dan ketentuan di Qwash</string>
-    <string name="info_registration">Kamu harus mencentang pernyataan setuju sebelum melakukan submit</string>
+    <string name="agree_term_and_condition_qwash">I agree to the terms and conditions in Qwash</string>
+    <string name="info_registration">You must check the agreed statement before submitting.</string>
     <string name="ok">OK</string>
-    <string name="notif_photo">Please select your photo</string>
-    <string name="notif_agree_register">you must check agree</string>
-    <string name="address">Address</string>
     <string name="confirm_password">Confirm Password</string>
-
-    <string name="january">Januari</string>
-    <string name="february">Februari</string>
-    <string name="march">Maret</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
     <string name="april">April</string>
-    <string name="may">Mei</string>
-    <string name="june">Juni</string>
-    <string name="july">Juli</string>
-    <string name="august">Agustus</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
     <string name="september">September</string>
-    <string name="october">Oktober</string>
+    <string name="october">October</string>
     <string name="november">November</string>
-    <string name="december">Desember</string>
+    <string name="december">December</string>
     <string name="btn_verification_code">Verification</string>
     <string name="please_input_verification_code">Please Input verification code !</string>
     <string name="btn_upload">Upload</string>
@@ -125,8 +104,8 @@
     <string name="your_location">Your Location</string>
     <string name="latitude_office_qwash">-6.340253</string>
     <string name="longitude_office_qwash">106.710095</string>
-    <string name="info_activation">Anda harus melakukan aktivasi offline dengan mengunjungi Kantor QWash Indonesia dengan membawa document.</string>
-    <string name="notif_select_file">Harap lengkapi document</string>
+    <string name="info_activation">You should activation Q-Wash offline by visiting the Office of Indonesia and took the document..</string>
+    <string name="notif_select_file">Please complete document</string>
     <string name="upload">Upload …</string>
     <string name="start">Start</string>
     <string name="finish">Finish</string>
@@ -140,9 +119,39 @@
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="request_forgot_password_action">Request …</string>
     <string name="desc_forgot_password">Reset Password</string>
-    <string name="save">Save</string>
     <string name="reset_password_action">Reset Password …</string>
     <string name="title_activity_verification_code_forgot_password">Verification Code</string>
     <string name="reset">Reset</string>
+    <string name="debit">Debit</string>
+    <string name="kredit">Credit</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="wallet">Wallet</string>
+    <string name="wash_history">Wash History</string>
+    <string name="feedback_customer">Feedback Customer</string>
+    <string name="pusat_bantuan">Help Center</string>
+    <string name="info">Info</string>
+    <string name="logout">Logout</string>
+    <string name="accept">ACCEPT</string>
+    <string name="deacline">DEACLINE</string>
+    <string name="call">CALL</string>
+    <string name="sms">SMS</string>
+    <string name="navigation">NAVIGATION</string>
+    <string name="rate">RATE</string>
+    <string name="wash">WASH</string>
+    <string name="balance">BALANCE</string>
+    <string name="rate_by_customer">Rate by Customer</string>
+    <string name="or">OR</string>
+    <string name="sign_in_with_washer_account">Sign in with washer account</string>
+    <string name="create_account_ni_m_new_washers">Create Account I\'m new washers</string>
+    <string name="connection_connected">Connected !!</string>
+    <string name="connection_slowly">Your Connection is slowly !!</string>
+    <string name="connection_not_connected">Not Connected. Check Your Internet !!</string>
+    <string name="small">SMALL</string>
+    <string name="medium">MEDIUM</string>
+    <string name="big">BIG</string>
+    <string name="change_language">Change Language</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="english">English</string>
 
 </resources>

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -63,7 +63,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginUserActivity extends AppCompatActivity {
+public class LoginUserActivity extends BaseActivity {
 
 
     @NotEmpty

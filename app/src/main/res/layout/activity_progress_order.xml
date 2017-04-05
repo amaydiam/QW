@@ -148,7 +148,6 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="right"
-                            android:text="Rp. 50.000"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
 
@@ -289,7 +288,6 @@
                             android:layout_centerInParent="true"
                             android:layout_toLeftOf="@+id/layout_navigation"
                             android:layout_toRightOf="@id/gbr5"
-                            android:text="Jl Benda Baru no 13 Pamulang, Tangerang Selatan, Banten 1402"
                             android:textSize="14sp" />
 
 
@@ -314,7 +312,7 @@
                             <com.qwash.washer.ui.widget.RobotoRegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="NAVIGATION"
+                                android:text="@string/navigation"
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -357,7 +355,6 @@
                                 android:id="@+id/customer_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="customer_name"
                                 android:textSize="14sp" />
 
 
@@ -365,7 +362,6 @@
                                 android:id="@+id/customer_phone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="customer_phone"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -391,7 +387,7 @@
                             <com.qwash.washer.ui.widget.RobotoRegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="SMS"
+                                android:text="@string/sms"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -417,7 +413,7 @@
                             <com.qwash.washer.ui.widget.RobotoRegularTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="CALL"
+                                android:text="@string/call"
                                 android:textSize="14sp" />
                         </LinearLayout>
 
@@ -555,7 +551,7 @@
                             android:layout_marginRight="@dimen/activity_half_vertical_margin"
                             android:layout_weight="1"
                             android:background="@drawable/border_red"
-                            android:text="DEACLINE"
+                            android:text="@string/deacline"
                             android:textColor="#F44336" />
 
                         <com.qwash.washer.ui.widget.RobotoRegularButton
@@ -566,7 +562,7 @@
                             android:layout_marginRight="@dimen/activity_half_vertical_margin"
                             android:layout_weight="1"
                             android:background="@drawable/border_green"
-                            android:text="ACCEPT"
+                            android:text="@string/accept"
                             android:textColor="#4CAF50" />
                     </LinearLayout>
                 </LinearLayout>

@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="IDR 10000000"
+                tools:text="IDR 10000000"
                 android:textColor="@color/orange"
                 android:textSize="25sp" />
 
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="BALANCE"
+                android:text="@string/balance"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_half_vertical_margin"
                     android:gravity="center"
-                    android:text="20x"
+                    tools:text="20x"
                     android:textColor="@color/orange"
                     android:textSize="25sp" />
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_half_vertical_margin"
                     android:gravity="center"
-                    android:text="WASH"
+                    android:text="@string/wash"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_half_vertical_margin"
                     android:gravity="center"
-                    android:text="4.5"
+                    tools:text="4.5"
                     android:textColor="@color/orange"
                     android:textSize="25sp" />
 
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_half_vertical_margin"
                     android:gravity="center"
-                    android:text="RATE"
+                    android:text="@string/rate"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -163,7 +163,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="desc_available_for_job"
                     android:textSize="14sp" />
             </LinearLayout>
 

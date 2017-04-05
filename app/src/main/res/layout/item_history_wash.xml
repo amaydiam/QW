@@ -196,7 +196,7 @@
                     <com.qwash.washer.ui.widget.RobotoRegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Rate by Customer"
+                        android:text="@string/rate_by_customer"
                         android:textSize="12sp" />
 
                     <io.techery.properratingbar.ProperRatingBar

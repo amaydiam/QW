@@ -12,7 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +45,7 @@ import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
+import com.qwash.washer.ui.activity.BaseActivity;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 
 import org.json.JSONObject;
@@ -64,7 +65,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LockWasherActivity extends AppCompatActivity implements
+public class LockWasherActivity extends BaseActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -162,7 +163,7 @@ public class LockWasherActivity extends AppCompatActivity implements
 
         new TedPermission(this)
                 .setPermissionListener(permissionMapsListener)
-                .setDeniedMessage("Jika kamu menolak permission, Anda tidak dapat mendeteksi lokasi Anda \nHarap hidupkan permission ACCESS_FINE_LOCATION pada [Setting] > [Permission]")
+                .setDeniedMessage("Jika Anda menolak permission, Anda tidak dapat mendeteksi lokasi Anda \nHarap hidupkan permission ACCESS_FINE_LOCATION pada [Setting] > [Permission]")
                 .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
                 .check();
 

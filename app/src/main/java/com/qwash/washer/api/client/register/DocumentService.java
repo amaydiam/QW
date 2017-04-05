@@ -21,7 +21,8 @@ import retrofit2.http.PartMap;
 public interface DocumentService {
 
     @Multipart
-    @POST("upload/avatar")
+    @POST("uploads/avatar")
     Call<UploadDocument> getUploadDocumentLink(@Header(Sample.AUTHORIZATION) String token, @Part MultipartBody.Part file, @PartMap() Map<String, RequestBody> partMap);
+
 
 }

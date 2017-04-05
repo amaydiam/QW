@@ -7,6 +7,8 @@ import android.renderscript.Double2;
 import com.qwash.washer.Sample;
 import com.qwash.washer.ui.activity.ProgressOrderActivity;
 
+import java.util.Locale;
+
 
 public final class Prefs {
 
@@ -246,6 +248,14 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.ORDERS_ID, null);
     }
 
+
+    public static String getLanguage(final Context context) {
+        return Prefs.getPref(context, Sample.LANGUAGE, Locale.getDefault().getLanguage());
+    }
+
+    public static void putLanguage(Context context, String language) {
+        Prefs.putPref(context, Sample.LANGUAGE, language);
+    }
 
 
     public static boolean isLogedIn(Context context) {

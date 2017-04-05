@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -73,7 +73,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProgressOrderActivity extends AppCompatActivity {
+public class ProgressOrderActivity extends BaseActivity {
 
     @BindView(R.id.fitur_service_motor)
     MaterialRadioGroup fiturServiceMotor;

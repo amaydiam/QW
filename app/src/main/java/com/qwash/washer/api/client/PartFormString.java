@@ -50,9 +50,9 @@ public class PartFormString {
     }
 
     public RequestBody createPartFromString(String descriptionString) {
-        //    return RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
-        return RequestBody.create(
-                MultipartBody.FORM, descriptionString);
+            return RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
+       /* return RequestBody.create(
+                MultipartBody.FORM, descriptionString);*/
     }
 
     public MultipartBody.Part prepareFilePart(String partName, File file) {

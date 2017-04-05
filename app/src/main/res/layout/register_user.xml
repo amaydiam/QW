@@ -115,7 +115,6 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/pick_code_country"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginLeft="@dimen/activity_half_vertical_margin"
@@ -362,7 +361,7 @@
                         android:shadowDx="1"
                         android:shadowDy="1"
                         android:shadowRadius="2"
-                        android:text="OR"
+                        android:text="@string/or"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="14sp"
@@ -392,7 +391,7 @@
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
-                    android:text="Sign in with washer account"
+                    android:text="@string/sign_in_with_washer_account"
                     android:textAlignment="center"
                     android:textColor="@color/blue_2196F3"
                     android:textSize="14sp" />

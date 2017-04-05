@@ -2,7 +2,7 @@ package com.qwash.washer.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * Created by binderbyte on 09/01/17.
  */
 
-public class TopUpActivity extends AppCompatActivity {
+public class TopUpActivity extends BaseActivity {
 
     @BindView(R.id.checkbox20)
     RadioButton checkbox20;

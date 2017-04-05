@@ -5,35 +5,35 @@
         <item
             android:id="@+id/nav_home"
             android:checkable="true"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_profil"
             android:checkable="true"
-            android:title="Profile" />
+            android:title="@string/profile" />
         <item
             android:id="@+id/nav_wallet"
             android:checkable="true"
-            android:title="Wallet" />
+            android:title="@string/wallet" />
         <item
             android:id="@+id/nav_wash_history"
             android:checkable="true"
-            android:title="Wash History" />
+            android:title="@string/wash_history" />
         <item
             android:id="@+id/nav_feedback_customer"
             android:checkable="true"
-            android:title="Feedback Customer" />
+            android:title="@string/feedback_customer" />
         <item
             android:id="@+id/nav_pusat_bantuan"
             android:checkable="false"
-            android:title="Pusat Bantuan" />
+            android:title="@string/pusat_bantuan" />
         <item
             android:id="@+id/nav_info"
             android:checkable="false"
-            android:title="Info" />
+            android:title="@string/info" />
         <item
             android:id="@+id/nav_logout"
             android:checkable="false"
-            android:title="Logout" />
+            android:title="@string/logout" />
 
     </group>
 </menu>

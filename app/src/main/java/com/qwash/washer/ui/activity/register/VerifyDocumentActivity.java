@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.Iconify;
@@ -31,6 +33,8 @@ import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.PartFormString;
 import com.qwash.washer.api.client.register.DocumentService;
 import com.qwash.washer.api.client.register.UploadDocument;
+import com.qwash.washer.api.model.GlobalError;
+import com.qwash.washer.ui.activity.BaseActivity;
 import com.qwash.washer.ui.fragment.DialogViewSinggleImageFragment;
 import com.qwash.washer.ui.widget.RobotoRegularButton;
 import com.qwash.washer.utils.Prefs;
@@ -38,6 +42,7 @@ import com.qwash.washer.utils.ProgressDialogBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -56,7 +61,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifyDocumentActivity extends AppCompatActivity {
+public class VerifyDocumentActivity extends BaseActivity {
 
     private int TYPE_IMG;
     private int PHOTO = 1;
@@ -306,6 +311,8 @@ public class VerifyDocumentActivity extends AppCompatActivity {
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put(Sample.USER_ID, partFormString.createPartFromString(Prefs.getUserId(this)));
 
+        Log.v(Sample.USER_ID, String.valueOf(partFormString.createPartFromString(Prefs.getUserId(this))));
+
         DocumentService paymentService = ApiUtils.DocumentService(getApplicationContext());
         paymentService.getUploadDocumentLink("Bearer " + Prefs.getToken(this), bodyFileKtp, map)
                 .enqueue(new Callback<UploadDocument>() {
@@ -320,6 +327,22 @@ public class VerifyDocumentActivity extends AppCompatActivity {
 
                             }
                         }
+                        else {
+                            int statusCode = response.code();
+                            try {
+                                String json = response.errorBody().string();
+                                GlobalError globalError = new Gson().fromJson(json, GlobalError.class);
+                                if (!globalError.getStatus()) {
+                                        Toast.makeText(getApplicationContext(), globalError.getMessages(), Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
                     }
 
                     @Override

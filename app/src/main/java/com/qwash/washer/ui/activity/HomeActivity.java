@@ -1,6 +1,7 @@
 package com.qwash.washer.ui.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import com.qwash.washer.ui.fragment.ProfilFragment;
 import com.qwash.washer.ui.fragment.WalletFragment;
 import com.qwash.washer.ui.fragment.WashHistoryFragment;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.utils.LanguageHelper;
 import com.qwash.washer.utils.Menus;
 import com.qwash.washer.utils.Prefs;
 
@@ -58,7 +60,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeActivity extends AppCompatActivity
+public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnProfilFragmentInteractionListener {
 
     @BindView(R.id.toolbar)
@@ -81,6 +83,8 @@ public class HomeActivity extends AppCompatActivity
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

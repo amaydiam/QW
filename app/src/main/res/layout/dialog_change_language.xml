@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_2196F3"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="{mdi-close}"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="{md-language}"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/change_language"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/layout_english"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_half_vertical_margin">
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/english"
+                    android:textSize="14sp" />
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/badge_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="{md-check}"
+                    android:textColor="@color/blue_2196F3"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                android:background="@color/divider" />
+
+            <RelativeLayout
+                android:id="@+id/layout_indonesia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_half_vertical_margin">
+                <com.qwash.washer.ui.widget.RobotoRegularTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/indonesia"
+                    android:textSize="14sp" />
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/badge_indonesia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="{md-check}"
+                    android:textColor="@color/blue_2196F3"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                android:background="@color/divider" />
+        </LinearLayout>
+
+        <com.qwash.washer.ui.widget.RobotoRegularButton
+            android:id="@+id/btn_change_language"
+            style="@style/btn_blue_outline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+            android:layout_marginRight="@dimen/activity_half_vertical_margin"
+            android:text="@string/change_language" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

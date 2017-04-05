@@ -94,7 +94,7 @@ public class Wallet implements Parcelable {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        return TextUtils.DefaultDateFormat(createdAt);
     }
 
     public void setCreatedAt(String createdAt) {

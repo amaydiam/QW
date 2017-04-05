@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sign_in_washer"
                 android:gravity="center"
-                android:text="Create Account\nI'm new washers"
+                android:text="@string/create_account_ni_m_new_washers"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                  />

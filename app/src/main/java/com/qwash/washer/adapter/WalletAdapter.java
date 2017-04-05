@@ -127,7 +127,8 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
                 holder.status.setBackground(activity.getResources().getDrawable(R.drawable.shape_complete));
             }
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.green_cc09891b));
-            holder.estimatedPrice.setText(wallet.getKredit());
+            holder.estimatedPrice.setText(wallet.getKreditRupiah());
+            holder.status.setText(activity.getString(R.string.kredit));
 
         } else if (wallet.getDebit()!=0) {
 
@@ -141,7 +142,8 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
             }
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.red_light));
 
-            holder.estimatedPrice.setText(wallet.getDebit());
+            holder.estimatedPrice.setText(wallet.getDebitRupiah());
+            holder.status.setText(activity.getString(R.string.debit));
 
         } else {
             if (sdk < Build.VERSION_CODES.JELLY_BEAN) {
@@ -155,9 +157,9 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder
             holder.status.setTextColor(ContextCompat.getColor(activity, R.color.divider));
 
             holder.estimatedPrice.setText("-");
+            holder.status.setText("-");
         }
 
-        holder.status.setText(wallet.getDescription());
 
         holder.status.setVisibility(View.VISIBLE);
         holder.rootParent.setTag(position);

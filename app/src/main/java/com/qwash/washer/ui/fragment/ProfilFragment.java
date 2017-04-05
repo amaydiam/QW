@@ -56,6 +56,15 @@ public class ProfilFragment extends Fragment {
         dialogRequestNewPasswordFragment.show(ft, "request_password");
     }
 
+    @OnClick(R.id.layout_change_language)
+    public void ChangeLanguage() {
+
+        FragmentManager ft = getChildFragmentManager();
+        DialogChangeLanguageFragment dialogChangeLanguageFragment = new DialogChangeLanguageFragment();
+        dialogChangeLanguageFragment.show(ft, "request_language");
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

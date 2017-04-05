@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +18,7 @@ import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.sms.VerificationCodeService;
 import com.qwash.washer.api.model.register.SendSms;
+import com.qwash.washer.ui.activity.BaseActivity;
 import com.qwash.washer.utils.Prefs;
 import com.qwash.washer.utils.ProgressDialogBuilder;
 import com.qwash.washer.utils.TextUtils;
@@ -33,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangeNumberActivity extends AppCompatActivity {
+public class ChangeNumberActivity extends BaseActivity {
 
     private static final String TAG = "ChangeNumberActivity";
 

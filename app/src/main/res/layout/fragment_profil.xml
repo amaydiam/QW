@@ -149,6 +149,38 @@
                     android:layout_marginRight="@dimen/activity_half_vertical_margin"
                     android:background="@color/divider" />
 
+
+                <LinearLayout
+                    android:layout_margin="@dimen/activity_half_vertical_margin"
+                    android:id="@+id/layout_change_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_width="@dimen/activity_vertical_margin"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                        android:text="{md-language}"
+                        android:textSize="14sp" />
+
+                    <com.qwash.washer.ui.widget.RobotoRegularTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/change_language"
+                        android:textColor="@color/blue_2196F3"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_half_vertical_margin"
+                    android:background="@color/divider" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

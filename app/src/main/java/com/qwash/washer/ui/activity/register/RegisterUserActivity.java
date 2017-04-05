@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,6 +31,7 @@ import com.qwash.washer.api.ApiUtils;
 import com.qwash.washer.api.client.register.RegisterService;
 import com.qwash.washer.api.model.washer.DataWasher;
 import com.qwash.washer.api.model.register.Register;
+import com.qwash.washer.ui.activity.BaseActivity;
 import com.qwash.washer.ui.widget.RobotoRegularButton;
 import com.qwash.washer.ui.widget.RobotoRegularEditText;
 import com.qwash.washer.utils.Prefs;
@@ -60,7 +61,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class RegisterUserActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "RegisterUserActivity";
 
