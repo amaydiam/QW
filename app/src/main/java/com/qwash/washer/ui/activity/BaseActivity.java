@@ -14,4 +14,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LanguageHelper.onAttach(base));
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.qwash.washer.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +19,7 @@ import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
+import com.qwash.washer.Sample;
 import com.qwash.washer.model.temporary.ChangePassword;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
 import com.qwash.washer.utils.Prefs;
@@ -62,6 +65,29 @@ public class ProfilFragment extends Fragment {
         FragmentManager ft = getChildFragmentManager();
         DialogChangeLanguageFragment dialogChangeLanguageFragment = new DialogChangeLanguageFragment();
         dialogChangeLanguageFragment.show(ft, "request_language");
+    }
+
+    @OnClick(R.id.layout_term_of_service)
+    public void TermOfService() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Sample.URL_TERM_OF_SERVICE));
+        startActivity(browserIntent);
+    }
+
+
+    @OnClick(R.id.layout_privacy_police)
+    public void PrivacyPolice() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Sample.URL_PRIVACY_POLICE));
+        startActivity(browserIntent);
+    }
+
+
+
+    @OnClick(R.id.layout_rate_qwash)
+    public void RateQwash() {
+
+        FragmentManager ft = getChildFragmentManager();
+        DialogRateQwashFragment dialogRateQwashFragment = new DialogRateQwashFragment();
+        dialogRateQwashFragment.show(ft, "rate_qwash");
     }
 
 

@@ -166,6 +166,8 @@ public class Sample {
 
     public static final String URL_PUSAT_BANTUAN_WASHER = "https://qwash-indonesia.com/panduan-washer";
     public static final String LANGUAGE = "language";
+    public static final String URL_TERM_OF_SERVICE = "https://qwash-indonesia.com/syarat-dan-ketentuan";
+    public static final String URL_PRIVACY_POLICE = "https://qwash-indonesia.com/page/privacy-policy";
 
     public static final String[] listMontOfYear(Context context) {
         return new String[]{

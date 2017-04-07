@@ -153,5 +153,10 @@
     <string name="change_language">Change Language</string>
     <string name="indonesia">Indonesia</string>
     <string name="english">English</string>
+    <string name="desc_rate_qwash" >If you enjoy using Qwash, please take a moment to rate it on the Play Store.</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="cancel">Cancel</string>
+    <string name="desc_rate_now">Rate QWash</string>
+    <string name="title_rate_qwash">Rate Qwash</string>
 
 </resources>

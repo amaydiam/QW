@@ -11,7 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialIcons;
+import com.joanzapata.iconify.fonts.MaterialModule;
+import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -67,12 +73,17 @@ public class RequestForgotPasswordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Iconify
+                .with(new FontAwesomeModule())
+                .with(new EntypoModule())
+                .with(new MaterialModule())
+                .with(new MaterialCommunityModule())
+                .with(new SimpleLineIconsModule());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_forgot_password);
         ButterKnife.bind(this);
         context = getApplicationContext();
         dialogProgress = new ProgressDialogBuilder(this);
-
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(
                 new IconDrawable(this, MaterialIcons.md_arrow_back)

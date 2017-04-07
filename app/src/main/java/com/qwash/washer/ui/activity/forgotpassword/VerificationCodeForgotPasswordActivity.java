@@ -8,6 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.joanzapata.iconify.fonts.MaterialCommunityModule;
+import com.joanzapata.iconify.fonts.MaterialModule;
+import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
 import com.qwash.washer.Sample;
 import com.qwash.washer.api.ApiUtils;
@@ -73,6 +79,12 @@ public class VerificationCodeForgotPasswordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Iconify
+                .with(new FontAwesomeModule())
+                .with(new EntypoModule())
+                .with(new MaterialModule())
+                .with(new MaterialCommunityModule())
+                .with(new SimpleLineIconsModule());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification_forgot_password);
         ButterKnife.bind(this);

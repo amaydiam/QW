@@ -182,6 +182,7 @@
                     android:background="@color/divider" />
 
                 <LinearLayout
+                    android:id="@+id/layout_term_of_service"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/activity_half_vertical_margin"
@@ -211,6 +212,7 @@
                     android:layout_marginRight="@dimen/activity_half_vertical_margin"
                     android:background="@color/divider" />
                 <LinearLayout
+                    android:id="@+id/layout_privacy_police"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/activity_half_vertical_margin"
@@ -245,6 +247,7 @@
                     android:layout_margin="@dimen/activity_half_vertical_margin">
 
                     <LinearLayout
+                        android:id="@+id/layout_rate_qwash"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
