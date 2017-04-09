@@ -260,14 +260,15 @@ public class RegisterUserActivity extends BaseActivity implements DatePickerDial
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
                         DataWasher data = response.body().getDataWasher();
-
+                        Prefs.putPassword(context, password.getText().toString().trim());
                         Prefs.putToken(context, response.body().getToken());
                         Prefs.putUserId(context, data.getUserId());
                         Prefs.putEmail(context, data.getEmail());
                         Prefs.putUsername(context, data.getUsername());
                         Prefs.putType(context, data.getType());
                         Prefs.putFullName(context, data.getFullName());
-                        Prefs.putSaldo(context, String.valueOf(data.getSaldo()));
+                     //   Prefs.putSaldo(context, data.getSaldo());
+                       Prefs.putSaldo(context, 0);
                         Prefs.putFirebaseId(context, data.getFirebaseId());
                         Prefs.putGeometryLat(context, data.getGeometryLat());
                         Prefs.putGeometryLong(context, data.getGeometryLong());

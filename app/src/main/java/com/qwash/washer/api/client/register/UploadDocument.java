@@ -8,27 +8,41 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class UploadDocument {
-        @SerializedName("status")
-        @Expose
-        private Boolean status;
-        @SerializedName("uploads")
-        @Expose
-        private String uploads;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
 
-        public Boolean getStatus() {
-            return status;
-        }
 
-        public void setStatus(Boolean status) {
-            this.status = status;
-        }
+    @SerializedName("messages")
+    @Expose
+    private String messages;
 
-        public String getUploads() {
-            return uploads;
-        }
+    @SerializedName("filename")
+    @Expose
+    private String filename;
 
-        public void setUploads(String uploads) {
-            this.uploads = uploads;
-        }
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getMessages() {
+        return messages;
+    }
+
+    public void setMessages(String messages) {
+        this.messages = messages;
+    }
+
+    public String getFileName() {
+        return filename;
+    }
+
+    public void setFileName(String filename) {
+        this.filename = filename;
+    }
 
 }

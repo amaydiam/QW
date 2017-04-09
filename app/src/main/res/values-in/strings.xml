@@ -13,7 +13,7 @@
     <string name="office_address">Ruko Parakan Kavling 8E, Jl. Parakan, Pd. Benda, Pamulang, Kota Tangerang Selatan, Banten, 15417</string>
     <string name="hint_number">877–7889–9430</string>
     <string name="city">Kota</string>
-    <string name="button_continue">Selnjutnya</string>
+    <string name="button_continue">Selanjutnya</string>
     <string name="title_activity_topup">Isi Ulang</string>
     <string name="val_email_length">Email harus minimal 5 karakter dan maksimal 100 karakter.</string>
     <string name="val_password_length">Sandi harus minimal 5 karakter</string>
@@ -105,7 +105,9 @@
     <string name="latitude_office_qwash">-6.340253</string>
     <string name="longitude_office_qwash">106.710095</string>
     <string name="info_activation">Anda harus melakukan aktivasi offline dengan mengunjungi Kantor QWash Indonesia dengan membawa document.</string>
-    <string name="notif_select_file">Harap lengkapi document</string>
+    <string name="notif_select_file_avatar">Harap ambil gambar avatar</string>
+    <string name="notif_select_file_ktp">Harap ambil gambar KTP</string>
+    <string name="notif_select_file_skck">Harap ambil gambar SKCK</string>
     <string name="upload">Unggah …</string>
     <string name="start">Mulai</string>
     <string name="finish">Selesai</string>
@@ -158,5 +160,14 @@
     <string name="cancel">Batal</string>
     <string name="desc_rate_now">Nilai QWash</string>
     <string name="title_rate_qwash">Nilai Qwash</string>
+    <string name="upload_avatar">Unggah Avatar ...</string>
+    <string name="upload_ktp">Unggah KTP ..</string>
+    <string name="upload_skck">Unggah SKCK ...</string>
+    <string name="button_back">Kembali</string>
+    <string name="info_check_verify_document">Dengan ini anda menyatakan bahwa dokumen yang anda lampirkan benar.</string>
+    <string name="please_complete_document">Harap lengkapi dokumen Anda !</string>
+    <string name="info_check_balance"><![CDATA[Saldo Anda saat ini <font color=\'red\'>%s</font>. Silakan lakukan isi ulang.]]></string>
+    <string name="check_activation">Cek Aktivasi</string>
+    <string name="check_activation_action">Cek Aktivasi ...</string>
 
 </resources>

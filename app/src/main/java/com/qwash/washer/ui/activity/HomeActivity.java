@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +62,7 @@ import butterknife.OnClick;
 
 
 public class HomeActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnProfilFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -83,7 +84,6 @@ public class HomeActivity extends BaseActivity
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
-
 
 
     @Override
@@ -201,97 +201,6 @@ public class HomeActivity extends BaseActivity
 
     }
 
-    private void ShowAbout() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.dialog_about_application);
-
-        RobotoRegularTextView versionApp = (RobotoRegularTextView) dialog.findViewById(R.id.version_app);
-        FloatingActionButton btnTwitter = (FloatingActionButton) dialog.findViewById(R.id.btn_twitter);
-        FloatingActionButton btnFacebook = (FloatingActionButton) dialog.findViewById(R.id.btn_facebook);
-        FloatingActionButton btnInstagram = (FloatingActionButton) dialog.findViewById(R.id.btn_instagram);
-
-        btnTwitter.setImageDrawable(
-                new IconDrawable(this, EntypoIcons.entypo_twitter)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        btnFacebook.setImageDrawable(
-                new IconDrawable(this, EntypoIcons.entypo_facebook)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        btnInstagram.setImageDrawable(
-                new IconDrawable(this, EntypoIcons.entypo_instagram)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-
-        btnTwitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (dialog != null) {
-                    Intent intent = null;
-                    try {
-                        // get the Twitter app if possible
-                        getPackageManager().getPackageInfo("com.twitter.android", 0);
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=qwash_indonesia"));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    } catch (Exception e) {
-                        // no Twitter app, revert to browser
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/qwash_indonesia"));
-                    }
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-            }
-        });
-        btnFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (dialog != null) {
-                    Intent intent;
-                    try {
-                        // get the Twitter app if possible
-                        int versionCode = getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
-                        String url_facebook;
-                        if (versionCode >= 3002850) { //newer versions of fb app
-                            url_facebook = "fb://facewebmodal/f?href=https://www.facebook.com/qwashindonesia";
-                        } else { //older versions of fb app
-                            url_facebook = "fb://page/qwashindonesia";
-                        }
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url_facebook));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    } catch (Exception e) {
-                        // no Twitter app, revert to browser
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/qwashindonesia"));
-                    }
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-            }
-        });
-
-        btnInstagram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (dialog != null) {
-                    Intent intent;
-                    try {
-                        getPackageManager().getPackageInfo("com.instagram.android", 0);
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/qwash_indonesia"));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    } catch (Exception e) {
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/qwash_indonesia"));
-                    }
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-            }
-        });
-
-        versionApp.setText("v" + BuildConfig.VERSION_NAME);
-
-
-        dialog.show();
-    }
 
     private void setFragment(int id, Fragment fragment) {
 
@@ -353,12 +262,10 @@ public class HomeActivity extends BaseActivity
         imageLoader.loadImage(washer_photo, Prefs.getProfilePhoto(this), Prefs.getFullName(this));
         washer_name.setText(Prefs.getFullName(this));
 
-    }
-
-    @Override
-    public void onProfilFragmentInteraction() {
+        Log.v("avatar",Prefs.getProfilePhoto(this));
 
     }
+
 
 
     @Override
@@ -419,36 +326,6 @@ public class HomeActivity extends BaseActivity
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-    public void Logout() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure, you wanted to logout?");
-        alertDialogBuilder.setPositiveButton("yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        // Logout email
-                        Prefs.Reset(HomeActivity.this);
-                        // Google sign out
-                        FirebaseAuth.getInstance().signOut();
-
-                        Intent intent = new Intent(HomeActivity.this, LoginUserActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
 

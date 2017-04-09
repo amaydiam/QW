@@ -1,6 +1,7 @@
 package com.qwash.washer.ui.fragment;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.zagum.switchicon.SwitchIconView;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.qwash.washer.MyApplication;
@@ -102,7 +105,6 @@ public class HomeFragment extends Fragment implements
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private OnProfilFragmentInteractionListener mListener;
     private ServiceHandler service;
 
     public HomeFragment() {
@@ -121,7 +123,14 @@ public class HomeFragment extends Fragment implements
 
     @OnClick(R.id.available_for_job)
     public void Click() {
+        if (Prefs.getSaldo(getActivity()) < 5000) {
+            showNotifBalance();
+            return;
+        }
         if (!service.isRunning()) {
+            final String firebase_id = FirebaseInstanceId.getInstance().getToken();
+            Prefs.putFirebaseId(getActivity(), firebase_id);
+
             new TedPermission(getActivity())
                     .setPermissionListener(permissionMapsListener)
                     .setDeniedMessage("Anda harus menghidupkan permission ACCESS_FINE_LOCATION pada [Setting] > [Permission]")
@@ -290,27 +299,15 @@ public class HomeFragment extends Fragment implements
 
     }
 
-    public void onButtonPressed() {
-        if (mListener != null) {
-            mListener.onProfilFragmentInteraction();
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnProfilFragmentInteractionListener) {
-            mListener = (OnProfilFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnProfilFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     private void startAvaibleForJob() {
@@ -419,11 +416,6 @@ public class HomeFragment extends Fragment implements
         }
     }
 
-    public interface OnProfilFragmentInteractionListener {
-        void onProfilFragmentInteraction();
-    }
-
-
 
 
     private void getRatings() {
@@ -434,7 +426,6 @@ public class HomeFragment extends Fragment implements
             public void onResponse(Call<Ratings> call, Response<Ratings> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
-
                         Prefs.putRating(getActivity(), String.valueOf(response.body().getData().get(0).getRatings()));
                         SetData();
                     }
@@ -463,7 +454,13 @@ public class HomeFragment extends Fragment implements
             public void onResponse(Call<Balance> call, Response<Balance> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
-                        Prefs.putSaldo(getActivity(), String.valueOf(response.body().getData().get(0).getBalance()));
+                        if (response.body().getData().size() > 0) {
+                            Prefs.putSaldo(getActivity(), (response.body().getData().get(0).getBalance()));
+                            SetData();
+                            CheckBalance();
+                        } else {
+                            Prefs.putSaldo(getActivity(), 0);
+                        }
                         SetData();
                     }
 
@@ -484,7 +481,40 @@ public class HomeFragment extends Fragment implements
 
     private void SetData() {
         rate.setText(Prefs.getRating(getActivity()));
-        changeSaldo.setText(Prefs.getSaldo(getActivity()));
+        changeSaldo.setText(Prefs.getSaldoRupiah(getActivity()));
     }
 
+
+    public void showNotifBalance() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_notif_balance);
+        RobotoRegularTextView info_saldo = (RobotoRegularTextView) dialog.findViewById(R.id.info_saldo);
+        info_saldo.setText(Html.fromHtml(String.format(getString(R.string.info_check_balance), Prefs.getSaldoRupiah(getActivity()))));
+
+        dialog.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    if (service.isRunning())
+                        startAvaibleForJob();
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+
+    void CheckBalance() {
+        if (Prefs.getSaldo(getActivity()) < 5000)
+            showNotifBalance();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        CheckBalance();
+    }
 }

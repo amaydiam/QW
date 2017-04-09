@@ -63,6 +63,14 @@ public final class Prefs {
         Prefs.putPref(context, Sample.USERNAME, username);
     }
 
+    public static String getPassword(final Context context) {
+        return Prefs.getPref(context, Sample.PASSWORD, "");
+    }
+
+    public static void putPassword(final Context context, String Password) {
+        Prefs.putPref(context, Sample.PASSWORD, Password);
+    }
+
     public static String getUsername(final Context context) {
         return Prefs.getPref(context, Sample.USERNAME, "");
     }
@@ -83,13 +91,18 @@ public final class Prefs {
         return Prefs.getPref(context, Sample.FULL_NAME, "");
     }
 
-    public static void putSaldo(final Context context, String saldo) {
+    public static void putSaldo(final Context context, int saldo) {
         Prefs.putPref(context, Sample.SALDO, String.valueOf(saldo));
     }
 
-    public static String getSaldo(final Context context) {
+    public static int getSaldo(final Context context) {
+        return Integer.parseInt(Prefs.getPref(context, Sample.SALDO, "0"));
+    }
+
+    public static String getSaldoRupiah(final Context context) {
         return Utils.Rupiah(Prefs.getPref(context, Sample.SALDO, ""));
     }
+
 
 
     public static void putFirebaseId(final Context context, String firebaseId) {
@@ -130,7 +143,7 @@ public final class Prefs {
     }
 
     public static String getProfilePhoto(final Context context) {
-        return Sample.BASE_URL_QWASH_PUBLIC + "" + Prefs.getPref(context, Sample.PROFILE_PHOTO, "");
+        return Sample.URL_AVATAR_FILE + Prefs.getPref(context, Sample.PROFILE_PHOTO, "");
     }
 
     public static void putProfileProvince(final Context context, String profileProvince) {
@@ -197,6 +210,67 @@ public final class Prefs {
 
     public static String getRating(final Context context) {
         return String.format("%.2f", Double.parseDouble(Prefs.getPref(context, Sample.RATING, "5")));
+    }
+
+
+    public static void putAvatarFile(final Context context, String avatar) {
+        Prefs.putPref(context, Sample.AVATAR, avatar);
+    }
+
+
+    public static String getAvatarFile(final Context context) {
+        return Sample.URL_AVATAR_FILE + Prefs.getPref(context, Sample.AVATAR, null);
+    }
+
+
+    public static void putKtpFile(final Context context, String enabled) {
+        Prefs.putPref(context, Sample.KTP, enabled);
+    }
+
+
+    public static String getKTPFile(final Context context) {
+        return Sample.URL_KTP_FILE + Prefs.getPref(context, Sample.KTP, null);
+    }
+
+
+    public static void putSkckFile(final Context context, String skck) {
+        Prefs.putPref(context, Sample.SKCK, skck);
+    }
+
+
+    public static String getSkckFile(final Context context) {
+        return Sample.URL_SKCK_FILE + Prefs.getPref(context, Sample.SKCK, null);
+    }
+
+
+    public static void putAvatar(final Context context, boolean enabled) {
+        Prefs.putPref(context, Sample.AVATAR_STATUS, (enabled ? "true" : "false"));
+    }
+
+
+    public static boolean getAvatar(final Context context) {
+        String e = Prefs.getPref(context, Sample.AVATAR_STATUS, "false");
+        return e.equals("true");
+    }
+
+    public static void putKtp(final Context context, boolean enabled) {
+        Prefs.putPref(context, Sample.KTP_STATUS, (enabled ? "true" : "false"));
+    }
+
+
+    public static boolean getKtp(final Context context) {
+        String e = Prefs.getPref(context, Sample.KTP_STATUS, "false");
+        return e.equals("true");
+    }
+
+    public static void putSkck(final Context context, boolean enabled) {
+        Prefs.putPref(context, Sample.SKCK_STATUS, (enabled ? "true" : "false"));
+    }
+
+
+    public static boolean getSkck(final Context context) {
+        String e = Prefs.getPref(context, Sample.SKCK_STATUS, "false");
+        return e.equals("true");
     }
 
 
@@ -269,10 +343,11 @@ public final class Prefs {
         putToken(context, "");
         putUserId(context, "");
         putEmail(context, "");
+        putPassword(context, "");
         putUsername(context, "");
         putType(context, 0);
         putFullName(context, "");
-        putSaldo(context, String.valueOf(0));
+        putSaldo(context, 0);
         putFirebaseId(context, "");
         putGeometryLat(context, 0.0);
         putGeometryLong(context, 0.0);
@@ -288,6 +363,12 @@ public final class Prefs {
         putRating(context, "5");
         putOrderedData(context, null);
         putLastOrdersId(context, null);
+        putAvatarFile(context, null);
+        putAvatar(context, false);
+        putKtpFile(context, null);
+        putKtp(context, false);
+        putSkckFile(context, null);
+        putSkck(context, false);
         putActivityIndex(context, Sample.NO_INDEX);
 
     }

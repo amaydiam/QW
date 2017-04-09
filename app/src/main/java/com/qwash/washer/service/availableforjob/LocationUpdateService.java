@@ -128,6 +128,7 @@ public class LocationUpdateService extends Service implements
             params.put(Sample.WASHERS_ID, Prefs.getUserId(this));
             params.put(Sample.LAT, String.valueOf(mCurrentLocation.getLatitude()));
             params.put(Sample.LONG, String.valueOf(mCurrentLocation.getLongitude()));
+            params.put(Sample.FIREBASE_ID, Prefs.getFirebaseId(this));
             Set keys = params.keySet();
             for (Object key1 : keys) {
                 String key = (String) key1;

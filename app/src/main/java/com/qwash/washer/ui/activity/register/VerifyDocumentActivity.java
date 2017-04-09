@@ -1,6 +1,7 @@
 package com.qwash.washer.ui.activity.register;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -64,7 +65,7 @@ import retrofit2.Response;
 public class VerifyDocumentActivity extends BaseActivity {
 
     private int TYPE_IMG;
-    private int PHOTO = 1;
+    private int AVATAR = 1;
     private int KTP = 2;
     private int SKCK = 3;
     @BindView(R.id.title_toolbar)
@@ -85,16 +86,17 @@ public class VerifyDocumentActivity extends BaseActivity {
     RobotoRegularButton btnContinue;
     private Context context;
     private ProgressDialogBuilder dialogProgress;
-    private File pathPhoto;
+    private File pathAvatar;
     private File pathKtp;
     private File pathSkck;
+    private PicassoLoader imageLoader;
 
     @OnClick(R.id.washer_photo)
     void PHOTO() {
-        if (pathPhoto != null) {
-            OpenDialog(PHOTO);
+        if (pathAvatar != null) {
+            OpenDialog(AVATAR);
         } else {
-            getFoto(PHOTO);
+            getFoto(AVATAR);
         }
     }
 
@@ -136,7 +138,7 @@ public class VerifyDocumentActivity extends BaseActivity {
 
     private void viewFoto(int type) {
         FragmentManager ft = getSupportFragmentManager();
-        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(type == PHOTO ? pathPhoto.getAbsolutePath() : (type == KTP ? pathKtp.getAbsolutePath() : pathSkck.getAbsolutePath()));
+        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(type == AVATAR ? pathAvatar.getAbsolutePath() : (type == KTP ? pathKtp.getAbsolutePath() : pathSkck.getAbsolutePath()));
         newFragment.show(ft, "slideshow");
     }
 
@@ -145,7 +147,7 @@ public class VerifyDocumentActivity extends BaseActivity {
         TYPE_IMG = type;
         new TedPermission(this)
                 .setPermissionListener(permissionGetFotoListener)
-                .setDeniedMessage(String.format(getString(R.string.upload_document_permission), type == PHOTO ? "PHOTO" : (type == KTP ? "KTP" : "SKCK")))
+                .setDeniedMessage(String.format(getString(R.string.upload_document_permission), type == AVATAR ? "AVATAR" : (type == KTP ? "KTP" : "SKCK")))
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();
     }
@@ -170,7 +172,13 @@ public class VerifyDocumentActivity extends BaseActivity {
 
     @OnClick(R.id.btn_continue)
     void LockWasher() {
-        Upload();
+
+        if (!Prefs.getAvatar(context) || !Prefs.getKtp(context) || !Prefs.getKtp(context)) {
+            Toast.makeText(context, getString(R.string.please_complete_document), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        showNotif();
     }
 
 
@@ -194,9 +202,9 @@ public class VerifyDocumentActivity extends BaseActivity {
                 .saveInAppExternalFilesDir()
                 .setCopyExistingPicturesToPublicLocation(true);
 
-        PicassoLoader imageLoader = new PicassoLoader();
-        imageLoader.loadImage(washerPhoto, Prefs.getProfilePhoto(this), Prefs.getFullName(this));
+        imageLoader = new PicassoLoader();
 
+        checkAvatar();
         checkKTP();
         checkSKCK();
 
@@ -216,7 +224,7 @@ public class VerifyDocumentActivity extends BaseActivity {
             @Override
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
                 //Handle the image
-                setImage(imageFile, TYPE_IMG);
+                setImage(imageFile);
             }
 
             @Override
@@ -230,11 +238,11 @@ public class VerifyDocumentActivity extends BaseActivity {
         });
     }
 
-    private void setImage(File imageFile, int type_img) {
-        if (type_img == PHOTO) {
-            pathPhoto = imageFile;
-            checkPhoto();
-        } else if (type_img == KTP) {
+    private void setImage(File imageFile) {
+        if (TYPE_IMG == AVATAR) {
+            pathAvatar = imageFile;
+            checkAvatar();
+        } else if (TYPE_IMG == KTP) {
             pathKtp = imageFile;
             checkKTP();
         } else {
@@ -242,17 +250,28 @@ public class VerifyDocumentActivity extends BaseActivity {
             checkSKCK();
         }
 
+        Upload();
+
     }
 
 
-    private void checkPhoto() {
-        if (pathPhoto != null) {
+    private void checkAvatar() {
+        if (pathAvatar != null) {
             Glide.with(this)
-                    .load(pathPhoto)
+                    .load(pathAvatar)
                     .asBitmap()
                     .override(200, 200)
                     .centerCrop()
                     .into(washerPhoto);
+        } else if (Prefs.getAvatar(context)) {
+            Glide.with(this)
+                    .load(Prefs.getAvatarFile(context))
+                    .asBitmap()
+                    .override(200, 200)
+                    .centerCrop()
+                    .into(washerPhoto);
+        } else {
+            imageLoader.loadImage(washerPhoto, Prefs.getProfilePhoto(this), Prefs.getFullName(this));
         }
 
     }
@@ -263,6 +282,14 @@ public class VerifyDocumentActivity extends BaseActivity {
             Picasso.with(this)
                     .load(pathKtp)
                     .resize(200, 200)
+                    .centerCrop()
+                    .into(imgKtp);
+        } else if (Prefs.getKtp(context)) {
+            layoutImgKtp.setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(Prefs.getKTPFile(context))
+                    .asBitmap()
+                    .override(200, 200)
                     .centerCrop()
                     .into(imgKtp);
         } else {
@@ -284,6 +311,14 @@ public class VerifyDocumentActivity extends BaseActivity {
                     .resize(200, 200)
                     .centerCrop()
                     .into(imgSkck);
+        } else if (Prefs.getSkck(context)) {
+            layoutImgSkck.setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(Prefs.getSkckFile(context))
+                    .asBitmap()
+                    .override(200, 200)
+                    .centerCrop()
+                    .into(imgSkck);
         } else {
             layoutImgSkck.setVisibility(View.VISIBLE);
             Picasso.with(this)
@@ -296,63 +331,143 @@ public class VerifyDocumentActivity extends BaseActivity {
     }
 
     void Upload() {
-        if (pathPhoto == null) {
-            Toast.makeText(getApplicationContext(), getString(R.string.notif_select_file), Toast.LENGTH_LONG).show();
-            return;
+
+        if (TYPE_IMG == AVATAR) {
+            if (pathAvatar == null) {
+                Toast.makeText(getApplicationContext(), getString(R.string.notif_select_file_avatar), Toast.LENGTH_LONG).show();
+                return;
+            }
+        } else if (TYPE_IMG == KTP) {
+            if (pathKtp == null) {
+                Toast.makeText(getApplicationContext(), getString(R.string.notif_select_file_ktp), Toast.LENGTH_LONG).show();
+                return;
+            }
+        } else {
+            if (pathSkck == null) {
+                Toast.makeText(getApplicationContext(), getString(R.string.notif_select_file_skck), Toast.LENGTH_LONG).show();
+                return;
+            }
         }
 
-        dialogProgress.show(getString(R.string.upload), getString(R.string.please_wait));
+
+        dialogProgress.show(TYPE_IMG == AVATAR ? getString(R.string.upload_avatar) : (TYPE_IMG == KTP ? getString(R.string.upload_ktp) : getString(R.string.upload_skck)), getString(R.string.please_wait));
+
 
         PartFormString partFormString = new PartFormString(VerifyDocumentActivity.this);
 
-        File compressedImageKtp = Compressor.getDefault(VerifyDocumentActivity.this).compressToFile(pathPhoto);
-        MultipartBody.Part bodyFileKtp = partFormString.prepareFilePart(Sample.PROFILE_PHOTO, compressedImageKtp);
-
-        HashMap<String, RequestBody> map = new HashMap<>();
-        map.put(Sample.USER_ID, partFormString.createPartFromString(Prefs.getUserId(this)));
-
-        Log.v(Sample.USER_ID, String.valueOf(partFormString.createPartFromString(Prefs.getUserId(this))));
-
         DocumentService paymentService = ApiUtils.DocumentService(getApplicationContext());
-        paymentService.getUploadDocumentLink("Bearer " + Prefs.getToken(this), bodyFileKtp, map)
-                .enqueue(new Callback<UploadDocument>() {
-                    @Override
-                    public void onResponse(Call<UploadDocument> call, Response<UploadDocument> response) {
-                        dialogProgress.hide();
-                        if (response.isSuccessful()) {
-                            if (response.body().getStatus()) {
-                                Prefs.putProfilePhoto(VerifyDocumentActivity.this, response.body().getUploads());
-                                //   Prefs.putActivityIndex(context, Sample.VERIFY_TOOLS_INDEX);
-                                toVerifyToolsActivity();
 
-                            }
+        Call<UploadDocument> ur;
+        if (TYPE_IMG == AVATAR) {
+            File compressedImageAvatar = Compressor.getDefault(VerifyDocumentActivity.this).compressToFile(pathAvatar);
+            MultipartBody.Part bodyFileAvatar = partFormString.prepareFilePart(Sample.AVATAR, compressedImageAvatar);
+            ur = paymentService.getUploadDocumentAvatarLink("Bearer " + Prefs.getToken(this), bodyFileAvatar, Prefs.getUserId(this));
+        } else if (TYPE_IMG == KTP) {
+            File compressedImageKtp = Compressor.getDefault(VerifyDocumentActivity.this).compressToFile(pathKtp);
+            MultipartBody.Part bodyFileKtp = partFormString.prepareFilePart(Sample.KTP, compressedImageKtp);
+            ur = paymentService.getUploadDocumentKtpLink("Bearer " + Prefs.getToken(this), bodyFileKtp, Prefs.getUserId(this));
+        } else {
+            File compressedImageSkck = Compressor.getDefault(VerifyDocumentActivity.this).compressToFile(pathSkck);
+            MultipartBody.Part bodyFileSkck = partFormString.prepareFilePart(Sample.SKCK, compressedImageSkck);
+            ur = paymentService.getUploadDocumentSkckLink("Bearer " + Prefs.getToken(this), bodyFileSkck, Prefs.getUserId(this));
+        }
+
+        ur.enqueue(new Callback<UploadDocument>() {
+            @Override
+            public void onResponse(Call<UploadDocument> call, Response<UploadDocument> response) {
+                dialogProgress.hide();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+
+                        if (TYPE_IMG == AVATAR) {
+                            Prefs.putProfilePhoto(VerifyDocumentActivity.this, response.body().getFileName());
+                            Prefs.putAvatarFile(VerifyDocumentActivity.this, response.body().getFileName());
+                            Prefs.putAvatar(VerifyDocumentActivity.this, true);
+                        } else if (TYPE_IMG == KTP) {
+                            Prefs.putKtpFile(VerifyDocumentActivity.this, response.body().getFileName());
+                            Prefs.putKtp(VerifyDocumentActivity.this, true);
+                        } else {
+                            Prefs.putSkckFile(VerifyDocumentActivity.this, response.body().getFileName());
+                            Prefs.putSkck(VerifyDocumentActivity.this, true);
                         }
-                        else {
-                            int statusCode = response.code();
-                            try {
-                                String json = response.errorBody().string();
-                                GlobalError globalError = new Gson().fromJson(json, GlobalError.class);
-                                if (!globalError.getStatus()) {
-                                        Toast.makeText(getApplicationContext(), globalError.getMessages(), Toast.LENGTH_LONG).show();
-                                }
+                        Toast.makeText(context, response.body().getMessages(), Toast.LENGTH_SHORT).show();
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
 
                     }
+                } else {
+                    int statusCode = response.code();
+                    try {
+                        String json = response.errorBody().string();
+                        GlobalError globalError = new Gson().fromJson(json, GlobalError.class);
+                        if (!globalError.getStatus()) {
+                            Toast.makeText(getApplicationContext(), globalError.getMessages(), Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onFailure(Call<UploadDocument> call, Throwable t) {
-                        dialogProgress.hide();
-                        Toast.makeText(getApplicationContext(), "Failed sent", Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                    if (TYPE_IMG == AVATAR) {
+                        pathAvatar = null;
+                        checkAvatar();
+                    } else if (TYPE_IMG == KTP) {
+                        pathKtp = null;
+                        checkKTP();
+                    } else {
+                        pathSkck = null;
+                        checkSKCK();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadDocument> call, Throwable t) {
+                dialogProgress.hide();
+                Toast.makeText(getApplicationContext(), "Failed sent", Toast.LENGTH_LONG).show();
+                if (TYPE_IMG == AVATAR) {
+                    pathAvatar = null;
+                    checkAvatar();
+                } else if (TYPE_IMG == KTP) {
+                    pathKtp = null;
+                    checkKTP();
+                } else {
+                    pathSkck = null;
+                    checkSKCK();
+                }
+            }
+        });
 
     }
+
+    public void showNotif() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_complete_verify_document);
+        dialog.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.findViewById(R.id.btn_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dialog != null) {
+                    Prefs.putActivityIndex(context, Sample.VERIFY_TOOLS_INDEX);
+                    toVerifyToolsActivity();
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
 
     private void toVerifyToolsActivity() {
         Intent intent = new Intent(this, VerifyToolsActivity.class);

@@ -17,12 +17,21 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 
 public interface DocumentService {
 
     @Multipart
-    @POST("uploads/avatar")
-    Call<UploadDocument> getUploadDocumentLink(@Header(Sample.AUTHORIZATION) String token, @Part MultipartBody.Part file, @PartMap() Map<String, RequestBody> partMap);
+    @POST("uploads/avatar/{user_id}")
+    Call<UploadDocument> getUploadDocumentAvatarLink(@Header(Sample.AUTHORIZATION) String token, @Part MultipartBody.Part file, @Path("user_id") String user_id);
+
+    @Multipart
+    @POST("uploads/ktp/{user_id}")
+    Call<UploadDocument> getUploadDocumentKtpLink(@Header(Sample.AUTHORIZATION) String token, @Part MultipartBody.Part file,  @Path("user_id") String user_id);
+
+    @Multipart
+    @POST("uploads/skck/{user_id}")
+    Call<UploadDocument> getUploadDocumentSkckLink(@Header(Sample.AUTHORIZATION) String token, @Part MultipartBody.Part file, @Path("user_id") String user_id);
 
 
 }

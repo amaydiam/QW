@@ -13,7 +13,12 @@
           "package_name": "com.qwash.washer"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "937408409681-jqqeqpm38v1t93k21ifoumkcag2ua9eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-oNG046oFDRGA2KgFmNqGHT6Qv1ut5Xo"
@@ -34,12 +39,25 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:937408409681:android:dff5c84e34f3af23",
+        "mobilesdk_app_id": "1:937408409681:android:5db3ceaa847a3ccd",
         "android_client_info": {
-          "package_name": "com.qwash.user"
+          "package_name": "com.qwash.customer"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "937408409681-pjrdl8o1pd4i4solvjp2gtrbj97ljvki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qwash.customer",
+            "certificate_hash": "0da6a6ceca073e80c3114973724f99f1d65ac7f5"
+          }
+        },
+        {
+          "client_id": "937408409681-jqqeqpm38v1t93k21ifoumkcag2ua9eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-oNG046oFDRGA2KgFmNqGHT6Qv1ut5Xo"
@@ -50,8 +68,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937408409681-jqqeqpm38v1t93k21ifoumkcag2ua9eg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

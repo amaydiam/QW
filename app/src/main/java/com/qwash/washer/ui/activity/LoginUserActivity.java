@@ -194,7 +194,8 @@ public class LoginUserActivity extends BaseActivity {
                         Prefs.putUsername(context, data.getUsername());
                         Prefs.putType(context, data.getType());
                         Prefs.putFullName(context, data.getFullName());
-                        Prefs.putSaldo(context, String.valueOf(data.getSaldo()));
+                        //   Prefs.putSaldo(context, data.getSaldo());
+                        Prefs.putSaldo(context, 0);
                         Prefs.putFirebaseId(context, data.getFirebaseId());
                         Prefs.putGeometryLat(context, data.getGeometryLat());
                         Prefs.putGeometryLong(context, data.getGeometryLong());

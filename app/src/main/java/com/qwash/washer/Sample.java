@@ -5,8 +5,14 @@ import android.content.Context;
 
 public class Sample {
 
-    public static final String BASE_URL_QWASH_PUBLIC = "http://api.qwash-indonesia.com:1337/public/";
-    public static final String BASE_URL_QWASH_API = "http://api.qwash-indonesia.com:1337/api/v1/";
+    public static final String BASE_URL_QWASH_PUBLIC = "http://api.qwash-indonesia.com/public/";
+    public static final String BASE_URL_QWASH_API = "http://api.qwash-indonesia.com/api/v1/";
+
+    public static final String URL_AVATAR_FILE = "http://api.qwash-indonesia.com/public/uploads/img-avatar/";
+
+    public static final String URL_KTP_FILE = "http://api.qwash-indonesia.com/public/uploads/ktp/";
+
+    public static final String URL_SKCK_FILE = "http://api.qwash-indonesia.com/public/uploads/skck/";
 
     public static final String IS_FINISH_LOADING_AWAL_DATA = "is_loading";
     public static final String IS_LOADING_MORE_DATA = "is_locked";
@@ -168,6 +174,15 @@ public class Sample {
     public static final String LANGUAGE = "language";
     public static final String URL_TERM_OF_SERVICE = "https://qwash-indonesia.com/syarat-dan-ketentuan";
     public static final String URL_PRIVACY_POLICE = "https://qwash-indonesia.com/page/privacy-policy";
+
+    public static final String AVATAR = "avatar";
+    public static final String KTP = "ktp";
+    public static final String SKCK = "skck";
+
+    public static final String AVATAR_STATUS = "avatar_avatar";
+    public static final String KTP_STATUS = "ktp_avatar";
+    public static final String SKCK_STATUS = "sksck_avatar";
+
 
     public static final String[] listMontOfYear(Context context) {
         return new String[]{

@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/btn_height"
                     android:layout_marginTop="@dimen/activity_half_vertical_margin"
-                    android:text="@string/btn_upload" />
+                    android:text="@string/button_continue" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

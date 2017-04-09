@@ -144,8 +144,9 @@ public class VerificationCodeActivity extends BaseActivity {
                 dialogProgress.hide();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus()) {
-                        Prefs.putActivityIndex(context, Sample.NO_INDEX);
-                        toLoginActivity();
+
+                        Prefs.putActivityIndex(context, Sample.VERIFY_DOCUMENT_INDEX);
+                        toVerifyDocummentActivity();
                     }
 
                 } else {
@@ -174,6 +175,13 @@ public class VerificationCodeActivity extends BaseActivity {
 
     }
 
+    private void toVerifyDocummentActivity() {
+        Intent intent = new Intent(this, VerifyDocumentActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -190,11 +198,6 @@ public class VerificationCodeActivity extends BaseActivity {
     }
 
 
-    private void toLoginActivity() {
-        Intent intent = new Intent(this, LoginUserActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
+
 
 }

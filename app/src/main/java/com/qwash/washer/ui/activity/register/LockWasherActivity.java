@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.IconDrawable;
@@ -45,9 +46,18 @@ import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 import com.joanzapata.iconify.fonts.SimpleLineIconsModule;
 import com.qwash.washer.R;
+import com.qwash.washer.Sample;
+import com.qwash.washer.api.ApiUtils;
+import com.qwash.washer.api.client.auth.LoginService;
+import com.qwash.washer.api.model.login.Login;
+import com.qwash.washer.api.model.washer.DataWasher;
 import com.qwash.washer.ui.activity.BaseActivity;
+import com.qwash.washer.ui.activity.LoginUserActivity;
 import com.qwash.washer.ui.widget.RobotoRegularTextView;
+import com.qwash.washer.utils.Prefs;
+import com.qwash.washer.utils.ProgressDialogBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -60,10 +70,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LockWasherActivity extends BaseActivity implements
         OnMapReadyCallback,
@@ -82,6 +96,12 @@ public class LockWasherActivity extends BaseActivity implements
 
     private LatLng latlong_qwash;
     private Location location_qwash;
+    private ProgressDialogBuilder dialogProgress;
+
+    @OnClick(R.id.btn_check_activation)
+    void btn_check_activation() {
+        CheckActivation();
+    }
 
     @OnClick(R.id.fab)
     void Navigation() {
@@ -141,6 +161,8 @@ public class LockWasherActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_washer);
         ButterKnife.bind(this);
+        dialogProgress = new ProgressDialogBuilder(this);
+
         Double lw = Double.valueOf(getString(R.string.latitude_office_qwash));
         Double low = Double.valueOf(getString(R.string.longitude_office_qwash));
         latlong_qwash = new LatLng(lw, low);
@@ -175,14 +197,7 @@ public class LockWasherActivity extends BaseActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setMapToolbarEnabled(false);
-        mMap.getUiSettings().setAllGesturesEnabled(false);
         mMap.setMyLocationEnabled(true);
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                return true;
-            }
-        });
         View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         locationButton.setVisibility(View.GONE);
 
@@ -257,7 +272,7 @@ public class LockWasherActivity extends BaseActivity implements
 
         //distance
         float distanceInMeters = location_qwash.distanceTo(location);
-        distance.setText(String.format("%.2f", distanceInMeters/1000)+" KM");
+        distance.setText(String.format("%.2f", distanceInMeters / 1000) + " KM");
 
 
         // Getting URL to the Google Directions API
@@ -533,6 +548,48 @@ public class LockWasherActivity extends BaseActivity implements
         });
 
         dialog.show();
+    }
+
+
+    private void CheckActivation() {
+        dialogProgress.show(getString(R.string.check_activation_action), "Please wait...");
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Sample.EMAIL, Prefs.getEmail(this));
+        params.put(Sample.PASSWORD, Prefs.getPassword(this));
+        params.put(Sample.FIREBASE_ID, "");
+
+
+        LoginService mService = ApiUtils.LoginService(this);
+        mService.getLoginLink(params).enqueue(new Callback<Login>() {
+            @Override
+            public void onResponse(Call<Login> call, Response<Login> response) {
+                dialogProgress.hide();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        Prefs.Reset(LockWasherActivity.this);
+                        toLoginActivity();
+                        Toast.makeText(getApplicationContext(), "Actived, You can Log In", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Not Active", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Login> call, Throwable t) {
+                String message = t.getMessage();
+                dialogProgress.hide();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void toLoginActivity() {
+        Intent intent = new Intent(this, LoginUserActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 }

@@ -105,7 +105,9 @@
     <string name="latitude_office_qwash">-6.340253</string>
     <string name="longitude_office_qwash">106.710095</string>
     <string name="info_activation">You should activation Q-Wash offline by visiting the Office of Indonesia and took the document..</string>
-    <string name="notif_select_file">Please complete document</string>
+    <string name="notif_select_file_avatar">Please pick avatar</string>
+    <string name="notif_select_file_ktp">Please pick KTP</string>
+    <string name="notif_select_file_skck">Please pick SKCK</string>
     <string name="upload">Upload …</string>
     <string name="start">Start</string>
     <string name="finish">Finish</string>
@@ -158,5 +160,14 @@
     <string name="cancel">Cancel</string>
     <string name="desc_rate_now">Rate QWash</string>
     <string name="title_rate_qwash">Rate Qwash</string>
+    <string name="upload_avatar">Upload Avatar ...</string>
+    <string name="upload_ktp">Upload KTP ...</string>
+    <string name="upload_skck">Upload SKCK ...</string>
+    <string name="button_back">Back</string>
+    <string name="info_check_verify_document">With this you stated that you attach the correct documents.</string>
+    <string name="please_complete_document">Please complete your document !</string>
+    <string name="info_check_balance"><![CDATA[Your balance is <font color=\'red\'>%s</font>. Please top up balance.]]></string>
+    <string name="check_activation">Check Activation</string>
+    <string name="check_activation_action">Check Activation ...</string>
 
 </resources>
